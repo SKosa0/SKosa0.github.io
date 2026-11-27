@@ -14,7 +14,7 @@
 -->
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-y1vMzFA32JgHsc3znwCV6zlYzSfLRYsV8uCRwNwJ7ZA=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-t9lL/I0ThEu6mUZ91Ncq7JwoCOr4wMrf0UCehteHfE8='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-hV5q285n2bnGg/1N8nmNpnqJd1/Bxu5PZ5fy26j+efA=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-edwa5RzaG03SWi2Y3cDOK/t13KxsX12VbfMCl9lBm1c='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#fdf8ff">
@@ -2119,7 +2119,7 @@ const UI_EN={
   '※ ローカルファイル直開き（file://）ではWeb生体認証は利用できません。GitHub Pages などの https:// または http://localhost から開くとパスキー（指紋・顔認証）が利用できます。':'Note: Web biometrics are unavailable when opened directly from a local file (file://). Open via https:// (such as GitHub Pages) or http://localhost to use passkeys.',
   '※ この端末では生体認証を利用できないか、端末に生体認証が登録されていません。':'Note: Biometrics are unavailable on this device or no biometric credentials are enrolled.',
   'パスキー（指紋・顔認証）を設定':'Set up passkey (Fingerprint / Face)',
-  'WebAuthn パスキー（PRF拡張）で解除できるように登録します':'Register a WebAuthn passkey (PRF extension) to unlock',
+  'PRF対応パスキーを登録して、指紋・顔認証で暗号鍵を取得できるようにします':'Register a PRF-compatible passkey to retrieve the encryption key with biometrics',
   '生体認証（指紋・顔認証）を設定':'Set up biometrics (Fingerprint / Face)',
   '指紋や顔認証で解除できるように登録します':'Register fingerprint or face authentication to unlock',
   'パスキー生体認証で解除をテスト':'Test passkey biometric unlock',
@@ -8832,7 +8832,32 @@ document.body.appendChild(nav);rShelfCards();
     return Boolean(!window.AndroidBridge&&window.isSecureContext&&typeof window.PublicKeyCredential==='function'&&navigator.credentials&&typeof navigator.credentials.create==='function'&&typeof navigator.credentials.get==='function');
   }
   function brGetWebBio(){
-    try{const r=LS.get(BR_WEB_BIO_KEY);return(r&&r.credId&&r.salt&&r.iv&&r.ct)?r:null}catch(_){return null}
+    /* パスキー連携情報は再起動後も必要なため、一時メモリ fallback を使わず永続領域から読む。 */
+    try{const raw=window.localStorage.getItem(BR_WEB_BIO_KEY),r=raw?JSON.parse(raw):null;return(r&&r.v===1&&r.credId&&r.salt&&r.iv&&r.ct)?r:null}catch(_){return null}
+  }
+  function brStoreWebBio(rec){
+    const raw=JSON.stringify(rec);let oldRaw=null;
+    try{oldRaw=window.localStorage.getItem(BR_WEB_BIO_KEY)}catch(_){}
+    try{
+      window.localStorage.setItem(BR_WEB_BIO_KEY,raw);
+      const saved=window.localStorage.getItem(BR_WEB_BIO_KEY);
+      if(saved!==raw)throw new Error('保存内容を読み戻せませんでした');
+      const check=JSON.parse(saved);
+      if(!check||check.credId!==rec.credId||check.salt!==rec.salt||check.iv!==rec.iv||check.ct!==rec.ct)throw new Error('保存内容が一致しません');
+    }catch(e){
+      /* 再設定に失敗したとき、動作中の既存登録まで失わないよう元データを戻す。 */
+      try{if(oldRaw===null)window.localStorage.removeItem(BR_WEB_BIO_KEY);else window.localStorage.setItem(BR_WEB_BIO_KEY,oldRaw)}catch(_){}
+      throw new Error('パスキー連携情報をブラウザに永続保存できません。プライベートブラウズやブラウザの保存制限を解除してから再試行してください。'+(e&&e.message?' ('+e.message+')':''));
+    }
+  }
+  function brWebBioPreflight(){
+    /* Important: this check must remain synchronous. Awaiting platform/capability
+       queries here consumes Safari's transient user activation before credentials.create().
+       The actual authenticator + PRF support is verified from the real WebAuthn result below. */
+    if(!brWebBioSupported())throw new Error('HTTPS上のWebAuthn対応ブラウザで開いてください');
+    if(!window.isSecureContext)throw new Error('パスキーにはHTTPSまたはlocalhostが必要です');
+    if(!window.crypto||!crypto.subtle)throw new Error('この環境では安全な暗号化APIを利用できません');
+    return true;
   }
   function brBioAvailable(){
     const ab=window.AndroidBridge;
@@ -8851,25 +8876,34 @@ document.body.appendChild(nav);rShelfCards();
   }
   async function brWebEnableBiometric(){
     if(!brMasterBytes)throw new Error('先にパスコードで解除してください');
-    if(!brWebBioSupported())throw new Error('HTTPSまたはlocalhost環境でのみパスキー生体認証を利用できます');
+    brWebBioPreflight();
+    const rpId=String(location.hostname||'').toLowerCase();
+    if(!rpId)throw new Error('このページのドメインを確認できません');
     const challenge=crypto.getRandomValues(new Uint8Array(32));
     const userId=crypto.getRandomValues(new Uint8Array(32));
     const salt=crypto.getRandomValues(new Uint8Array(32));
     let cred;
     try{
-      cred=await navigator.credentials.create({
+      /* Start credentials.create synchronously in the original settings-button
+         click handler, before the first await (required by WebKit). */
+      const createRequest=navigator.credentials.create({
         publicKey:{
           challenge,
-          rp:{name:'BookReader'},
+          rp:{id:rpId,name:'BookReader'},
           user:{id:userId,name:'bookreader-local',displayName:'BookReader'},
           pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],
-          authenticatorSelection:{authenticatorAttachment:'platform',residentKey:'preferred',userVerification:'required'},
+          /* Do not force platform-only: allow synced passkey providers and cross-device
+             authenticators as well as the OS platform authenticator. */
+          authenticatorSelection:{residentKey:'required',requireResidentKey:true,userVerification:'required'},
           timeout:60000,
-          extensions:{prf:{eval:{first:salt}}}
+          /* Enable PRF at registration; request the actual salted output in credentials.get(). */
+          extensions:{prf:{}}
         }
       });
+      cred=await createRequest;
     }catch(e){
-      if(e&&e.name==='NotAllowedError')throw new Error('パスキーの作成がキャンセルされました');
+      if(e&&e.name==='NotAllowedError')throw new Error('パスキーの作成がキャンセルされたか、端末で承認されませんでした');
+      if(e&&e.name==='SecurityError')throw new Error('このサイトのドメインではパスキーを作成できません。HTTPSとアクセス先ドメインを確認してください');
       throw new Error((e&&e.message)||'パスキーを作成できませんでした');
     }
     if(!cred||!cred.rawId)throw new Error('パスキーの取得に失敗しました');
@@ -8880,6 +8914,7 @@ document.body.appendChild(nav);rShelfCards();
       try{
         assertion=await navigator.credentials.get({
           publicKey:{
+            rpId,
             challenge:crypto.getRandomValues(new Uint8Array(32)),
             allowCredentials:[{type:'public-key',id:new Uint8Array(cred.rawId)}],
             userVerification:'required',
@@ -8888,17 +8923,21 @@ document.body.appendChild(nav);rShelfCards();
           }
         });
       }catch(e){
-        if(e&&e.name==='NotAllowedError')throw new Error('生体認証の確認がキャンセルされました');
-        throw new Error((e&&e.message)||'パスキーの確認に失敗しました');
+        if(e&&e.name==='NotAllowedError')throw new Error('パスキーは作成されましたが、Face ID・Touch IDによるPRF鍵の確認がキャンセルされました');
+        throw new Error((e&&e.message)||'パスキーのPRF鍵を確認できませんでした');
       }
       const aext=assertion&&typeof assertion.getClientExtensionResults==='function'?assertion.getClientExtensionResults():{};
       prfOut=aext&&aext.prf&&aext.prf.results&&aext.prf.results.first?aext.prf.results.first:null;
     }
-    if(!prfOut)throw new Error('このブラウザまたはパスキー保存先は PRF 暗号鍵導出に対応していません（パスコードをご利用ください）');
-    const wrapKey=await brWebDeriveAesKey(prfOut,['encrypt']);
+    if(!prfOut)throw new Error('パスキーは作成されましたが、このブラウザまたはパスキー保存先はPRF鍵導出に対応していません。別のパスキー保存先を使うか、パスコードで解除してください');
+    const wrapKey=await brWebDeriveAesKey(prfOut,['encrypt','decrypt']);
     const iv=crypto.getRandomValues(new Uint8Array(12));
     const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:BR_WEB_BIO_AAD},wrapKey,brMasterBytes);
-    LS.set(BR_WEB_BIO_KEY,{v:1,credId:brB64Url(new Uint8Array(cred.rawId)),salt:brB64(salt),iv:brB64(iv),ct:brB64(new Uint8Array(ct))});
+    /* 保存前に同じPRF出力で復号できることを確認する。 */
+    const roundTrip=await crypto.subtle.decrypt({name:'AES-GCM',iv,additionalData:BR_WEB_BIO_AAD},wrapKey,ct);
+    const check=new Uint8Array(roundTrip);
+    if(check.length!==brMasterBytes.length||check.some((v,i)=>v!==brMasterBytes[i]))throw new Error('パスキー暗号鍵の検証に失敗しました');
+    brStoreWebBio({v:1,credId:brB64Url(new Uint8Array(cred.rawId)),salt:brB64(salt),iv:brB64(iv),ct:brB64(new Uint8Array(ct))});
     toast('パスキー（指紋・顔認証）を設定しました');
   }
   async function brWebBiometricUnlock(){
@@ -8906,8 +8945,9 @@ document.body.appendChild(nav);rShelfCards();
     if(!rec)throw new Error('パスキー生体認証が設定されていません');
     let assertion;
     try{
-      assertion=await navigator.credentials.get({
+      const getRequest=navigator.credentials.get({
         publicKey:{
+          rpId:String(location.hostname||'').toLowerCase(),
           challenge:crypto.getRandomValues(new Uint8Array(32)),
           allowCredentials:[{type:'public-key',id:brUnB64Url(rec.credId)}],
           userVerification:'required',
@@ -8915,6 +8955,7 @@ document.body.appendChild(nav);rShelfCards();
           extensions:{prf:{eval:{first:brUnB64(rec.salt)}}}
         }
       });
+      assertion=await getRequest;
     }catch(e){
       if(e&&e.name==='NotAllowedError')throw new Error('生体認証がキャンセルされました');
       throw new Error((e&&e.message)||'生体認証に失敗しました');
@@ -8923,7 +8964,9 @@ document.body.appendChild(nav);rShelfCards();
     const prfOut=ext&&ext.prf&&ext.prf.results&&ext.prf.results.first?ext.prf.results.first:null;
     if(!prfOut)throw new Error('パスキーから暗号鍵を取得できませんでした。パスコードで解除してください');
     const wrapKey=await brWebDeriveAesKey(prfOut,['decrypt']);
-    const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:brUnB64(rec.iv),additionalData:BR_WEB_BIO_AAD},wrapKey,brUnB64(rec.ct));
+    let plain;
+    try{plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:brUnB64(rec.iv),additionalData:BR_WEB_BIO_AAD},wrapKey,brUnB64(rec.ct))}
+    catch(_){throw new Error('パスキーから以前と同じ暗号鍵を取得できませんでした。登録時と同じサイト・パスキー保存先を使うか、パスコードで解除してください')}
     return new Uint8Array(plain);
   }
   async function brEnableBiometric(){
@@ -8935,7 +8978,7 @@ document.body.appendChild(nav);rShelfCards();
   }
   let brBioBusy=false;
   async function brBiometricUnlock(done,silent){
-    if(brBioBusy)return;
+    if(brBioBusy)return false;
     brBioBusy=true;window.__brBioBusy=true;
     try{
       const keyBytes=window.AndroidBridge
@@ -8945,9 +8988,11 @@ document.body.appendChild(nav);rShelfCards();
       const st=secGet();if(st){st.f=0;st.u=0;LS.set('rd:sec',st)}
       secOpen=true;secHideAt=0;document.body.classList.remove('app-locked');secLastAct=Date.now();applog('security','生体認証でアンロック');closeAll();toast('生体認証でロックを解除しました');secAfterChange();
       if(typeof done==='function')done();
+      return true;
     }catch(e){
       brClearMaster();
       if(!silent)toast(e&&e.message?e.message:'生体認証で解除できませんでした');
+      return false;
     }finally{
       brBioBusy=false;window.__brBioBusy=false;
     }
@@ -9038,7 +9083,7 @@ document.body.appendChild(nav);rShelfCards();
     });
   };
 
-  /* Android-only biometric entry point on the existing unlock sheet. */
+  /* Biometric entry point: Android may prompt natively; WebAuthn must start from a user tap (iOS Safari). */
   const oldSecUnlockSheet=secUnlockSheet;
   secUnlockSheet=function(done){
     oldSecUnlockSheet(done);
@@ -9054,8 +9099,15 @@ document.body.appendChild(nav);rShelfCards();
       const inp=sh.querySelector('.sec-in')||sh.querySelector('input');
       if(inp&&inp.parentNode)inp.parentNode.insertBefore(b,inp);else sh.appendChild(b);
       if(!sh.classList.contains('on'))return;
+      /* Best-effort automatic unlock for the Web version too. Some browsers may
+         present their native passkey UI here. iOS Safari requires a user gesture
+         for Face ID / Touch ID, so its automatic attempt can be rejected; in that
+         case the existing passkey button is immediately re-enabled as fallback.
+         Android keeps its native biometric prompt path unchanged. */
       b.disabled=true;
-      brBiometricUnlock(done,!ab).finally(()=>{b.disabled=false});
+      brBiometricUnlock(done,!ab).then(ok=>{
+        if(!ok)b.disabled=false;
+      }).catch(()=>{b.disabled=false});
     },50);
   };
   const oldSecSettingsBox=secSettingsBox;
@@ -9078,7 +9130,7 @@ document.body.appendChild(nav);rShelfCards();
         if(brMasterBytes)act(ab?'生体認証を再設定':'パスキー生体認証を再設定','指紋・顔認証キーを更新します',async()=>{try{await brEnableBiometric();if(refresh)refresh()}catch(e){toast(e.message||'生体認証を再設定できませんでした')}});
         act(ab?'生体認証を無効化':'パスキー生体認証を無効化',ab?'Android Keystore に保存した生体認証キーを削除します':'ブラウザに保存したパスキー連携キーを削除します',()=>{brDisableBiometric();toast('生体認証を無効にしました');if(refresh)refresh()});
       }else if(brMasterBytes){
-        act(ab?'生体認証（指紋・顔認証）を設定':'パスキー（指紋・顔認証）を設定',ab?'指紋や顔認証で解除できるように登録します':'WebAuthn パスキー（PRF拡張）で解除できるように登録します',async()=>{try{await brEnableBiometric();if(refresh)refresh()}catch(e){toast(e.message||'生体認証を設定できませんでした')}});
+        act(ab?'生体認証（指紋・顔認証）を設定':'パスキー（指紋・顔認証）を設定',ab?'指紋や顔認証で解除できるように登録します':'PRF対応パスキーを登録して、指紋・顔認証で暗号鍵を取得できるようにします',async()=>{try{await brEnableBiometric();if(refresh)refresh()}catch(e){toast(e.message||'生体認証を設定できませんでした')}});
       }else{
         g.appendChild(mkEl('p','※ 生体認証を設定するには、先にパスコードを入力して一度ロックを解除してください。','note'));
       }
