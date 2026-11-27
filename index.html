@@ -14,7 +14,7 @@
 -->
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pgYDQZ2LxB3OJvAPR75se5PpoxDiyp68YosDLQqTQ4k=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-U5UrjWwOnD4qPEk+v+/LDfUalEW8ZaCsFNSF2itAtiA=' 'self'   ; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-GLS0PKYtcqn5C2jSRWkQfc6BT6QlSUbwB5Q76rSNXFk=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-U5UrjWwOnD4qPEk+v+/LDfUalEW8ZaCsFNSF2itAtiA=' 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#fdf8ff">
@@ -204,12 +204,12 @@ body:not(.reading) #top,body:not(.reading) #bot{display:none}
 #cv.on{display:block}#cv[data-bg=g]{background:#3a3d44}#cv[data-bg=w]{background:#fff}
 #cvStage{position:absolute;inset:0;touch-action:none;overflow:hidden;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 #cv.fw #cvStage{overflow-y:auto;touch-action:pan-y}
-#cvPg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:0;transform-origin:center;will-change:transform}
+#cvPg{position:absolute;inset:var(--cv-top-space,0px) 0 0;display:flex;align-items:center;justify-content:center;gap:0;transform-origin:center;will-change:transform}
 #cv.rtl #cvPg{flex-direction:row-reverse}
 #cvPg img{display:block;flex:0 1 auto;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;object-position:center;image-rendering:auto;pointer-events:none;-webkit-user-drag:none;user-select:none}
 #cvPg[data-pages="2"] img{max-width:50%;max-height:100%}
 #cv.fw #cvStage{overflow-y:auto;overflow-x:hidden;touch-action:pan-y}
-#cv.fw #cvPg{position:relative;inset:auto;min-height:100%;height:auto;align-items:flex-start}
+#cv.fw #cvPg{position:relative;inset:auto;min-height:100%;height:auto;align-items:flex-start;padding-top:var(--cv-top-space,0px)}
 #cv.fw #cvPg img{width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain}
 #cv.fw #cvPg[data-pages="2"] img{width:50%;max-width:50%}
 #cvPg img.a{object-position:right center}#cvPg img.b{object-position:left center}
@@ -1506,6 +1506,24 @@ body.app-locked #welcome,body.app-locked #stage,body.app-locked #kdTabs,body.app
 }
 </style>
 
+
+<style id="ui-top-space-adjustment">
+/* Environment setting: adjustable global top spacing for app interface chrome.
+   Device safe-area insets remain independent; book text/page-image margins are untouched. */
+:root{--ui-top-space:0px}
+.home-head{padding-top:max(0px,calc(env(safe-area-inset-top,0px) + 14px + var(--ui-top-space,0px)))!important}
+@media (max-height:500px) and (orientation:landscape){.home-head{padding-top:max(0px,calc(env(safe-area-inset-top,0px) + 8px + var(--ui-top-space,0px)))!important}}
+#top{top:max(0px,var(--ui-top-space,0px))!important}
+body.reading #top,body.pc-ui.reading #top{top:max(0px,calc(max(12px,env(safe-area-inset-top,0px)) + var(--ui-top-space,0px)))!important}
+#cvTop{top:max(0px,var(--ui-top-space,0px))!important}
+body.comic #cvTop{top:max(0px,calc(max(12px,env(safe-area-inset-top,0px)) + var(--ui-top-space,0px)))!important}
+#colView .col-top{top:max(0px,calc(max(12px,env(safe-area-inset-top,0px)) + var(--ui-top-space,0px)))!important}
+#colView #colBody{padding-top:max(0px,calc(88px + env(safe-area-inset-top,0px) + var(--ui-top-space,0px)))!important}
+#statsView .sv-top{padding-top:max(0px,calc(10px + env(safe-area-inset-top,0px) + var(--ui-top-space,0px)))!important}
+#side{padding-top:max(0px,calc(env(safe-area-inset-top,0px) + var(--ui-top-space,0px)))!important}
+#selbar{top:max(0px,calc(8px + env(safe-area-inset-top,0px) + var(--ui-top-space,0px)))!important}
+#importStatus{top:max(0px,calc(env(safe-area-inset-top,0px) + 14px + var(--ui-top-space,0px)))!important}
+</style>
 </head>
 <body>
 <header id="top" class="bar">
@@ -4564,8 +4582,14 @@ function rShelf(p){
     g.books.forEach(e=>p.appendChild(bookRow(e)));
   });
 }
-const HOME_DEFAULT={cols:4,cover:'m',showProgress:false,showLast:true,sort:'recent',zipFolder:false,autoScan:true,hideMissing:true,backToShelf:true,backExitConfirm:true,ui2:true,ui2Font:'serif',fullscreen:false};
+const HOME_DEFAULT={cols:4,cover:'m',showProgress:false,showLast:true,sort:'recent',zipFolder:false,autoScan:true,hideMissing:true,backToShelf:true,backExitConfirm:true,ui2:true,ui2Font:'serif',fullscreen:false,uiTopSpace:0};
 const HOME=Object.assign({},HOME_DEFAULT,LS.get('rd:home',{}));
+function applyUiTopSpace(){
+  const n=Math.max(-40,Math.min(80,Number(HOME.uiTopSpace)||0));
+  HOME.uiTopSpace=n;
+  document.documentElement.style.setProperty('--ui-top-space',n+'px');
+}
+applyUiTopSpace();
 if(HOME.hideMissing)syncPresentBookKeys(true);
 const repairTitleKey=t=>String(t||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s　]+/g,' ').trim();
 /* 修復で本を付け替えたとき、読書統計・履歴・コミック設定・表紙キャッシュも新しいキーへ移す（migrate() は位置・しおり等のみ） */
@@ -5816,7 +5840,7 @@ function openImg(src){
   v.addEventListener('wheel',e=>{e.preventDefault();const[fx,fy]=cen(e);zoom(sc*(e.deltaY<0?1.15:1/1.15),fx,fy)},{passive:false});
   v.append(im,x);document.body.appendChild(v);
 }
-function saveHome(){LS.set('rd:home',HOME);rShelfCards()}
+function saveHome(){applyUiTopSpace();LS.set('rd:home',HOME);rShelfCards()}
 /* ---------- License information (BookReader V4.6.0Beta) ---------- */
 const LIC_CONTACT='X DM：@SKosa_0（https://x.com/SKosa_0）';
 const LIC_JSZIP_MIT=`The MIT License
@@ -6074,6 +6098,14 @@ function homeSettings(){
     renderAccentPicker(sh,true);
     if(!isPhoneDevice())uiModeRow(sh);
     {const ds=mkEl('div','','seg');[[false,'現行'],[true,'軽量']].forEach(([lite,t])=>{const b=mkEl('button',t);if((HOME.uiLite===true)===lite)b.classList.add('on');b.onclick=()=>{HOME.uiLite=lite;LS.set('rd:home',HOME);applyUi2();ds.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));applog('setting','UIモード='+t)};ds.appendChild(b)});row('UI表示',ds)}
+    {const ctl=mkEl('div','','ui-top-space-control');ctl.style.cssText='display:flex;align-items:center;gap:12px;width:100%;min-width:0';
+      const rg=document.createElement('input');rg.type='range';rg.min='-40';rg.max='80';rg.step='2';rg.value=String(HOME.uiTopSpace||0);rg.setAttribute('aria-label','UI全体の上部余白');rg.style.cssText='flex:1;min-width:0;width:100%;accent-color:var(--acc)';
+      const val=mkEl('output',(HOME.uiTopSpace>0?'+':'')+(HOME.uiTopSpace||0)+'px');val.style.cssText='min-width:48px;text-align:right;font-variant-numeric:tabular-nums;font-size:13px;font-weight:700';
+      rg.oninput=()=>{const n=Number(rg.value);HOME.uiTopSpace=n;val.textContent=(n>0?'+':'')+n+'px';applyUiTopSpace()};
+      rg.onchange=()=>{LS.set('rd:home',HOME);applog('setting','UI全体の上部余白='+HOME.uiTopSpace+'px')};
+      ctl.append(rg,val);row('UI全体の上部余白',ctl);
+      sh.appendChild(mkEl('p','ホーム・本棚・読書画面・コミック・コレクション・統計など、画面上部のUI位置をまとめて調整します。マイナスで上へ、プラスで下へ移動します。iPadのセーフエリアは別に確保し、本文の文字余白やページ画像の余白には影響しません。','note'));
+    }
     {const fs=mkEl('div','','seg');[['serif','明朝'],['sys','ゴシック']].forEach(([f,t])=>{const b=mkEl('button',t);if((HOME.ui2Font||'serif')===f)b.classList.add('on');b.onclick=()=>{HOME.ui2Font=f;LS.set('rd:home',HOME);applyUi2();fs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));applog('setting','見出しの書体='+t)};fs.appendChild(b)});row('見出しと題名の書体',fs)}
     if(!isPhoneDevice()){const sd=mkEl('div','','seg');[['r','ナビを右'],['l','ナビを左']].forEach(([v,t])=>{const b=mkEl('button',t);if((HOME.dockSide||'r')===v)b.classList.add('on');b.onclick=()=>{HOME.dockSide=v;LS.set('rd:home',HOME);sd.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));document.documentElement.classList.toggle('dock-swap',v==='l')};sd.appendChild(b)});row('iPad・PCの下部バー配置（ナビと読書中カードの左右）',sd)}
     }else if(homeTabCur==='d'){
@@ -6674,7 +6706,7 @@ async function looksComic(){
   try{for(let k=0;k<6;k++){const i=Math.floor((k+.5)*spine.length/6),d=parseDoc(await getFile(spine[i].path).async('string')),b=d.body||d.documentElement;if((b.textContent||'').trim().length<3&&b.querySelector('img,image'))ok++}}catch(e){CON.warn('looksComic',e);return false}
   return ok>=5;
 }
-const CVD={dir:'r',spread:'a',cover:true,offset:false,fit:'c',bg:'k',tap:true,tapMode:'std',swipe:true,anim:false};
+const CVD={dir:'r',spread:'a',cover:true,offset:false,fit:'c',bg:'k',topSpace:0,tap:true,tapMode:'std',swipe:true,anim:false};
 const CV={on:false,n:0,dims:[],paths:[],spreads:[],si:0,page:0,cur:[0],sc:1,tx:0,ty:0,cache:new Map(),th:new Map(),thq:Promise.resolve(),tok:0,rev:0,cfg:Object.assign({},CVD)};
 const cvEl=$('#cv'),cvPg=$('#cvPg'),cvSt=$('#cvStage'),cvRtl=()=>CV.cfg.dir==='r';
 function cvLoadCfg(sp){const ppd=sp&&sp.getAttribute('page-progression-direction');CV.cfg=Object.assign({},CVD,ppd==='ltr'?{dir:'l'}:{},LS.get('rd:cset',{}),LS.get('rd:cs:'+key,{}))}
@@ -6744,7 +6776,7 @@ async function cvShow(si){
 function cvUI(){
   const a=CV.cur,lab=a.length===2?(a[0]+1)+'-'+(a[1]+1):(a[0]+1),sl=$('#cvSl');
   $('#cvCt').textContent=lab+' / '+CV.n;sl.max=Math.max(0,CV.n-1);sl.value=a[0];sl.style.direction=cvRtl()?'rtl':'ltr';
-  cvEl.classList.toggle('rtl',cvRtl());cvEl.classList.toggle('fw',CV.cfg.fit==='w');cvEl.dataset.bg=CV.cfg.bg;
+  cvEl.classList.toggle('rtl',cvRtl());cvEl.classList.toggle('fw',CV.cfg.fit==='w');cvEl.dataset.bg=CV.cfg.bg;cvEl.style.setProperty('--cv-top-space',Math.max(0,Math.min(120,Number(CV.cfg.topSpace)||0))+'px');
   $('#cvMark').replaceChildren(miEl(marks.some(m=>m.i===a[0]||m.i===a[a.length-1])?'star-fill':'star'));
   const shb=$('#cvShift');if(shb){const two=CV.cfg.spread==='2'||(CV.cfg.spread==='a'&&cvSt.clientWidth>cvSt.clientHeight*1.1);shb.style.display=two?'':'none';shb.classList.toggle('on',!!CV.cfg.offset)}
 }
@@ -6839,6 +6871,11 @@ function cvSettings(){
       row('見開きの表紙を単独で表示','cover',oo);
       row('見開きを1ページずらす','offset',oo);
       row('表示','fit',[['c','全体を表示'],['w','幅に合わせる']]);
+      const tr=mkEl('div','','row');tr.innerHTML='<b>上の余白</b><div class="seg" style="display:flex;align-items:center;gap:10px;width:100%"></div>';
+      const range=document.createElement('input');range.type='range';range.min='0';range.max='120';range.step='4';range.value=String(CV.cfg.topSpace||0);range.style.cssText='flex:1;min-width:0;accent-color:var(--acc)';
+      const val=mkEl('span',(CV.cfg.topSpace||0)+'px');val.style.cssText='min-width:42px;text-align:right;font-variant-numeric:tabular-nums';
+      range.oninput=()=>{CV.cfg.topSpace=Number(range.value);val.textContent=range.value+'px';cvSave('topSpace');cvUI()};
+      tr.lastChild.append(range,val);sh.appendChild(tr);
       row('背景','bg',[['k','黒'],['g','グレー'],['w','白']]);
     }else{
       row('読む向き','dir',[['r','右開き（右→左）'],['l','左開き（左→右）']]);
