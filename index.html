@@ -14,7 +14,7 @@
 -->
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-VTxuq/ZdXVr+aW8zDhXpIyBHxVW08Kbk0D+kcaSbP/8=' 'sha256-Rh8XYNiHWcOV2ycfv/QEdsVVDMAHMTGz1mgtazPRAoQ=' 'sha256-h7lD0r9NQdyeuRe+ub8GQTJXjUMan6qik4bw9rA9aGU='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-ogkiLeTGiqERzQCk0LYqEmLEAkBsl8SaUwhqEnPqIqM=' 'sha256-Rh8XYNiHWcOV2ycfv/QEdsVVDMAHMTGz1mgtazPRAoQ=' 'sha256-h7lD0r9NQdyeuRe+ub8GQTJXjUMan6qik4bw9rA9aGU='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#fdf8ff">
@@ -709,6 +709,11 @@ html.kd .sv-body{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 .sv-cp{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:12px;border:1px solid var(--line);margin:6px 0;cursor:pointer;width:100%;text-align:left;background:transparent;color:var(--fg)}
 .sv-cp:hover{border-color:var(--acc)}
 @media (max-width:699px) and (not (display-mode:standalone)){html.web-env #kdTabs{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!important}html.web-env #kdNow{bottom:calc(82px + env(safe-area-inset-bottom,0px))!important}}
+/* V5.1.2 Lightweight Mode (html.ui2.ui-lite) */
+html.ui2.ui-lite{--paper-grain:none!important;--glass-shadow:0 6px 18px -10px rgba(0,0,0,.22)!important}
+html.ui2.ui-lite :is(#welcome,#colView,#sheet,#side){background-image:none!important}
+html.ui2.ui-lite :is(#top,#bot,#kdTabs,#kdNow,#bulkbar,#quickSet,.col-top,#colActs,#progTip,.flip-top,.flip-bot,body.comic #cvTop,body.comic #cvBot,.home-head,#sheet,#side,#autoScanVeil>div,#flipView,.cvbar,#selbar.on){-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background-color:var(--bar)!important}
+html.ui2.ui-lite :is(#sheet,#side){background-color:var(--card)!important}
 </style>
 <style id="lb">
 /* BookReader Library UI — single source of truth for #welcome (Home / Library), dock and now-reading card.
@@ -5801,17 +5806,13 @@ function libMoreSheet(){
   });
 }
 function applyUi2(){
-  const on=HOME.ui2!==false,html=document.documentElement;html.classList.toggle('ui2',on);html.classList.toggle('ui2-sys',on&&HOME.ui2Font==='sys');
+  if(HOME.ui2===false){HOME.ui2=true;try{LS.set('rd:home',HOME)}catch(_){}}
+  const html=document.documentElement;html.classList.add('ui2');html.classList.toggle('ui2-sys',HOME.ui2Font==='sys');html.classList.toggle('ui-lite',HOME.uiLite===true);
   const tools=$('.home-tools'),search=$('#librarySearch');if(!tools||!search)return;
   let more=$('#bLibMore');
-  if(on){
-    if(!more){more=document.createElement('button');more.id='bLibMore';more.type='button';more.setAttribute('aria-label','その他の操作');more.title='その他の操作';more.appendChild(miEl('more_horiz'));more.onclick=libMoreSheet}
-    search.append($('#bLibSort'),$('#bSelectMode'),more);
-    const af=$('#bAddFolder');if(af){af.setAttribute('aria-label','フォルダを追加');af.title='フォルダを追加'}
-  }else{
-    LIB_TOOL_ORDER.forEach(id=>{const e=document.getElementById(id);if(e)tools.appendChild(e)});
-    if(more)more.remove();
-  }
+  if(!more){more=document.createElement('button');more.id='bLibMore';more.type='button';more.setAttribute('aria-label','その他の操作');more.title='その他の操作';more.appendChild(miEl('more_horiz'));more.onclick=libMoreSheet}
+  search.append($('#bLibSort'),$('#bSelectMode'),more);
+  const af=$('#bAddFolder');if(af){af.setAttribute('aria-label','フォルダを追加');af.title='フォルダを追加'}
   if(typeof syncLibSortBtn==='function')syncLibSortBtn();
 }
 function homeSettings(){
@@ -5839,9 +5840,8 @@ function homeSettings(){
     themeRow.appendChild(themeSeg);sh.appendChild(themeRow);
     renderAccentPicker(sh,true);
     if(!isPhoneDevice())uiModeRow(sh);
-    {const ds=mkEl('div','','seg');[[true,'紙とガラス（新）'],[false,'従来']].forEach(([on,t])=>{const b=mkEl('button',t);if((HOME.ui2!==false)===on)b.classList.add('on');b.onclick=()=>{HOME.ui2=on;LS.set('rd:home',HOME);applyUi2();applog('setting','デザイン='+(on?'紙とガラス':'従来'));homeSettings()};ds.appendChild(b)});row('デザイン',ds)}
-    /* 見出し・題名の書体（新しいデザインのときだけ） */
-    if(HOME.ui2!==false){const fs=mkEl('div','','seg');[['serif','明朝'],['sys','従来の書体']].forEach(([f,t])=>{const b=mkEl('button',t);if((HOME.ui2Font||'serif')===f)b.classList.add('on');b.onclick=()=>{HOME.ui2Font=f;LS.set('rd:home',HOME);applyUi2();fs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));applog('setting','見出しの書体='+t)};fs.appendChild(b)});row('見出しと題名の書体',fs)}
+    {const ds=mkEl('div','','seg');[[false,'現行'],[true,'軽量']].forEach(([lite,t])=>{const b=mkEl('button',t);if((HOME.uiLite===true)===lite)b.classList.add('on');b.onclick=()=>{HOME.uiLite=lite;LS.set('rd:home',HOME);applyUi2();ds.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));applog('setting','UIモード='+t)};ds.appendChild(b)});row('UI表示',ds)}
+    {const fs=mkEl('div','','seg');[['serif','明朝'],['sys','ゴシック']].forEach(([f,t])=>{const b=mkEl('button',t);if((HOME.ui2Font||'serif')===f)b.classList.add('on');b.onclick=()=>{HOME.ui2Font=f;LS.set('rd:home',HOME);applyUi2();fs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));applog('setting','見出しの書体='+t)};fs.appendChild(b)});row('見出しと題名の書体',fs)}
     if(!isPhoneDevice()){const sd=mkEl('div','','seg');[['r','ナビを右'],['l','ナビを左']].forEach(([v,t])=>{const b=mkEl('button',t);if((HOME.dockSide||'r')===v)b.classList.add('on');b.onclick=()=>{HOME.dockSide=v;LS.set('rd:home',HOME);sd.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));document.documentElement.classList.toggle('dock-swap',v==='l')};sd.appendChild(b)});row('iPad・PCの下部バー配置（ナビと読書中カードの左右）',sd)}
     }else if(homeTabCur==='d'){
     /* V4.6.0Beta：「データ」タブを目的ごとのまとまりに整理（中の機能は同じ）
