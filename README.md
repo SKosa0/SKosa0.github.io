@@ -1,5 +1,8 @@
 # [SKosa0.github.io](https://skosa0.github.io/index.html)
-# BookReader (v5.1.5)
+# HTMLBookReader (GitHubWeb版)
+
+HTML,APKは後日以下のリンクで配布する
+https://github.com/SKosa0/BookReader-HTML
 
 完全ローカル完結・プライバシー重視の電子書籍リーダーです。  
 小説（EPUB）とコミック（EPUB / ZIP / CBZ / RAR / CBR）の両方に対応し、書籍データ・読書記録・暗号化キーを外部サーバーへ一切送信せず、お使いの端末内だけで快適に読書と本棚管理ができます。
