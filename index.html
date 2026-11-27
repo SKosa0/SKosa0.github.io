@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ja">
 <!--
-  BookReader V5.1.3
+  BookReader V5.1.4
   Copyright (c) 2026 Kosa.
   Source-available under the BookReader NonCommercial Attribution License 1.1.
   You may use, modify, and redistribute this software for noncommercial purposes,
@@ -14,14 +14,14 @@
 -->
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-8BwAzA5LDHCYgHm8pin8SiBYwRsYPBr/tVY9CYtQJWQ=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-zws/ctaMJ+75AUeLvVMlLfe6D3kjLULIfTJArPu12vU='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-wEi6E0bI0MiyfYUTgsBft2OJ9w5sfkhOm0FNCPw7rmI=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-awWk3xVPLt0FcEYpyE6uqEzBcW0mIPlx0hDfZccelPc='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#fdf8ff">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>BookReader V5.1.3</title>
+<title>BookReader V5.1.4</title>
 <style>
 :root{--bg:#fdf8ff;--fg:#1c1b20;--sub:#48454e;--bar:#f1ecf4;--line:#cac4cf;--acc:#3569c8;--link:#3569c8;--md-pc:#e6deff;--md-opc:#180054;--md-sc:#e4dff8;--md-osc:#1b192c;--md-surf:#f7f2fa;--md-on-primary:#ffffff;--md-card-bg:#f7f2fa;--md-chip-bg:#e4dff8;--md-chip-fg:#1b192c;color-scheme:light;}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="sepia"]):not([data-theme="oled"]){--bg:#141318;--fg:#e5e1e9;--sub:#cac4cf;--bar:#201f25;--line:#48454e;--acc:#cfbcff;--link:#cfbcff;--md-pc:#4d358a;--md-opc:#e6deff;--md-sc:#474459;--md-osc:#e4dff8;--md-surf:#1c1b20;--md-on-primary:#381e72;--md-card-bg:#26242b;--md-chip-bg:#474459;--md-chip-fg:#e4dff8;color-scheme:dark}}
@@ -709,11 +709,16 @@ html.kd .sv-body{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 .sv-cp{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:12px;border:1px solid var(--line);margin:6px 0;cursor:pointer;width:100%;text-align:left;background:transparent;color:var(--fg)}
 .sv-cp:hover{border-color:var(--acc)}
 @media (max-width:699px) and (not (display-mode:standalone)){html.web-env #kdTabs{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!important}html.web-env #kdNow{bottom:calc(82px + env(safe-area-inset-bottom,0px))!important}}
-/* V5.1.3 Lightweight Mode (html.ui2.ui-lite) */
+/* V5.1.4 Lightweight Mode (html.ui2.ui-lite) */
 html.ui2.ui-lite{--paper-grain:none!important;--glass-shadow:0 6px 18px -10px rgba(0,0,0,.22)!important}
 html.ui2.ui-lite :is(#welcome,#colView,#sheet,#side){background-image:none!important}
 html.ui2.ui-lite :is(#top,#bot,#kdTabs,#kdNow,#bulkbar,#quickSet,.col-top,#colActs,#progTip,.flip-top,.flip-bot,body.comic #cvTop,body.comic #cvBot,.home-head,#sheet,#side,#autoScanVeil>div,#flipView,.cvbar,#selbar.on){-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background-color:var(--bar)!important}
 html.ui2.ui-lite :is(#sheet,#side){background-color:var(--card)!important}
+#bkPop{width:min(92vw,340px)!important}
+#bkPop .bp-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+#bkPop .bp-act{height:40px!important;padding:0 8px!important;font-size:12.5px!important;gap:7px!important}
+#bkPop .bp-act span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#bkPop .bp-act.dng{grid-column:1 / -1}
 </style>
 <style id="lb">
 /* BookReader Library UI — single source of truth for #welcome (Home / Library), dock and now-reading card.
@@ -3592,7 +3597,7 @@ function folderDeleteSheet(gs,after){
   openSheet(sh=>{
     sh.appendChild(mkEl('h3','フォルダを削除'));
     sh.appendChild(mkEl('p',label+'を削除します。中の本は'+nb.size+'冊です（子フォルダの本を含む）。','note'));
-    const keep=mkEl('button','フォルダだけ削除（本は未分類に戻す）'),all=mkEl('button','中の本ごと削除'),no=mkEl('button','キャンセル');
+    const keep=mkEl('button','フォルダだけ削除（本は未分類に戻す）'),all=mkEl('button','フォルダと中の本をすべて削除'),no=mkEl('button','キャンセル');
     [keep,all,no].forEach(b=>b.style.cssText='display:block;width:100%;margin:6px 0');all.style.color='#e5484d';
     keep.onclick=async()=>{closeAll();const r=await deleteFolders(gs,false);toast(r.folders+'個のフォルダを削除しました');if(after)after();rShelfCards()};
     all.onclick=()=>{closeAll();confirmSheet(label+'と中の本'+nb.size+'冊を本棚から削除します。読書位置・しおり・ハイライトも削除され、元に戻せません。','本ごと削除',async()=>{const r=await deleteFolders(gs,true);toast(r.folders+'個のフォルダと'+r.books+'冊を削除しました');if(after)after();rShelfCards()})};
@@ -4186,8 +4191,7 @@ function bookLabel(e,books){
 }
 function byTitle(a,b,books){
   const x=groupVolumeInfo(a,books),y=groupVolumeInfo(b,books);
-  if(x.rank!==y.rank)return x.rank-y.rank;
-  if(x.rank===0&&x.n!==y.n)return x.n-y.n;
+  if(x.rank===0&&y.rank===0&&x.n!==y.n&&titleSimilarity(a.t,b.t)>=0.72)return x.n-y.n;
   return (a.t||'').localeCompare(b.t||'','ja',{numeric:true,sensitivity:'base'});
 }
 /* V4.6.0Beta 高速化：シリーズの判定（タイトルの似ている度合い）は本の数の2乗に比例して重いので、同じ組み合わせの結果を覚えておく */
@@ -5612,7 +5616,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 const LIC_TEXT={
 ja:{title:'ライセンス情報',
  h:['1. 著作権・クレジット表示','2. 利用条件','3. 禁止事項','4. 第三者ライブラリのライセンス','5. EPUBの利用とプライバシー','6. 問い合わせ先'],
- copy:['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.1.3','License：BookReader NonCommercial Attribution License 1.1（全文は配布物のLICENSEファイルを参照）','取り込んだ書籍ファイル（IndexedDB）と読書統計・目標・履歴・設定・生体認証／パスキー連携情報（localStorage / Android Keystore）はすべて端末内に保存され、外部へ送信されません。','改変版を配布する場合は、改変版であることを明確に表示してください。','Kosaの著作権表示・ライセンス表示を保持してください。'],
+ copy:['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.1.4','License：BookReader NonCommercial Attribution License 1.1（全文は配布物のLICENSEファイルを参照）','取り込んだ書籍ファイル（IndexedDB）と読書統計・目標・履歴・設定・生体認証／パスキー連携情報（localStorage / Android Keystore）はすべて端末内に保存され、外部へ送信されません。','改変版を配布する場合は、改変版であることを明確に表示してください。','Kosaの著作権表示・ライセンス表示を保持してください。'],
  allow:['許可する行為','個人・非商用目的での利用','個人の端末へのダウンロード','非商用目的での改変','本ライセンスと著作権表示を保持した非商用目的での再配布','任意の寄付・投げ銭は、利用や配布の対価・条件でない限り、それだけで商用利用とは扱いません。'],
  deny:['禁止する行為','商用利用（販売、有料提供、有料サポート、広告・アフィリエイト等の収益化、営利事業上の利用を含む）','会社・事業者等による社内利用を、業務上の利益・効率化等のために行うこと','Kosaの著作権表示・クレジット・ライセンス表示の削除または改変','製作者を偽る行為、または本ソフトウェア・改変版を自作したものとして表示する行為','改変版であることを明示せずに配布する行為','Kosaの名前・Xアカウント・クレジットを、Kosaが改変版や利用者を推薦・公認しているかのように表示する行為'],
  exc:'非営利団体による利用を含め、利用目的・実態から商用か判断しにくい場合、社内評価・研究利用、寄付・投げ銭など本ライセンスの境界に当たる場合は、利用前にKosaへ相談してください。明示的な許諾がない限り商用利用はできません。',
@@ -5621,7 +5625,7 @@ ja:{title:'ライセンス情報',
  contact:'連絡先：',back:'戻る',close:'閉じる'},
 en:{title:'License information',
  h:['1. Copyright and attribution','2. Terms of use','3. Prohibited actions','4. Third-party library licenses','5. EPUB use and privacy','6. Contact'],
- copy:['Creator: Kosa','X: @SKosa_0','Copyright © 2026 Kosa','Product: BookReader','Version: 5.1.3','License: BookReader NonCommercial Attribution License 1.1 (full text in the LICENSE file distributed with this software)','Imported book files (IndexedDB) and reading stats, goals, history, settings, and biometric/passkey wrap metadata (localStorage / Android Keystore) are stored locally on your device and are never sent externally.','Clearly identify modified versions when distributing them.','Retain Kosa’s copyright, attribution, and license notices.'],
+ copy:['Creator: Kosa','X: @SKosa_0','Copyright © 2026 Kosa','Product: BookReader','Version: 5.1.4','License: BookReader NonCommercial Attribution License 1.1 (full text in the LICENSE file distributed with this software)','Imported book files (IndexedDB) and reading stats, goals, history, settings, and biometric/passkey wrap metadata (localStorage / Android Keystore) are stored locally on your device and are never sent externally.','Clearly identify modified versions when distributing them.','Retain Kosa’s copyright, attribution, and license notices.'],
  allow:['Permitted','Personal and noncommercial use','Downloading to your own device','Modification for noncommercial purposes','Redistribution for noncommercial purposes, provided this license and copyright notices are retained','Voluntary donations or tips are not commercial use by themselves, provided they are not consideration for or a condition of access or distribution.'],
  deny:['Prohibited','Commercial use, including sale, paid access or support, advertising or affiliate monetization, and use in for-profit business operations','Internal use by a company or business for operational benefit, efficiency, or other business purposes','Removing or altering Kosa’s copyright, attribution, or license notices','Misrepresenting the creator or presenting this software or a modified version as your own work','Distributing a modified version without clearly identifying it as modified','Using Kosa’s name, X account, or attribution to imply that Kosa endorses or recommends a modified version or its distributor'],
  exc:'If the commercial or noncommercial nature of a use is unclear—including use by nonprofit organizations, internal evaluation or research, or donations and tips—contact Kosa before use. Commercial use is not permitted without explicit prior permission.',
@@ -5904,7 +5908,7 @@ function homeSettings(){
     }
     const licBtn=mkEl('button','ライセンス情報');licBtn.style.cssText='display:block;width:100%;margin:14px 0 0';licBtn.onclick=licenseSheet;sh.appendChild(licBtn);
     const credit=mkEl('div');credit.style.cssText='text-align:center;margin:16px 0 6px;opacity:.7;font-size:12px;line-height:1.7';
-    const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.1.3'];
+    const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.1.4'];
     const nativeVer=AppNative.getNativeVersion();
     if(nativeVer){
     creditItems.push('アプリ本体バージョン：'+nativeVer);
@@ -7949,17 +7953,17 @@ function folderPop(g,rect,where){
   const ic=document.createElement('span');ic.className='bp-fico';ic.appendChild(miEl('folder'));hd.appendChild(ic);
   const tx=document.createElement('div');tx.appendChild(mkEl('b',g.name.split('/').pop()));tx.appendChild(mkEl('small',(g.auto?'自動シリーズ・':'')+(g.auto?g.books.length:n)+'冊'+(subs?'・子フォルダ'+subs+'個':'')));hd.appendChild(tx);p.appendChild(hd);
   const finish=()=>{bookPopClose();if(where==='lib')endSelection()};
-  const act=(icn,label,fn,danger)=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','menuitem');b.className='bp-act'+(danger?' dng':'');b.appendChild(miEl(icn));b.appendChild(mkEl('span',label));b.onclick=ev=>{ev.stopPropagation();fn()};p.appendChild(b)};
+  const gr=document.createElement('div');gr.className='bp-grid';p.appendChild(gr);const act=(icn,label,fn,danger)=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','menuitem');b.className='bp-act'+(danger?' dng':'');b.appendChild(miEl(icn));b.appendChild(mkEl('span',label));b.onclick=ev=>{ev.stopPropagation();fn()};gr.appendChild(b)};
   act('folder_open','開く',()=>{finish();if(window.kdOpenCol)window.kdOpenCol(g.key);else{toggleFo(g.key);rShelfCards()}});
   act('edit','名前を変更',()=>{finish();const m=ensureManagedFolder(g);renameFolder(m.name)});
   {const hid=g.auto?(g.books.length>0&&g.books.every(x=>x.hd)):secHf().includes(g.name);if(hid)act('visibility','非表示を解除',()=>{finish();secUnhideFolder(g)});else if(!(!g.auto&&secFolderHidden(g.name)))act('visibility_off','非表示にする',()=>{finish();secHideFolder(g)})}
   if(typeof window.kdFolderMove==='function')act('folder','中身を別のフォルダへ移動',()=>{finish();window.kdFolderMove(g)});
-  act('delete','フォルダを削除',()=>{finish();folderDeleteSheet([g])},true);
+  act('delete','フォルダを削除…',()=>{finish();folderDeleteSheet([g])},true);
   if(where==='lib')p.appendChild(mkEl('div','ほかの本やフォルダをタップすると続けて選択できます','bp-note'));
   document.body.appendChild(p);
   const pw=p.offsetWidth,ph=p.offsetHeight,m=10,vw=innerWidth,vh=innerHeight;
   let x=Math.min(vw-pw-m,Math.max(m,rect.left+Math.min(rect.width,240)/2-pw/2)),y=rect.bottom+8;
-  if(y+ph>vh-m){y=rect.top-ph-8;if(y<m)y=Math.max(m,Math.min(vh-ph-m,rect.top+rect.height/2-ph/2))}
+  if(y+ph>vh-m){y=rect.top-ph-8;if(y<m)y=(rect.top+rect.height/2<vh/2)?Math.max(m,vh-ph-m):m}
   p.style.left=x+'px';p.style.top=y+'px';p.style.transformOrigin='50% '+(y>rect.top?'0':'100%');
   requestAnimationFrame(()=>p.classList.add('on'));
 }
@@ -8026,7 +8030,7 @@ function bookPop(e,rect,where){
   const done=typeof isBookDone==='function'&&isBookDone(k);
   /* 選択中の本に対する操作はメニューを閉じて選択を終える */
   const finish=()=>{bookPopClose();if(where==='lib')endSelection();else if(where==='col'&&typeof window.kdColEndEdit==='function')window.kdColEndEdit()};
-  const act=(ic,label,fn,danger)=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','menuitem');b.className='bp-act'+(danger?' dng':'');b.appendChild(miEl(ic));b.appendChild(mkEl('span',label));b.onclick=ev=>{ev.stopPropagation();fn()};p.appendChild(b)};
+  const gr=document.createElement('div');gr.className='bp-grid';p.appendChild(gr);const act=(ic,label,fn,danger)=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','menuitem');b.className='bp-act'+(danger?' dng':'');b.appendChild(miEl(ic));b.appendChild(mkEl('span',label));b.onclick=ev=>{ev.stopPropagation();fn()};gr.appendChild(b)};
   act('menu_book','開く',()=>{finish();openShelf(k)});
   act('folder','フォルダへ移動',()=>{finish();folderSheet(e)});
   act('image','種類を変更（小説／コミック）',()=>{finish();bookTypeSheet(k)});
@@ -8034,13 +8038,13 @@ function bookPop(e,rect,where){
   act('check',done?'読了を解除':'読了にする',()=>{finish();setBookDone(k,!done);rShelfCards()});
   act('history','未読にする',()=>{finish();setBookUnread(k)});
   act('history','読書履歴',()=>{finish();bookHistorySheet(k)});
-  act('delete','本棚から削除',()=>{finish();delBook(e)},true);
+  act('delete','この本を削除',()=>{finish();delBook(e)},true);
   if(where!=='home'){const n=mkEl('div','ほかの本をタップすると続けて選択できます','bp-note');p.appendChild(n)}
   document.body.appendChild(p);
   /* 本の下に出す。入らなければ上に。左右は画面内に収める */
   const pw=p.offsetWidth,ph=p.offsetHeight,m=10,vw=innerWidth,vh=innerHeight;
   let x=Math.min(vw-pw-m,Math.max(m,rect.left+rect.width/2-pw/2)),y=rect.bottom+8;
-  if(y+ph>vh-m){y=rect.top-ph-8;if(y<m)y=Math.max(m,Math.min(vh-ph-m,rect.top+rect.height/2-ph/2))}
+  if(y+ph>vh-m){y=rect.top-ph-8;if(y<m)y=(rect.top+rect.height/2<vh/2)?Math.max(m,vh-ph-m):m}
   p.style.left=x+'px';p.style.top=y+'px';p.style.transformOrigin=(rect.left+rect.width/2-x)+'px '+(y>rect.top?'0':'100%');
   requestAnimationFrame(()=>p.classList.add('on'));
 }
@@ -8103,7 +8107,7 @@ applyUiMode();
 applyUi2();
 addEventListener('resize',()=>{if((S.ui||'auto')==='auto')applyUiMode()});
 applyLanguage();
-applog('app','起動 V5.1.3・起動まで'+Math.round(performance.now())+'ms・本'+shelf().length+'冊・'+innerWidth+'x'+innerHeight+'@'+(devicePixelRatio||1)+'・'+navigator.userAgent);
+applog('app','起動 V5.1.4・起動まで'+Math.round(performance.now())+'ms・本'+shelf().length+'冊・'+innerWidth+'x'+innerHeight+'@'+(devicePixelRatio||1)+'・'+navigator.userAgent);
 (function initAndroidLocalReader(){
   const ab=window.AndroidBridge;if(!ab)return;
   const fb=$('#bAddFolder');
@@ -8505,7 +8509,7 @@ document.body.appendChild(nav);rShelfCards();
 })();
 </script>
 <script id="br5Crypto">
-/* BookReader V5.1.3: encrypted hidden books + Android Keystore biometric unlock.
+/* BookReader V5.1.4: encrypted hidden books + Android Keystore biometric unlock.
    Existing database/store names are kept. Book payloads are encrypted in-place in IndexedDB store b.
    No CSP directive is relaxed; this script is separately SHA-256 allow-listed. */
 (function(){
@@ -8934,7 +8938,7 @@ document.body.appendChild(nav);rShelfCards();
     document.body.classList.add('app-locked');
     setTimeout(()=>{if(secHas()&&!secOpen)secUnlockSheet(()=>{document.body.classList.remove('app-locked')})},80);
   }
-  applog('security','V5.1.3：ロック書籍のAES-GCM暗号化とAndroid生体認証連携を初期化');
+  applog('security','V5.1.4：ロック書籍のAES-GCM暗号化とAndroid生体認証連携を初期化');
 })();
 </script>
 </body>
