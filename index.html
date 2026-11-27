@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ja">
 <!--
-  BookReader V5.2.2
+  BookReader V5.2.11
   Copyright (c) 2026 Kosa.
   Source-available under the BookReader NonCommercial Attribution License 1.1.
   You may use, modify, and redistribute this software for noncommercial purposes,
@@ -10,18 +10,18 @@
   Third-party: Beer CSS 5.0.3 (MIT License; (c) 2021 Beer css!) is embedded in this file.
   Third-party: Material Symbols (Google; Apache License 2.0) icons are embedded as inline SVG.
   Third-party: JSZip 3.10.1 (MIT License; (c) 2009-2016 Stuart Knightley, David Duponchel, Franz Buchinger, Antonio Afonso)
-  is embedded in this file. Its copyright belongs to its respective owners. Details: Home settings > License information.
+  is embedded in this file. Its copyright belongs to its respective owners. Details: Environment settings > License information.
 -->
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-gSkMrE0NxSthDBK58fwoLkOw518dS3TUpIurW2rEUt4=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-RIN6vm/2BvPVJ4K9liwd6kOx8b4ZDCR7994dT75r8TI=' 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-ojfvmvIl9XbynyTQ61M3SQaM6sde+sKAa7D45hNDv74=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-Pw6y6Sp2vG8BLatM2pGEtfWfYlE7Lvmg65+U0khKgTg='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#fdf8ff">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>BookReader V5.2.2</title>
+<title>BookReader V5.2.11</title>
 <style>
 :root{--bg:#fdf8ff;--fg:#1c1b20;--sub:#48454e;--bar:#f1ecf4;--line:#cac4cf;--acc:#3569c8;--link:#3569c8;--md-pc:#e6deff;--md-opc:#180054;--md-sc:#e4dff8;--md-osc:#1b192c;--md-surf:#f7f2fa;--md-on-primary:#ffffff;--md-card-bg:#f7f2fa;--md-chip-bg:#e4dff8;--md-chip-fg:#1b192c;color-scheme:light;}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="sepia"]):not([data-theme="oled"]){--bg:#141318;--fg:#e5e1e9;--sub:#cac4cf;--bar:#201f25;--line:#48454e;--acc:#cfbcff;--link:#cfbcff;--md-pc:#4d358a;--md-opc:#e6deff;--md-sc:#474459;--md-osc:#e4dff8;--md-surf:#1c1b20;--md-on-primary:#381e72;--md-card-bg:#26242b;--md-chip-bg:#474459;--md-chip-fg:#e4dff8;color-scheme:dark}}
@@ -204,12 +204,12 @@ body:not(.reading) #top,body:not(.reading) #bot{display:none}
 #cv.on{display:block}#cv[data-bg=g]{background:#3a3d44}#cv[data-bg=w]{background:#fff}
 #cvStage{position:absolute;inset:0;touch-action:none;overflow:hidden;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 #cv.fw #cvStage{overflow-y:auto;touch-action:pan-y}
-#cvPg{position:absolute;inset:var(--cv-top-space,0px) 0 0;display:flex;align-items:center;justify-content:center;gap:0;transform-origin:center;will-change:transform}
+#cvPg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:0;transform-origin:center;will-change:transform}
 #cv.rtl #cvPg{flex-direction:row-reverse}
 #cvPg img{display:block;flex:0 1 auto;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;object-position:center;image-rendering:auto;pointer-events:none;-webkit-user-drag:none;user-select:none}
 #cvPg[data-pages="2"] img{max-width:50%;max-height:100%}
 #cv.fw #cvStage{overflow-y:auto;overflow-x:hidden;touch-action:pan-y}
-#cv.fw #cvPg{position:relative;inset:auto;min-height:100%;height:auto;align-items:flex-start;padding-top:var(--cv-top-space,0px)}
+#cv.fw #cvPg{position:relative;inset:auto;min-height:100%;height:auto;align-items:flex-start}
 #cv.fw #cvPg img{width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain}
 #cv.fw #cvPg[data-pages="2"] img{width:50%;max-width:50%}
 #cvPg img.a{object-position:right center}#cvPg img.b{object-position:left center}
@@ -362,7 +362,7 @@ body.comic #cvTop #cvShift.on{background:var(--md-sc);color:var(--md-osc)}
 #pgrow button{height:48px;border-radius:9999px;background:var(--md-sc);color:var(--md-osc);font-weight:600;border-color:transparent}
 #pgrow button:active{filter:brightness(.94)}
 #pct,#cvCt{font-variant-numeric:tabular-nums;font-weight:500;font-size:13px;color:var(--sub)}
-#prog,#cvSl{-webkit-appearance:none;appearance:none;background:transparent;height:40px;margin:0;--p:0%}
+#prog,#cvSl{-webkit-appearance:none;appearance:none;background:transparent;height:40px;margin:0;--p:0%;--tw:4px}
 #prog::-webkit-slider-runnable-track,#cvSl::-webkit-slider-runnable-track{height:16px;border-radius:8px;background:linear-gradient(to var(--dir,right),var(--acc) var(--p),var(--md-sc) var(--p))}
 #prog::-webkit-slider-thumb,#cvSl::-webkit-slider-thumb{-webkit-appearance:none;width:4px;height:40px;margin-top:-12px;border-radius:2px;border:0;background:var(--acc);box-shadow:0 0 0 4px var(--bar)}
 #prog::-moz-range-track,#cvSl::-moz-range-track{height:16px;border-radius:8px;background:var(--md-sc)}
@@ -509,7 +509,7 @@ body{overscroll-behavior:none;-webkit-text-size-adjust:100%}
   #pgrow button{height:40px;min-width:0;padding:0 8px;font-size:12px}
 }
 
-/* Material 3 color controls in the Home settings sheet (outside the settings Shadow DOM) */
+/* Material 3 color controls in the Environment settings sheet (outside the settings Shadow DOM) */
 #sheet .accent-picker{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;align-items:center}
 #sheet .accent-swatch{appearance:none;-webkit-appearance:none;box-sizing:border-box;display:grid;place-items:center;flex:0 0 48px;width:48px;min-width:48px;height:48px;min-height:48px;aspect-ratio:1/1;padding:0;margin:0;border:3px solid var(--md-surf,var(--bg));border-radius:50%;position:relative;overflow:visible;box-shadow:0 0 0 1px var(--line),0 1px 3px rgba(0,0,0,.16);line-height:1;cursor:pointer}
 #sheet .accent-swatch[aria-pressed="true"]{outline:2px solid var(--acc);outline-offset:3px;box-shadow:0 0 0 1px var(--line)}
@@ -568,7 +568,8 @@ body.reading #bot,body.pc-ui.reading #bot{display:flex!important;flex-wrap:nowra
 body.reading #bPrev,body.reading #bNext{display:inline-flex!important;flex:none;align-items:center;justify-content:center;width:44px;min-width:44px;height:44px;padding:0;gap:0;font-size:0;border:0;border-radius:50%;background:transparent;color:var(--acc)}
 body.reading #bPrev::before,body.reading #bNext::after{width:26px;height:26px}
 body.reading #bPrev:active,body.reading #bNext:active{background:color-mix(in srgb,var(--acc) 16%,transparent)}
-body.reading #prog{flex:1 1 auto;min-width:0;width:auto;height:44px;margin:0 4px}
+body.reading #prog{flex:1 1 auto;min-width:0;width:auto;height:44px;margin:0 4px;--tw:14px}
+#flipSl{--tw:14px}
 body.reading #prog::-webkit-slider-runnable-track{height:12px;border-radius:6px}
 body.reading #prog::-webkit-slider-thumb{width:14px;height:36px;margin-top:-12px;border-radius:7px;box-shadow:0 1px 4px rgba(0,0,0,.28)}
 body.reading #prog::-moz-range-track,body.reading #prog::-moz-range-progress{height:12px;border-radius:6px}
@@ -593,7 +594,7 @@ body.comic #cvTop,body.comic #cvBot{
   box-shadow:0 10px 34px rgba(0,0,0,.22);
 }
 #cvCt{color:var(--fg)!important}
-#cvSl{accent-color:var(--acc)!important}
+#cvSl{accent-color:var(--acc)!important;--tw:4px}
 #cvSl::-webkit-slider-runnable-track{
   /* 右開き（direction:rtl）のときは右側から塗る。--dir は進捗バー同期処理が設定する */
   background:linear-gradient(to var(--dir,right),var(--acc) var(--p),var(--md-sc) var(--p))!important;
@@ -1413,131 +1414,340 @@ body.app-locked #welcome,body.app-locked #stage,body.app-locked #kdTabs,body.app
 #brBioUnlock{display:flex!important;align-items:center;justify-content:center;gap:8px;width:100%;margin:12px 0 14px;height:48px;font-weight:700;font-size:15px;border-radius:14px}
 #brBioUnlock .mi{width:22px;height:22px;margin:0}
 </style>
-<style id="ipad-reader-menu-fix">
-/* iPadOS standalone / WKWebView: keep reading content inside the system safe area. */
-#stage{
-  inset:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px)
-        env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)!important;
-}
-#cvStage{
-  inset:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px)
-        env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)!important;
-}
+<style id="m3-environment-unification-v5211">
 
-/* Material 3-style long-press menu: clear one-column actions and a calm surface. */
-#bkPop{
-  width:min(88vw,360px)!important;
-  max-height:min(74dvh,680px);
-  overflow-y:auto;
-  overscroll-behavior:contain;
-  padding:12px;
-  border-radius:24px;
-  background:var(--md-card-bg,var(--bar));
-  border:1px solid color-mix(in srgb,var(--fg) 12%,transparent);
-  -webkit-backdrop-filter:blur(18px) saturate(1.45);
-  backdrop-filter:blur(18px) saturate(1.45);
-  box-shadow:0 16px 44px rgba(0,0,0,.22);
-  scrollbar-width:thin;
+/* V5.2.11 — unified Material 3 Environment Settings */
+#sheet.settings-unified{
+  box-sizing:border-box;
+  color:var(--fg);
 }
-#bkPop .bp-head{
-  gap:12px;
-  padding:4px 6px 12px;
-  margin:0 0 8px;
-  border-bottom:1px solid color-mix(in srgb,var(--fg) 10%,transparent);
+#sheet.settings-unified>h3{
+  margin:8px 0 14px;
+  padding:0 0 12px;
+  border-bottom:1px solid color-mix(in srgb,var(--fg) 14%,transparent);
+  font-size:20px;
+  line-height:1.4;
+  font-weight:700;
+  letter-spacing:.01em;
 }
-#bkPop .bp-head img{width:42px;height:58px;border-radius:8px;object-fit:cover}
-#bkPop .bp-head b{font-size:14px;line-height:1.4}
-#bkPop .bp-head small{font-size:12px;line-height:1.4}
-#bkPop .bp-grid{display:flex;flex-direction:column;gap:2px}
-#bkPop .bp-act{
+#sheet.settings-unified>.stabs{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:4px;
   width:100%;
-  min-height:48px;
-  height:auto!important;
-  padding:8px 12px!important;
-  gap:14px!important;
-  border-radius:14px;
-  font-size:14px!important;
-  line-height:1.35;
-  text-align:left;
+  box-sizing:border-box;
+  padding:4px;
+  margin:0 0 12px;
+  border:1px solid color-mix(in srgb,var(--fg) 14%,transparent);
+  border-radius:999px;
+  background:color-mix(in srgb,var(--fg) 5%,transparent);
+  position:sticky;
+  top:0;
+  z-index:5;
 }
-#bkPop .bp-act .mi{width:22px;height:22px;flex:none}
-#bkPop .bp-act span{
+#sheet.settings-unified>.stabs>button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
   min-width:0;
-  white-space:normal!important;
-  overflow:visible;
-  text-overflow:clip;
-  overflow-wrap:anywhere;
+  width:100%;
+  height:42px;
+  margin:0;
+  padding:0 3px;
+  border:1px solid transparent;
+  border-radius:999px;
+  background:transparent;
+  color:var(--fg);
+  font-size:clamp(12px,3.5vw,14px);
+  line-height:1.2;
+  font-weight:500;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  box-shadow:none;
 }
-#bkPop .bp-act:active{background:color-mix(in srgb,var(--acc) 12%,transparent)}
-#bkPop .bp-act.dng{
-  min-height:52px;
-  margin-top:7px;
-  padding-top:12px!important;
-  border-top:1px solid color-mix(in srgb,var(--fg) 12%,transparent);
-  border-radius:0 0 14px 14px;
-}
-#bkPop .bp-note{
-  margin-top:8px;
-  padding:10px 8px 2px;
-  border-top:1px solid color-mix(in srgb,var(--fg) 9%,transparent);
-  font-size:11.5px;
-}
-@media (min-width:700px){#bkPop{width:min( min(88vw,360px), 400px)!important}}
-
-/* iPad Safari / Home Screen web app: release WebKit backdrop layers when comic HUD is hidden.
-   opacity + translate alone can leave a stale blurred strip at the top edge on iOS. */
-#cv:not(.ui) #cvTop,
-#cv:not(.ui) #cvBot{
-  display:none!important;
-  visibility:hidden!important;
-  opacity:0!important;
-  pointer-events:none!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-  background:transparent!important;
-  box-shadow:none!important;
+#sheet.settings-unified>.stabs>button.on{
+  background:var(--acc)!important;
+  color:var(--md-on-primary,#fff)!important;
   border-color:transparent!important;
+  font-weight:700;
 }
-#cv.ui #cvTop,
-#cv.ui #cvBot{
+#sheet.settings-unified :is(.bk-set-group,.ds-group,.upd-card,.sv-sec){
+  box-sizing:border-box;
+  margin:14px 0;
+  padding:13px 14px 12px;
+  border:1px solid color-mix(in srgb,var(--fg) 11%,transparent);
+  border-radius:20px;
+  background:var(--md-card-bg,var(--bar));
+  background-image:var(--paper-grain,none);
+  box-shadow:none;
+}
+#sheet.settings-unified :is(.bk-set-group>b,.ds-h,.upd-card-title,.sv-sec h3){
+  display:block;
+  margin:0 0 7px;
+  color:var(--fg);
+  font-size:15px;
+  font-weight:700;
+  line-height:1.45;
+  letter-spacing:.01em;
+}
+#sheet.settings-unified :is(.ds-desc,.note,.ds-sub,.upd-card-desc){
+  color:var(--sub);
+  font-size:12.5px;
+  line-height:1.6;
+}
+#sheet.settings-unified .row{
+  margin:12px 0;
+}
+#sheet.settings-unified .row>b{
+  display:block;
+  margin:0 0 7px;
+  color:var(--sub);
+  font-size:12.5px;
+  line-height:1.45;
+  font-weight:600;
+}
+#sheet.settings-unified .ds-sw{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-height:58px;
+  padding:9px 3px;
+  border-top:1px solid color-mix(in srgb,var(--fg) 10%,transparent);
+  cursor:pointer;
+}
+#sheet.settings-unified .ds-sw>span{
+  flex:1;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+#sheet.settings-unified .ds-sw b{
+  color:var(--fg);
+  font-size:14px;
+  line-height:1.45;
+  font-weight:600;
+}
+#sheet.settings-unified .ds-sw small{
+  color:var(--sub);
+  font-size:12px;
+  line-height:1.5;
+}
+#sheet.settings-unified label:has(>input[type=checkbox]){
   display:flex!important;
-  visibility:visible!important;
-  pointer-events:auto;
+  align-items:center;
+  gap:12px;
+  min-height:48px;
+  margin:5px 0!important;
+  color:var(--fg);
+  font-size:14px;
+  line-height:1.45;
 }
+#sheet.settings-unified input[type=checkbox]{
+  -webkit-appearance:none;
+  appearance:none;
+  order:9;
+  flex:none;
+  width:52px!important;
+  height:32px!important;
+  min-width:52px;
+  margin:0 0 0 auto;
+  border:1px solid color-mix(in srgb,var(--fg) 24%,transparent);
+  border-radius:16px;
+  background:
+    radial-gradient(circle at 16px 50%,var(--md-surf,var(--bg)) 0 10px,transparent 10.5px),
+    color-mix(in srgb,var(--fg) 18%,transparent);
+  box-shadow:none;
+  cursor:pointer;
+  transition:background .18s cubic-bezier(.2,0,0,1),border-color .18s;
+}
+#sheet.settings-unified input[type=checkbox]:checked{
+  border-color:var(--acc);
+  background:
+    radial-gradient(circle at calc(100% - 16px) 50%,var(--md-on-primary,#fff) 0 10px,transparent 10.5px),
+    var(--acc);
+}
+#sheet.settings-unified input[type=checkbox]:focus-visible{
+  outline:2px solid var(--acc);
+  outline-offset:3px;
+}
+#sheet.settings-unified .seg:not(.wrap):has(>.on),
+#sheet.settings-unified .row>.seg:not(.wrap){
+  display:flex;
+  gap:4px;
+  padding:4px;
+  border:1px solid color-mix(in srgb,var(--fg) 13%,transparent);
+  border-radius:999px;
+  background:color-mix(in srgb,var(--fg) 5%,transparent);
+  overflow:hidden;
+}
+#sheet.settings-unified .seg:not(.wrap):has(>.on)>button,
+#sheet.settings-unified .row>.seg:not(.wrap)>button{
+  flex:1 1 0;
+  min-width:0;
+  height:42px;
+  margin:0;
+  padding:0 8px;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+  color:var(--fg);
+  font-size:14px;
+  font-weight:500;
+  white-space:normal;
+  box-shadow:none;
+}
+#sheet.settings-unified .seg:not(.wrap):has(>.on)>button.on,
+#sheet.settings-unified .row>.seg:not(.wrap)>button.on,
+#sheet.settings-unified .seg.wrap>button.on{
+  background:var(--acc)!important;
+  color:var(--md-on-primary,#fff)!important;
+  border-color:transparent!important;
+  font-weight:700;
+}
+#sheet.settings-unified .seg.wrap{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+#sheet.settings-unified .seg.wrap>button{
+  flex:1 1 auto;
+  min-width:0;
+  min-height:42px;
+  height:auto;
+  padding:9px 14px;
+  border:1px solid color-mix(in srgb,var(--fg) 14%,transparent);
+  border-radius:999px;
+  background:color-mix(in srgb,var(--fg) 5%,transparent);
+  color:var(--fg);
+  font-size:14px;
+  font-weight:500;
+  box-shadow:none;
+}
+#sheet.settings-unified .ds-act{
+  min-height:56px;
+  padding:9px 3px;
+  border-top:1px solid color-mix(in srgb,var(--fg) 10%,transparent);
+  border-radius:12px;
+}
+#sheet.settings-unified .ds-act:active{
+  background:color-mix(in srgb,var(--fg) 7%,transparent);
+}
+#sheet.settings-unified .ds-btns{
+  display:flex;
+  gap:8px;
+  margin:12px 0 5px;
+}
+#sheet.settings-unified .ds-btns>button{
+  flex:1;
+  min-width:0;
+  min-height:42px;
+  border-radius:999px;
+  font-weight:600;
+}
+#sheet.settings-unified :is(button.m3-btn-filled,.m3-btn-filled){
+  background:var(--acc)!important;
+  color:var(--md-on-primary,#fff)!important;
+  border:1px solid transparent!important;
+  font-weight:700;
+}
+#sheet.settings-unified :is(button.m3-btn-tonal,.m3-btn-tonal){
+  background:var(--md-sc)!important;
+  color:var(--md-osc)!important;
+  border:1px solid transparent!important;
+  font-weight:600;
+}
+#sheet.settings-unified :is(button.m3-btn-outlined,.m3-btn-outlined){
+  background:transparent!important;
+  color:var(--fg)!important;
+  border:1px solid color-mix(in srgb,var(--fg) 22%,transparent)!important;
+  font-weight:500;
+}
+#sheet.settings-unified :is(input[type=search],input[type=number],textarea,select){
+  box-sizing:border-box;
+  border:1px solid color-mix(in srgb,var(--fg) 18%,transparent);
+  border-radius:12px;
+  background:color-mix(in srgb,var(--md-surf,var(--bg)) 75%,transparent);
+  color:var(--fg);
+}
+#sheet.settings-unified input[type=range]{
+  -webkit-appearance:none;
+  appearance:none;
+  display:block;
+  width:100%;
+  height:50px;
+  margin:7px 0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  accent-color:var(--acc);
+  cursor:pointer;
+}
+#sheet.settings-unified input[type=range]::-webkit-slider-runnable-track{
+  height:18px;
+  border-radius:9px;
+  background:linear-gradient(to right,var(--acc) var(--p,50%),var(--md-sc) var(--p,50%));
+}
+#sheet.settings-unified input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:4px;
+  height:50px;
+  margin-top:-16px;
+  border:0;
+  border-radius:2px;
+  background:var(--acc);
+  box-shadow:0 0 0 4px var(--md-card-bg,var(--bar));
+}
+#sheet.settings-unified input[type=range]::-moz-range-track{
+  height:18px;
+  border:0;
+  border-radius:9px;
+  background:var(--md-sc);
+}
+#sheet.settings-unified input[type=range]::-moz-range-progress{
+  height:18px;
+  border-radius:9px;
+  background:var(--acc);
+}
+#sheet.settings-unified input[type=range]::-moz-range-thumb{
+  width:4px;
+  height:50px;
+  border:0;
+  border-radius:2px;
+  background:var(--acc);
+  box-shadow:0 0 0 4px var(--md-card-bg,var(--bar));
+}
+#sheet.settings-unified :focus-visible{
+  outline:2px solid var(--acc);
+  outline-offset:3px;
+}
+@media(max-width:420px){
+  #sheet.settings-unified>.stabs{gap:3px;padding:3px}
+  #sheet.settings-unified>.stabs>button{height:40px;font-size:12px}
+  #sheet.settings-unified :is(.bk-set-group,.ds-group,.upd-card,.sv-sec){padding:12px 12px 10px;border-radius:18px}
+}
+
 </style>
-
-
-<style id="ui-top-space-adjustment">
-/* Environment setting: adjustable global top spacing for app interface chrome.
-   Device safe-area insets remain independent; book text/page-image margins are untouched. */
-:root{--ui-top-space:0px}
-.home-head{padding-top:max(0px,calc(env(safe-area-inset-top,0px) + 14px + var(--ui-top-space,0px)))!important}
-@media (max-height:500px) and (orientation:landscape){.home-head{padding-top:max(0px,calc(env(safe-area-inset-top,0px) + 8px + var(--ui-top-space,0px)))!important}}
-#top{top:max(0px,var(--ui-top-space,0px))!important}
-body.reading #top,body.pc-ui.reading #top{top:max(0px,calc(max(12px,env(safe-area-inset-top,0px)) + var(--ui-top-space,0px)))!important}
-#cvTop{top:max(0px,var(--ui-top-space,0px))!important}
-body.comic #cvTop{top:max(0px,calc(max(12px,env(safe-area-inset-top,0px)) + var(--ui-top-space,0px)))!important}
-#colView .col-top{top:max(0px,calc(max(12px,env(safe-area-inset-top,0px)) + var(--ui-top-space,0px)))!important}
-#colView #colBody{padding-top:max(0px,calc(88px + env(safe-area-inset-top,0px) + var(--ui-top-space,0px)))!important}
-#statsView .sv-top{padding-top:max(0px,calc(10px + env(safe-area-inset-top,0px) + var(--ui-top-space,0px)))!important}
-#side{padding-top:max(0px,calc(env(safe-area-inset-top,0px) + var(--ui-top-space,0px)))!important}
-#selbar{top:max(0px,calc(8px + env(safe-area-inset-top,0px) + var(--ui-top-space,0px)))!important}
-#importStatus{top:max(0px,calc(env(safe-area-inset-top,0px) + 14px + var(--ui-top-space,0px)))!important}
-
-/* UI全体の上部余白：環境設定の既存Material 3カード／スライダー規格に統一 */
-#sheet .ui-top-space-card{display:flex;flex-direction:column;gap:8px;padding:14px 16px 12px}
-#sheet .ui-top-space-card>b{display:block;margin:0 0 2px;font-size:15px;font-weight:700;color:var(--fg);letter-spacing:.01em}
-#sheet .ui-top-space-card>.note{margin:0;font-size:12px;line-height:1.55;color:var(--sub)}
-#sheet .ui-top-space-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px;font-size:13px;font-weight:600;color:var(--fg)}
-#sheet .ui-top-space-value{display:inline-flex;align-items:center;justify-content:center;min-width:64px;min-height:30px;padding:3px 10px;box-sizing:border-box;border-radius:999px;background:var(--md-sc);color:var(--md-osc);font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
-#sheet .ui-top-space-range{display:block;width:100%;min-width:0;height:40px;margin:0;padding:0;background:transparent;accent-color:var(--acc);appearance:none;-webkit-appearance:none;touch-action:pan-y;cursor:pointer;--p:33.333%}
-#sheet .ui-top-space-range::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:linear-gradient(to right,var(--acc) var(--p),var(--md-sc) var(--p))}
-#sheet .ui-top-space-range::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;margin-top:-7px;border:0;border-radius:50%;background:var(--acc);box-shadow:0 1px 3px rgba(0,0,0,.22)}
-#sheet .ui-top-space-range::-moz-range-track{height:6px;border:0;border-radius:999px;background:var(--md-sc)}
-#sheet .ui-top-space-range::-moz-range-progress{height:6px;border-radius:999px;background:var(--acc)}
-#sheet .ui-top-space-range::-moz-range-thumb{width:20px;height:20px;border:0;border-radius:50%;background:var(--acc);box-shadow:0 1px 3px rgba(0,0,0,.22)}
-#sheet .ui-top-space-range:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:999px}
-#sheet .ui-top-space-limits{display:flex;justify-content:space-between;gap:12px;margin-top:-2px;font-size:11px;font-weight:500;color:var(--sub);font-variant-numeric:tabular-nums}
+<style id="comic-spread-favorites-v5211">
+/* V5.2.11 — per-page comic favorites in spread mode */
+#sheet.cv-mark-sheet{height:auto;max-height:min(68dvh,560px);padding:14px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+#sheet.cv-mark-sheet>h3{margin:4px 0 8px;font-size:19px;font-weight:700}
+#sheet.cv-mark-sheet>.note{margin:0 0 12px;line-height:1.6}
+.cv-mark-options{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.cv-mark-option{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;padding:9px 13px;border:1px solid var(--line);border-radius:18px;background:var(--md-card-bg,var(--bar));color:var(--fg);text-align:left}
+.cv-mark-option.on{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 12%,var(--md-card-bg,var(--bar)))}
+.cv-mark-option-icon{width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--md-sc);color:var(--md-osc)}
+.cv-mark-option-icon .mi{width:22px;height:22px;margin:0}
+.cv-mark-option-text{display:flex;flex:1;min-width:0;flex-direction:column;gap:2px}
+.cv-mark-option-text b{font-size:14px;font-weight:700}
+.cv-mark-option-text small{font-size:12px;color:var(--sub)}
+.cv-mark-option-state{font-size:12px;font-weight:600;color:var(--sub);white-space:nowrap}
+.cv-mark-option.on .cv-mark-option-state{color:var(--acc)}
+.cv-mark-both,.cv-mark-done{width:100%;min-height:44px;margin-top:7px;border-radius:999px;font-weight:700}
+.cv-mark-both{background:var(--acc)!important;color:var(--md-on-primary,#fff)!important;border-color:transparent!important}
+.cv-mark-done{background:transparent;color:var(--fg);border:1px solid var(--line)}
 </style>
 </head>
 <body>
@@ -1577,7 +1787,7 @@ body.comic #cvTop{top:max(0px,calc(max(12px,env(safe-area-inset-top,0px)) + var(
   <div id="pgrow"><button id="bL"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M561-240 320-481l241-241 43 43-198 198 198 198-43 43Z"/></svg>次のページ</button><button id="bR">前のページ<svg class="mi r" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M530-481 332-679l43-43 241 241-241 241-43-43 198-198Z"/></svg></button></div>
 </footer>
 <div id="cv"><div id="cvStage"><div id="cvPg"></div></div>
-  <header id="cvTop" class="cvbar"><button id="cvHome"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M220-180h150v-250h220v250h150v-390L480-765 220-570v390Zm-60 60v-480l320-240 320 240v480H530v-250H430v250H160Zm320-353Z"/></svg>本棚</button><button id="cvList" aria-label="ページ一覧としおり"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M120-240v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></button><div id="cvTtl"></div><button id="cvShift" aria-label="見開きを1ページずらす" title="見開きを1ページずらす" style="display:none;width:auto;min-width:40px;padding:0 10px;border-radius:9999px;font-size:12px;font-weight:700">1P</button><button id="cvMark" aria-label="しおり"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="m323-245 157-94 157 95-42-178 138-120-182-16-71-168-71 167-182 16 138 120-42 178Zm-90 125 65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-355Z"/></svg></button><button id="cvFs" aria-label="全画面"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M120-120v-193h60v133h133v60H120Zm527 0v-60h133v-133h60v193H647ZM120-647v-193h193v60H180v133h-60Zm660 0v-133H647v-60h193v193h-60Z"/></svg></button><button id="cvSet" aria-label="設定"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="m388-80-20-126q-19-7-40-19t-37-25l-118 54-93-164 108-79q-2-9-2.5-20.5T185-480q0-9 .5-20.5T188-521L80-600l93-164 118 54q16-13 37-25t40-18l20-127h184l20 126q19 7 40.5 18.5T669-710l118-54 93 164-108 77q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l108 78-93 164-118-54q-16 13-36.5 25.5T592-206L572-80H388Zm48-60h88l14-112q33-8 62.5-25t53.5-41l106 46 40-72-94-69q4-17 6.5-33.5T715-480q0-17-2-33.5t-7-33.5l94-69-40-72-106 46q-23-26-52-43.5T538-708l-14-112h-88l-14 112q-34 7-63.5 24T306-642l-106-46-40 72 94 69q-4 17-6.5 33.5T245-480q0 17 2.5 33.5T254-413l-94 69 40 72 106-46q24 24 53.5 41t62.5 25l14 112Zm44-210q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Zm0-130Z"/></svg></button></header>
+  <header id="cvTop" class="cvbar"><button id="cvHome"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M220-180h150v-250h220v250h150v-390L480-765 220-570v390Zm-60 60v-480l320-240 320 240v480H530v-250H430v250H160Zm320-353Z"/></svg>本棚</button><button id="cvList" aria-label="ページ一覧とお気に入り"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M120-240v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></button><div id="cvTtl"></div><button id="cvShift" aria-label="見開きを1ページずらす" title="見開きを1ページずらす" style="display:none;width:auto;min-width:40px;padding:0 10px;border-radius:9999px;font-size:12px;font-weight:700">1P</button><button id="cvMark" aria-label="しおり"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="m323-245 157-94 157 95-42-178 138-120-182-16-71-168-71 167-182 16 138 120-42 178Zm-90 125 65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-355Z"/></svg></button><button id="cvFs" aria-label="全画面"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M120-120v-193h60v133h133v60H120Zm527 0v-60h133v-133h60v193H647ZM120-647v-193h193v60H180v133h-60Zm660 0v-133H647v-60h193v193h-60Z"/></svg></button><button id="cvSet" aria-label="設定"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="m388-80-20-126q-19-7-40-19t-37-25l-118 54-93-164 108-79q-2-9-2.5-20.5T185-480q0-9 .5-20.5T188-521L80-600l93-164 118 54q16-13 37-25t40-18l20-127h184l20 126q19 7 40.5 18.5T669-710l118-54 93 164-108 77q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l108 78-93 164-118-54q-16 13-36.5 25.5T592-206L572-80H388Zm48-60h88l14-112q33-8 62.5-25t53.5-41l106 46 40-72-94-69q4-17 6.5-33.5T715-480q0-17-2-33.5t-7-33.5l94-69-40-72-106 46q-23-26-52-43.5T538-708l-14-112h-88l-14 112q-34 7-63.5 24T306-642l-106-46-40 72 94 69q-4 17-6.5 33.5T245-480q0 17 2.5 33.5T254-413l-94 69 40 72 106-46q24 24 53.5 41t62.5 25l14 112Zm44-210q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Zm0-130Z"/></svg></button></header>
   <footer id="cvBot" class="cvbar"><button id="cvL" aria-label="左のページへ"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M561-240 320-481l241-241 43 43-198 198 198 198-43 43Z"/></svg></button><input id="cvSl" type="range" min="0" max="0" value="0" aria-label="ページ"><span id="cvCt"></span><button id="cvR" aria-label="右のページへ"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M530-481 332-679l43-43 241 241-241 241-43-43 198-198Z"/></svg></button><button id="cvFlip" type="button" aria-label="ページ一覧（スライド）"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true"><path d="M240-160q-33 0-56.5-23.5T160-240q0-33 23.5-56.5T240-320q33 0 56.5 23.5T320-240q0 33-23.5 56.5T240-160Zm240 0q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm240 0q-33 0-56.5-23.5T640-240q0-33 23.5-56.5T720-320q33 0 56.5 23.5T800-240q0 33-23.5 56.5T720-160ZM240-400q-33 0-56.5-23.5T160-480q0-33 23.5-56.5T240-560q33 0 56.5 23.5T320-480q0 33-23.5 56.5T240-400Zm240 0q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm240 0q-33 0-56.5-23.5T640-480q0-33 23.5-56.5T720-560q33 0 56.5 23.5T800-480q0 33-23.5 56.5T720-400ZM240-640q-33 0-56.5-23.5T160-720q0-33 23.5-56.5T240-800q33 0 56.5 23.5T320-720q0 33-23.5 56.5T240-640Zm240 0q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Zm240 0q-33 0-56.5-23.5T640-720q0-33 23.5-56.5T720-800q33 0 56.5 23.5T800-720q0 33-23.5 56.5T720-640Z"/></svg></button></footer></div>
 <div id="flipView" aria-label="ページスライドビュー">
   <header class="flip-top">
@@ -1759,7 +1969,7 @@ const UI_EN={
 '縦書きと横書きを切り替え':'Toggle vertical / horizontal text','本文':'Book text','左のページへ':'Go to left page','右のページへ':'Go to right page',
 '本棚':'Library','次のページ':'Next page','前のページ':'Previous page','本棚に戻る':'Back to library','目次':'Contents','しおり':'Bookmarks','検索':'Search','メモ':'Notes','別の本を開く':'Open another book',
 '本棚':'Library','シリーズ・フォルダごとに本を管理できます。':'Organize books by series and folders.',
-'環境設定':'Home settings','下部ナビの並び順':'Bottom navigation order','読書中':'Reading','読書中ボタンを表示':'Show Reading button','ホーム':'Home','ライブラリ':'Library','UI表示':'Interface layout','モバイル':'Mobile','PC':'Desktop','本を追加':'Add books','ライブラリ':'Library','＋ フォルダ':'＋ Folder',
+'環境設定':'Environment settings','下部ナビの並び順':'Bottom navigation order','読書中':'Reading','読書中ボタンを表示':'Show Reading button','ホーム':'Home','ライブラリ':'Library','UI表示':'Interface layout','モバイル':'Mobile','PC':'Desktop','本を追加':'Add books','ライブラリ':'Library','＋ フォルダ':'＋ Folder',
 'シリーズ自動仕分け：オン':'Auto-organize series: On','選択':'Select','タイトル・著者名で検索':'Search title or author','クリア':'Clear',
 '0冊選択中':'0 selected','フォルダへ移動':'Move to folder','削除':'Delete','キャンセル':'Cancel',
 'EPUB・ZIP・CBZ・RAR（コミックの画像書庫にも対応）を追加できます。RAR4はStore形式のみ対応し、暗号化RARには対応していません。分割RAR（.part1.rar など）は全パートを同時に選んでください。複数のファイルを一度に追加できます。':'Add EPUB, ZIP, CBZ, or RAR files (including image comic archives). RAR4 Store is supported; encrypted RAR files are not supported. For split RAR files (.part1.rar etc.), select all parts together. Multiple files can be added at once.',
@@ -1774,13 +1984,13 @@ const UI_EN={
 '文字サイズ':'Font size','行間':'Line spacing','余白':'Margins','上の余白':'Top margin','下の余白':'Bottom margin','追加フォント':'Custom fonts',
 'TTF・OTF・WOFF・WOFF2に対応しています。':'Supports TTF, OTF, WOFF, and WOFF2 fonts.',
 '向きと送り方向は本ごとに記憶されます。「自動」は本の指定に従います。縦書きは横スクロール式で、画面の左右端をタップするとページ送りできます。中央をタップすると操作バーを隠せます。':'Text direction and page-turn direction are saved per book. “Auto” follows the book settings. Vertical text uses horizontal scrolling; tap the left or right edge to turn pages. Tap the center to hide the controls.',
-'環境設定':'Home settings','下部ナビの並び順':'Bottom navigation order','読書中':'Reading','読書中ボタンを表示':'Show Reading button','ホーム':'Home','ライブラリ':'Library','iPadでの本の表示列数':'Book columns on iPad','表紙サイズ':'Cover size','小':'Small','大':'Large','並び順':'Sort order',
+'環境設定':'Environment settings','下部ナビの並び順':'Bottom navigation order','読書中':'Reading','読書中ボタンを表示':'Show Reading button','ホーム':'Home','ライブラリ':'Library','iPadでの本の表示列数':'Book columns on iPad','表紙サイズ':'Cover size','小':'Small','大':'Large','並び順':'Sort order',
 '最近読んだ順':'Recently read','タイトル順':'Title','最終閲覧日時を表示':'Show last opened date','読書進捗を表示':'Show reading progress',
 '同じシリーズの本をシリーズ名のフォルダにまとめる（追加時）':'Group books of the same series into a folder named after the series (when adding)',
 '自動バックアップ（7日ごと・端末内に最大2世代）':'Automatic backup (every 7 days, up to 2 local copies)',
 'ZIPを追加すると中のEPUBを自動展開します。複数冊の場合はZIP名のフォルダにまとめる設定も選べます。列数・表紙サイズはiPadなどの広い画面に適用されます。':'When you add a ZIP, EPUBs inside are extracted automatically. You can group multiple books into a folder named after the ZIP. Column count and cover size apply to larger screens such as iPad.',
 '読書統計':'Reading statistics','バックアップ':'Backup','復元':'Restore','自動バックアップから復元':'Restore automatic backup','本棚の整理':'Organize library',
-'データ':'Data','初期設定に戻す':'Reset to defaults','保存':'Save','環境設定を保存しました':'Home settings saved',
+'データ':'Data','初期設定に戻す':'Reset to defaults','保存':'Save','環境設定を保存しました':'Environment settings saved',
 '読む向き':'Reading direction','右開き（右→左）':'Right-to-left (right → left)','左開き（左→右）':'Left-to-right (left → right)',
 '見開き':'Spread','見開きの表紙を単独で表示':'Show cover as a single page','表示':'Fit','全体を表示':'Fit entire page','幅に合わせる':'Fit width',
 '背景':'Background','黒':'Black','グレー':'Gray','白':'White','左右タップでページ送り':'Tap left/right sides to turn pages',
@@ -1956,7 +2166,7 @@ const UI_EN={
 "このフォルダは空です":"This folder is empty",
 "このブラウザは全画面に対応していません":"Fullscreen is not supported by this browser",
 "この本のデータが端末にありません。EPUBを開き直してください。":"This book is not stored on this device. Reopen the EPUB.",
-"しおりはまだありません（上の ☆ で追加できます）":"No bookmarks yet. Tap ☆ above to add one.",
+"お気に入りはまだありません（上の ☆ で追加できます）":"No bookmarks yet. Tap ☆ above to add one.",
 "しおりを削除しました":"Bookmark deleted",
 "しおりを追加しました":"Bookmark added",
 "シリーズ自動仕分け：":"Auto-sort series: ",
@@ -2049,7 +2259,7 @@ const UI_EN={
 "データ":"Data",
 "初期設定に戻す":"Reset to defaults",
 "保存":"Save",
-"環境設定を保存しました":"Home settings saved",
+"環境設定を保存しました":"Environment settings saved",
 "累計の読書時間":"Total reading time",
 "読書した日数":"Days read",
 "1日あたり":"Daily average",
@@ -2917,7 +3127,7 @@ img,svg,video{max-width:${isPaged()?(eff==='v'?Math.round(pw):Math.floor((W-G-sa
   baseCss=customFontFaces+'\n'+c;root.getElementById('rd').textContent=baseCss;
   fr.style.writingMode=wm;const sc=!isPaged();fr.style.overflowX=eff==='v'&&sc?'auto':'hidden';fr.style.overflowY=eff==='h'&&sc?'auto':'hidden';
   $('#bDir').textContent=eff==='v'?'縦':'横';
-  $('#prog').style.direction=bindRtl()?'rtl':'ltr';
+  $('#prog').style.direction=bindRtl()?'rtl':'ltr';if(typeof window.__syncSliders==='function')window.__syncSliders();
   $('#bL').replaceChildren(miEl('chevron_left'),document.createTextNode(bindRtl()?'次のページ':'前のページ'));$('#bR').replaceChildren(document.createTextNode(bindRtl()?'前のページ':'次のページ'),miEl('chevron_right','r'));
   const rt=bindRtl();$('#bNext').style.order=rt?0:3;$('#bPrev').style.order=rt?3:0;$('#prog').style.order=1;$('#pct').style.order=2;$('#pgrow').style.order=9;
   paginate();
@@ -3110,10 +3320,39 @@ function goNode(a,q){
   if(qq){const f=findText(q);if(f&&tns[f.s[0]])return goRect(cr(tns[f.s[0]],f.s[1]))}
   if(n&&n.isConnected)goRect(cr(n,a[1]));
 }
+let textProgressPrefix=[0],textProgressTotal=0;
+function progressTextLength(s){return String(s||'').replace(/\s/g,'').length}
 function findLast(){
-  lastN=null;tns=[];try{clearSel()}catch(e){}const b=bd();if(!b)return;
+  lastN=null;tns=[];textProgressPrefix=[0];textProgressTotal=0;try{clearSel()}catch(e){}const b=bd();if(!b)return;
   const w=document.createTreeWalker(b,NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT);let t;
-  while(t=w.nextNode()){if(t.nodeType===3){if(t.data.trim()){lastN=t;tns.push(t)}}else if(/^(img|svg|image|video|canvas)$/i.test(t.nodeName))lastN=t}
+  while(t=w.nextNode()){
+    if(t.nodeType===3){
+      if(t.data.trim()){
+        lastN=t;tns.push(t);
+        textProgressTotal+=progressTextLength(t.data);
+        textProgressPrefix.push(textProgressTotal);
+      }
+    }else if(/^(img|svg|image|video|canvas)$/i.test(t.nodeName))lastN=t
+  }
+}
+/* 画像・挿絵の表示面積ではなく、現在位置までに読める文字量を章内進捗に使う。
+   次の本文が画面外にある画像だけの領域では、進捗を先の文章へ飛ばさず直前の文字位置で保つ。 */
+function novelProgressAnchor(){
+  const a=anchor();if(!a)return null;
+  const i=Math.max(0,Math.min(tns.length-1,a[0])),n=tns[i],off=Math.max(0,Math.min(n.length,a[1]));
+  const r=cr(n,Math.min(off,Math.max(0,n.length-1))),b=fr.getBoundingClientRect();
+  const visible=r.width>0&&r.height>0&&r.right>b.left+1&&r.left<b.right-1&&r.bottom>b.top+1&&r.top<b.bottom-1;
+  if(visible||off>0)return[i,off];
+  return i>0?[i-1,tns[i-1].length]:[i,0];
+}
+function novelChapterTextFrac(){
+  if(!tns.length||textProgressTotal<=0)return frac();
+  if(atEnd())return 1;
+  const a=novelProgressAnchor();if(!a)return 0;
+  const i=Math.max(0,Math.min(tns.length-1,a[0])),n=tns[i];
+  const before=textProgressPrefix[i]||0;
+  const local=progressTextLength(n.data.slice(0,Math.max(0,a[1])));
+  return Math.max(0,Math.min(1,(before+local)/textProgressTotal));
 }
 /* 末尾の空行・余白だけが残っているときは「章の終わり」とみなす */
 function atEnd(){
@@ -3362,10 +3601,34 @@ function turnRaw(dir){
    この本（記録が少なければ全小説）の「読書時間 ÷ 読んだページ数」と、1ページの文字数から1文字あたりの時間を出し、
    章と本の残りの文字数に掛ける。記録がまだ少ないときは1分あたり500文字として計算する。 */
 const RT={key:'',chars:[],busy:false,spc:0,spcAt:0};
+/* EPUBの章数ではなく、本文の文字量を重みにして本全体の進捗を計算する。
+   画像だけのspine項目は文字量0として扱い、挿絵だけで進捗が増える問題を防止する。 */
+const NP={key:'',weights:[],prefix:[],total:0,ready:false};
+function buildNovelProgressIndex(k){
+  if(!k||k!==key||RT.key!==k||RT.chars.length<spine.length||RT.chars.slice(0,spine.length).some(v=>v==null))return false;
+  let w=RT.chars.slice(0,spine.length).map(v=>Math.max(0,Number(v)||0));
+  let total=w.reduce((s,v)=>s+v,0);
+  if(total<=0){w=spine.map(()=>1);total=w.length}
+  const prefix=[0];for(const v of w)prefix.push(prefix[prefix.length-1]+v);
+  NP.key=k;NP.weights=w;NP.prefix=prefix;NP.total=total;NP.ready=true;
+  return true;
+}
+function novelOverallProgress(i,f){
+  if(NP.ready&&NP.key===key&&NP.total>0){
+    const at=Math.max(0,Math.min(NP.weights.length-1,i));
+    return Math.max(0,Math.min(1,(NP.prefix[at]+NP.weights[at]*Math.max(0,Math.min(1,f)))/NP.total));
+  }
+  return Math.max(0,Math.min(1,(i+f)/Math.max(1,spine.length)));
+}
 async function rtScanChars(k){
   if(RT.busy)return;RT.busy=true;
   try{for(let i=0;i<spine.length;i++){if(key!==k||!spine.length)return;if(RT.chars[i]==null){try{RT.chars[i]=(await textOf(i)).replace(/\s+/g,'').length}catch(_){RT.chars[i]=0}}if(i%3===2)await new Promise(r=>setTimeout(r,30))}}
-  finally{RT.busy=false}
+  finally{
+    RT.busy=false;
+    if(key===k&&buildNovelProgressIndex(k)&&document.body.classList.contains('reading')&&!CV.on){
+      requestAnimationFrame(()=>{if(key===k&&!CV.on)updateProg()});
+    }
+  }
 }
 function rtSecPerChar(cpp){
   const now=Date.now();
@@ -3391,12 +3654,12 @@ function remainText(f,pn){
   let rest=chLeft,known=true;for(let i=idx+1;i<spine.length;i++){if(RT.chars[i]==null){known=false;break}rest+=RT.chars[i]}
   return 'この章あと'+fmtRemain(chLeft*spc)+(known&&idx<spine.length-1?'・本あと'+fmtRemain(rest*spc):'');
 }
-function updateProg(){if(typeof window.__syncSliders==='function')window.__syncSliders();
+function updateProg(){
   if(CV.on||isComic||!spine.length||pending)return;
-  const f=frac(),all=(idx+f)/spine.length;lastAct=Date.now();
+  const f=frac(),pf=novelChapterTextFrac(),all=novelOverallProgress(idx,pf);lastAct=Date.now();
   if(all>=.98&&key&&!flipState.on&&typeof maybeOfferDone==='function')maybeOfferDone(key);
-  $('#prog').value=Math.round(all*1000);$('#pct').textContent=Math.round(all*100)+'%';
-  const mm=metrics();const pn=pageNo();$('#mL').textContent=labelFor(idx)+'　'+pn[0]+'/'+pn[1]+'p';{const rt=remainText(f,pn);$('#mR').textContent=(rt?rt+'・':'')+Math.round(all*100)+'%'}
+  $('#prog').value=Math.round(all*1000);$('#pct').textContent=Math.round(all*100)+'%';if(typeof window.__syncSliders==='function')window.__syncSliders();
+  const mm=metrics();const pn=pageNo();$('#mL').textContent=labelFor(idx)+'　'+pn[0]+'/'+pn[1]+'p';{const rt=remainText(pf,pn);$('#mR').textContent=(rt?rt+'・':'')+Math.round(all*100)+'%'}
   const k0=key;
   clearTimeout(sv);sv=setTimeout(function svf(){if(curl.busy){sv=setTimeout(svf,150);return}if(!pending&&key&&key===k0&&!bookSwitching){const pctVal=Math.round(all*100),anc=anchor(),qq=aq();LS.set('rd:p:'+key,{i:idx,f,a:anc,q:qq,t:Date.now()});shelfUp(key,{pct:pctVal,at:Date.now()});if(typeof onNovelProgress==='function')onNovelProgress(key,idx,f,anc,qq,pctVal)}},300);
 }
@@ -3580,11 +3843,11 @@ const BEER_APP_CSS=`.mi{width:1.35em;height:1.35em;fill:currentColor;flex:none;d
 .beer.app button.border{border:1px solid color-mix(in srgb,var(--sub) 70%,transparent);background:transparent;color:var(--acc);border-radius:9999px}
 .beer.app .fl>button.active{background:var(--md-sc,var(--secondary-container));color:var(--md-osc,var(--fg));border-radius:9999px;border:0}
 .beer.app input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;block-size:2.5rem;margin:2px 0;--p:50%}
-.beer.app input[type=range]::-webkit-slider-runnable-track{block-size:16px;border-radius:8px;background:linear-gradient(to right,var(--acc) var(--p),var(--md-sc,var(--line)) var(--p))}
-.beer.app input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;inline-size:4px;block-size:40px;margin-block-start:-12px;border-radius:2px;border:0;background:var(--acc);box-shadow:0 0 0 4px var(--bg)}
-.beer.app input[type=range]::-moz-range-track{block-size:16px;border-radius:8px;background:var(--md-sc,var(--line))}
-.beer.app input[type=range]::-moz-range-progress{block-size:16px;border-radius:8px;background:var(--acc)}
-.beer.app input[type=range]::-moz-range-thumb{inline-size:4px;block-size:40px;border-radius:2px;border:0;background:var(--acc);box-shadow:0 0 0 4px var(--bg)}
+.beer.app input[type=range]::-webkit-slider-runnable-track{block-size:18px;border-radius:9px;background:linear-gradient(to right,var(--acc) var(--p),var(--md-sc,var(--line)) var(--p))}
+.beer.app input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;inline-size:4px;block-size:50px;margin-block-start:-16px;border-radius:2px;border:0;background:var(--acc);box-shadow:0 0 0 4px var(--bg)}
+.beer.app input[type=range]::-moz-range-track{block-size:18px;border-radius:9px;background:var(--md-sc,var(--line))}
+.beer.app input[type=range]::-moz-range-progress{block-size:18px;border-radius:9px;background:var(--acc)}
+.beer.app input[type=range]::-moz-range-thumb{inline-size:4px;block-size:50px;border-radius:2px;border:0;background:var(--acc);box-shadow:0 0 0 4px var(--bg)}
 .beer.app .lab{font-size:.8125rem;letter-spacing:.01em}
 .beer.app nav.group.connected>button,.beer.app nav.group.connected>button:first-child,.beer.app nav.group.connected>button:last-child,.beer.app nav.group.connected>button.active{border-radius:0!important;margin:0!important;box-shadow:none!important;background-image:none!important;transform:none!important;min-inline-size:0!important;border-block:0!important;border-inline-start:0!important}
 .beer.app nav.group.connected>button{background-color:transparent!important;border-inline-end:1px solid color-mix(in srgb,var(--sub) 70%,transparent)!important;color:var(--fg)!important}
@@ -4316,7 +4579,7 @@ function openSheet(build,_replay){
     }else SHEET.stack=[];
   }
   SHEET.cur={id,build};
-  sh.innerHTML='';sh.classList.remove('compact','cv-sheet','sh-tabbed','bm-split');$('#veil').classList.remove('soft');build(sh);splitTabbedSheet(sh);
+  sh.innerHTML='';sh.classList.remove('compact','cv-sheet','sh-tabbed','bm-split','settings-unified','cv-mark-sheet');$('#veil').classList.remove('soft');build(sh);splitTabbedSheet(sh);
   if(SHEET.stack.length){
     /* 1つ前のシートに戻るボタン。「キャンセル」「戻る」で閉じていたボタンも、1つ前に戻るようにする */
     const bk=document.createElement('button');bk.type='button';bk.className='sh-back';bk.setAttribute('aria-label','1つ前に戻る');bk.append(miEl('chevron_left'),mkEl('span','戻る'));bk.onclick=sheetBack;sh.prepend(bk);
@@ -4597,14 +4860,8 @@ function rShelf(p){
     g.books.forEach(e=>p.appendChild(bookRow(e)));
   });
 }
-const HOME_DEFAULT={cols:4,cover:'m',showProgress:false,showLast:true,sort:'recent',zipFolder:false,autoScan:true,hideMissing:true,backToShelf:true,backExitConfirm:true,ui2:true,ui2Font:'serif',fullscreen:false,uiTopSpace:0};
+const HOME_DEFAULT={cols:4,cover:'m',showProgress:false,showLast:true,sort:'recent',zipFolder:false,autoScan:true,hideMissing:true,backToShelf:true,backExitConfirm:true,ui2:true,ui2Font:'serif',fullscreen:false};
 const HOME=Object.assign({},HOME_DEFAULT,LS.get('rd:home',{}));
-function applyUiTopSpace(){
-  const n=Math.max(-40,Math.min(80,Number(HOME.uiTopSpace)||0));
-  HOME.uiTopSpace=n;
-  document.documentElement.style.setProperty('--ui-top-space',n+'px');
-}
-applyUiTopSpace();
 if(HOME.hideMissing)syncPresentBookKeys(true);
 const repairTitleKey=t=>String(t||'').normalize('NFKC').toLocaleLowerCase().replace(/[\s　]+/g,' ').trim();
 /* 修復で本を付け替えたとき、読書統計・履歴・コミック設定・表紙キャッシュも新しいキーへ移す（migrate() は位置・しおり等のみ） */
@@ -5420,7 +5677,7 @@ function onComicProgress(k,curPages,totalPages,pctVal){
   const now=Date.now();
   if(now-rs.lastCpAt>30000){
     rs.lastCpAt=now;
-    recordCheckpoint(k,{ty:'c',i:(curPages&&curPages[0])||0,f:0,pct:pctVal,label:lab});
+    recordCheckpoint(k,{ty:'c',i:Array.isArray(curPages)&&curPages.length?Math.max(...curPages):0,f:0,pct:pctVal,label:lab});
   }
   flushReadSession(false);
 }
@@ -5435,12 +5692,12 @@ function flushSavePos(){
   if(!CV.on&&!document.body.classList.contains('reading'))return;
   if(CV.on){
     clearTimeout(cvSv);cvSv=0;
-    LS.set('rd:p:'+key,{i:CV.page,f:0,t:Date.now()});
-    const pct=Math.round((Math.max(...CV.cur)+1)/CV.n*100);
+    const progressPage=cvProgressPage(),pct=cvProgressPct();
+    LS.set('rd:p:'+key,{i:progressPage,f:0,t:Date.now()});
     shelfUp(key,{pct,at:Date.now()});
   }else if(!isComic&&spine.length&&!pending&&bd()&&typeof frac==='function'){
     clearTimeout(sv);sv=0;
-    const f=frac(),all=(idx+f)/spine.length;
+    const f=frac(),pf=novelChapterTextFrac(),all=novelOverallProgress(idx,pf);
     LS.set('rd:p:'+key,{i:idx,f,a:anchor(),q:aq(),t:Date.now()});
     shelfUp(key,{pct:Math.round(all*100),at:Date.now()});
   }
@@ -5855,7 +6112,7 @@ function openImg(src){
   v.addEventListener('wheel',e=>{e.preventDefault();const[fx,fy]=cen(e);zoom(sc*(e.deltaY<0?1.15:1/1.15),fx,fy)},{passive:false});
   v.append(im,x);document.body.appendChild(v);
 }
-function saveHome(){applyUiTopSpace();LS.set('rd:home',HOME);rShelfCards()}
+function saveHome(){LS.set('rd:home',HOME);rShelfCards()}
 /* ---------- License information (BookReader V4.6.0Beta) ---------- */
 const LIC_CONTACT='X DM：@SKosa_0（https://x.com/SKosa_0）';
 const LIC_JSZIP_MIT=`The MIT License
@@ -5870,7 +6127,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 const LIC_TEXT={
 ja:{title:'ライセンス情報',
  h:['1. 著作権・クレジット表示','2. 利用条件','3. 禁止事項','4. 第三者ライブラリのライセンス','5. EPUBの利用とプライバシー','6. 問い合わせ先'],
- copy:['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.2.2','License：BookReader NonCommercial Attribution License 1.1（全文は配布物のLICENSEファイルを参照）','取り込んだ書籍ファイル（IndexedDB）と読書統計・目標・履歴・設定・生体認証／パスキー連携情報（localStorage / Android Keystore）はすべて端末内に保存され、外部へ送信されません。','改変版を配布する場合は、改変版であることを明確に表示してください。','Kosaの著作権表示・ライセンス表示を保持してください。'],
+ copy:['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.2.11','License：BookReader NonCommercial Attribution License 1.1（全文は配布物のLICENSEファイルを参照）','取り込んだ書籍ファイル（IndexedDB）と読書統計・目標・履歴・設定・生体認証／パスキー連携情報（localStorage / Android Keystore）はすべて端末内に保存され、外部へ送信されません。','改変版を配布する場合は、改変版であることを明確に表示してください。','Kosaの著作権表示・ライセンス表示を保持してください。'],
  allow:['許可する行為','個人・非商用目的での利用','個人の端末へのダウンロード','非商用目的での改変','本ライセンスと著作権表示を保持した非商用目的での再配布','任意の寄付・投げ銭は、利用や配布の対価・条件でない限り、それだけで商用利用とは扱いません。'],
  deny:['禁止する行為','商用利用（販売、有料提供、有料サポート、広告・アフィリエイト等の収益化、営利事業上の利用を含む）','会社・事業者等による社内利用を、業務上の利益・効率化等のために行うこと','Kosaの著作権表示・クレジット・ライセンス表示の削除または改変','製作者を偽る行為、または本ソフトウェア・改変版を自作したものとして表示する行為','改変版であることを明示せずに配布する行為','Kosaの名前・Xアカウント・クレジットを、Kosaが改変版や利用者を推薦・公認しているかのように表示する行為'],
  exc:'非営利団体による利用を含め、利用目的・実態から商用か判断しにくい場合、社内評価・研究利用、寄付・投げ銭など本ライセンスの境界に当たる場合は、利用前にKosaへ相談してください。明示的な許諾がない限り商用利用はできません。',
@@ -5879,7 +6136,7 @@ ja:{title:'ライセンス情報',
  contact:'連絡先：',back:'戻る',close:'閉じる'},
 en:{title:'License information',
  h:['1. Copyright and attribution','2. Terms of use','3. Prohibited actions','4. Third-party library licenses','5. EPUB use and privacy','6. Contact'],
- copy:['Creator: Kosa','X: @SKosa_0','Copyright © 2026 Kosa','Product: BookReader','Version: 5.2.2','License: BookReader NonCommercial Attribution License 1.1 (full text in the LICENSE file distributed with this software)','Imported book files (IndexedDB) and reading stats, goals, history, settings, and biometric/passkey wrap metadata (localStorage / Android Keystore) are stored locally on your device and are never sent externally.','Clearly identify modified versions when distributing them.','Retain Kosa’s copyright, attribution, and license notices.'],
+ copy:['Creator: Kosa','X: @SKosa_0','Copyright © 2026 Kosa','Product: BookReader','Version: 5.2.11','License: BookReader NonCommercial Attribution License 1.1 (full text in the LICENSE file distributed with this software)','Imported book files (IndexedDB) and reading stats, goals, history, settings, and biometric/passkey wrap metadata (localStorage / Android Keystore) are stored locally on your device and are never sent externally.','Clearly identify modified versions when distributing them.','Retain Kosa’s copyright, attribution, and license notices.'],
  allow:['Permitted','Personal and noncommercial use','Downloading to your own device','Modification for noncommercial purposes','Redistribution for noncommercial purposes, provided this license and copyright notices are retained','Voluntary donations or tips are not commercial use by themselves, provided they are not consideration for or a condition of access or distribution.'],
  deny:['Prohibited','Commercial use, including sale, paid access or support, advertising or affiliate monetization, and use in for-profit business operations','Internal use by a company or business for operational benefit, efficiency, or other business purposes','Removing or altering Kosa’s copyright, attribution, or license notices','Misrepresenting the creator or presenting this software or a modified version as your own work','Distributing a modified version without clearly identifying it as modified','Using Kosa’s name, X account, or attribution to imply that Kosa endorses or recommends a modified version or its distributor'],
  exc:'If the commercial or noncommercial nature of a use is unclear—including use by nonprofit organizations, internal evaluation or research, or donations and tips—contact Kosa before use. Commercial use is not permitted without explicit prior permission.',
@@ -6089,6 +6346,7 @@ function applyUi2(){
 }
 function homeSettings(){
   openSheet(sh=>{
+    sh.classList.add('settings-unified');
     sh.appendChild(mkEl('h3','環境設定'));
     if(!['s','a','d','l','o'].includes(homeTabCur))homeTabCur='s';
     sh.appendChild(tabBar(homeTabCur,[['s','本棚'],['a','見た目'],['d','データ'],['l','ロック'],['o','その他']],k=>{homeTabCur=k;homeSettings()}));
@@ -6113,33 +6371,6 @@ function homeSettings(){
     renderAccentPicker(sh,true);
     if(!isPhoneDevice())uiModeRow(sh);
     {const ds=mkEl('div','','seg');[[false,'現行'],[true,'軽量']].forEach(([lite,t])=>{const b=mkEl('button',t);if((HOME.uiLite===true)===lite)b.classList.add('on');b.onclick=()=>{HOME.uiLite=lite;LS.set('rd:home',HOME);applyUi2();ds.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));applog('setting','UIモード='+t)};ds.appendChild(b)});row('UI表示',ds)}
-    {
-      /* 既存の環境設定カード（bk-set-group）とMaterial 3スライダーに統一 */
-      const card=mkEl('section','','bk-set-group ui-top-space-card');
-      card.appendChild(mkEl('b','UI全体の上部余白'));
-      card.appendChild(mkEl('p','ホーム・本棚・読書画面・コミック・コレクション・統計など、画面上部のUI位置をまとめて調整します。iPadのセーフエリアと本文・ページ画像の余白は独立しています。','note'));
-      const meta=mkEl('div','','ui-top-space-meta');
-      meta.appendChild(mkEl('span','上部UIの位置'));
-      const val=mkEl('output',(HOME.uiTopSpace>0?'+':'')+(HOME.uiTopSpace||0)+' px','ui-top-space-value');
-      val.setAttribute('aria-live','polite');
-      meta.appendChild(val);
-      const rg=document.createElement('input');
-      rg.type='range';rg.className='ui-top-space-range';rg.min='-40';rg.max='80';rg.step='2';rg.value=String(HOME.uiTopSpace||0);
-      rg.setAttribute('aria-label','UI全体の上部余白');
-      const updateRange=()=>{
-        const n=Number(rg.value),pct=((n-Number(rg.min))/(Number(rg.max)-Number(rg.min)))*100;
-        rg.style.setProperty('--p',pct+'%');
-        val.textContent=(n>0?'+':'')+n+' px';
-        rg.setAttribute('aria-valuetext',(n>0?'プラス':'')+n+'ピクセル');
-      };
-      updateRange();
-      rg.oninput=()=>{const n=Number(rg.value);HOME.uiTopSpace=n;updateRange();applyUiTopSpace()};
-      rg.onchange=()=>{LS.set('rd:home',HOME);applog('setting','UI全体の上部余白='+HOME.uiTopSpace+'px')};
-      const limits=mkEl('div','','ui-top-space-limits');
-      limits.append(mkEl('span','上へ −40 px'),mkEl('span','下へ +80 px'));
-      card.append(meta,rg,limits);
-      sh.appendChild(card);
-    }
     {const fs=mkEl('div','','seg');[['serif','明朝'],['sys','ゴシック']].forEach(([f,t])=>{const b=mkEl('button',t);if((HOME.ui2Font||'serif')===f)b.classList.add('on');b.onclick=()=>{HOME.ui2Font=f;LS.set('rd:home',HOME);applyUi2();fs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));applog('setting','見出しの書体='+t)};fs.appendChild(b)});row('見出しと題名の書体',fs)}
     if(!isPhoneDevice()){const sd=mkEl('div','','seg');[['r','ナビを右'],['l','ナビを左']].forEach(([v,t])=>{const b=mkEl('button',t);if((HOME.dockSide||'r')===v)b.classList.add('on');b.onclick=()=>{HOME.dockSide=v;LS.set('rd:home',HOME);sd.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));document.documentElement.classList.toggle('dock-swap',v==='l')};sd.appendChild(b)});row('iPad・PCの下部バー配置（ナビと読書中カードの左右）',sd)}
     }else if(homeTabCur==='d'){
@@ -6187,10 +6418,9 @@ function homeSettings(){
     if(AppNative.canUpdate()&&typeof updBox==='function'){
     sh.appendChild(updBox());
     }
-    const reloadBtn=mkEl('button','アプリを再読み込み');reloadBtn.type='button';reloadBtn.style.cssText='display:block;width:100%;margin:14px 0 0';reloadBtn.onclick=()=>{closeAll();location.reload()};sh.appendChild(reloadBtn);
     const licBtn=mkEl('button','ライセンス情報');licBtn.style.cssText='display:block;width:100%;margin:14px 0 0';licBtn.onclick=licenseSheet;sh.appendChild(licBtn);
     const credit=mkEl('div');credit.style.cssText='text-align:center;margin:16px 0 6px;opacity:.7;font-size:12px;line-height:1.7';
-    const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.2.2'];
+    const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.2.11'];
     const nativeVer=AppNative.getNativeVersion();
     if(nativeVer){
     creditItems.push('アプリ本体バージョン：'+nativeVer);
@@ -6740,7 +6970,7 @@ async function looksComic(){
   try{for(let k=0;k<6;k++){const i=Math.floor((k+.5)*spine.length/6),d=parseDoc(await getFile(spine[i].path).async('string')),b=d.body||d.documentElement;if((b.textContent||'').trim().length<3&&b.querySelector('img,image'))ok++}}catch(e){CON.warn('looksComic',e);return false}
   return ok>=5;
 }
-const CVD={dir:'r',spread:'a',cover:true,offset:false,fit:'c',bg:'k',topSpace:0,tap:true,tapMode:'std',swipe:true,anim:false};
+const CVD={dir:'r',spread:'a',cover:true,offset:false,fit:'c',bg:'k',tap:true,tapMode:'std',swipe:true,anim:false};
 const CV={on:false,n:0,dims:[],paths:[],spreads:[],si:0,page:0,cur:[0],sc:1,tx:0,ty:0,cache:new Map(),th:new Map(),thq:Promise.resolve(),tok:0,rev:0,cfg:Object.assign({},CVD)};
 const cvEl=$('#cv'),cvPg=$('#cvPg'),cvSt=$('#cvStage'),cvRtl=()=>CV.cfg.dir==='r';
 function cvLoadCfg(sp){const ppd=sp&&sp.getAttribute('page-progression-direction');CV.cfg=Object.assign({},CVD,ppd==='ltr'?{dir:'l'}:{},LS.get('rd:cset',{}),LS.get('rd:cs:'+key,{}))}
@@ -6809,9 +7039,12 @@ async function cvShow(si){
 }
 function cvUI(){
   const a=CV.cur,lab=a.length===2?(a[0]+1)+'-'+(a[1]+1):(a[0]+1),sl=$('#cvSl');
-  $('#cvCt').textContent=lab+' / '+CV.n;sl.max=Math.max(0,CV.n-1);sl.value=a[0];sl.style.direction=cvRtl()?'rtl':'ltr';
-  cvEl.classList.toggle('rtl',cvRtl());cvEl.classList.toggle('fw',CV.cfg.fit==='w');cvEl.dataset.bg=CV.cfg.bg;cvEl.style.setProperty('--cv-top-space',Math.max(0,Math.min(120,Number(CV.cfg.topSpace)||0))+'px');
-  $('#cvMark').replaceChildren(miEl(marks.some(m=>m.i===a[0]||m.i===a[a.length-1])?'star-fill':'star'));
+  $('#cvCt').textContent=lab+' / '+CV.n;sl.max=Math.max(0,CV.n-1);sl.value=Math.max(...a);sl.style.direction=cvRtl()?'rtl':'ltr';
+  cvEl.classList.toggle('rtl',cvRtl());cvEl.classList.toggle('fw',CV.cfg.fit==='w');cvEl.dataset.bg=CV.cfg.bg;
+  if(typeof window.__syncSliders==='function')window.__syncSliders();
+  const markCount=a.filter(p=>marks.some(m=>m.i===p)).length;
+  $('#cvMark').replaceChildren(miEl(markCount===a.length?'star-fill':'star'));
+  $('#cvMark').setAttribute('aria-label',a.length===2?'見開きの左右ページのお気に入りを設定（'+markCount+'/2件登録）':'このページをお気に入りに登録');
   const shb=$('#cvShift');if(shb){const two=CV.cfg.spread==='2'||(CV.cfg.spread==='a'&&cvSt.clientWidth>cvSt.clientHeight*1.1);shb.style.display=two?'':'none';shb.classList.toggle('on',!!CV.cfg.offset)}
 }
 function cvTurn(d){
@@ -6821,12 +7054,17 @@ function cvTurn(d){
 }
 const cvGo=p=>{CV.si=cvFind(Math.max(0,Math.min(CV.n-1,p)));cvShow(CV.si)};
 let cvSv=0;
+function cvProgressPage(){return CV.cur&&CV.cur.length?Math.max(...CV.cur):CV.page}
+function cvProgressPct(){return CV.n>0?Math.max(0,Math.min(100,Math.round((cvProgressPage()+1)/CV.n*100))):0}
 function cvSavePos(){
-  /* 0.3秒後の保存は、予約したときの本にだけ書く（その間に別の本を開いても、別の本の位置を上書きしない） */
+  /* 進捗率は見開きの最後のページまで読んだ値なので、保存位置・履歴も同じページ番号に揃える。
+     そのページ番号から再開してもcvFind()が同じ見開きを選ぶため表示状態は変わらない。 */
   const k0=key;
   clearTimeout(cvSv);cvSv=setTimeout(()=>{
-    if(!CV.on||!key||key!==k0||bookSwitching)return;LS.set('rd:p:'+key,{i:CV.page,f:0,t:Date.now()});
-    const pct=Math.round((Math.max(...CV.cur)+1)/CV.n*100);shelfUp(key,{pct,at:Date.now()});if(typeof onComicProgress==='function')onComicProgress(key,CV.cur,CV.n,pct);
+    if(!CV.on||!key||key!==k0||bookSwitching)return;
+    const progressPage=cvProgressPage(),pct=cvProgressPct();
+    LS.set('rd:p:'+key,{i:progressPage,f:0,t:Date.now()});
+    shelfUp(key,{pct,at:Date.now()});if(typeof onComicProgress==='function')onComicProgress(key,CV.cur,CV.n,pct);
     if(pct>=98&&typeof maybeOfferDone==='function')maybeOfferDone(key);
   },300);
 }
@@ -6905,11 +7143,6 @@ function cvSettings(){
       row('見開きの表紙を単独で表示','cover',oo);
       row('見開きを1ページずらす','offset',oo);
       row('表示','fit',[['c','全体を表示'],['w','幅に合わせる']]);
-      const tr=mkEl('div','','row');tr.innerHTML='<b>上の余白</b><div class="seg" style="display:flex;align-items:center;gap:10px;width:100%"></div>';
-      const range=document.createElement('input');range.type='range';range.min='0';range.max='120';range.step='4';range.value=String(CV.cfg.topSpace||0);range.style.cssText='flex:1;min-width:0;accent-color:var(--acc)';
-      const val=mkEl('span',(CV.cfg.topSpace||0)+'px');val.style.cssText='min-width:42px;text-align:right;font-variant-numeric:tabular-nums';
-      range.oninput=()=>{CV.cfg.topSpace=Number(range.value);val.textContent=range.value+'px';cvSave('topSpace');cvUI()};
-      tr.lastChild.append(range,val);sh.appendChild(tr);
       row('背景','bg',[['k','黒'],['g','グレー'],['w','白']]);
     }else{
       row('読む向き','dir',[['r','右開き（右→左）'],['l','左開き（左→右）']]);
@@ -6940,12 +7173,12 @@ function cvList(tab){
     sh.classList.add('cv-sheet');
     /* 「ページ／しおり」の切り替えは上に固定して、一覧を下までスクロールしても見えるようにする */
     /* 環境設定と同じタブ（tabBar）を使う。タブはスクロールする中身の外に置き、一覧だけをスクロールさせる */
-    const tb=tabBar(tab,[['t','ページ'],['m','しおり']],k=>{if(k===tab)return;cvListTab=k;cvList(k)});tb.classList.add('cv-tabs');
+    const tb=tabBar(tab,[['t','ページ'],['m','お気に入り']],k=>{if(k===tab)return;cvListTab=k;cvList(k)});tb.classList.add('cv-tabs');
     if(marks.length){const c=mkEl('span',String(marks.length),'cv-tabcount');tb.lastChild.appendChild(c)}
     sh.appendChild(tb);
     const body=mkEl('div','','cv-body');sh.appendChild(body);
     if(tab==='m'){
-      if(!marks.length){body.appendChild(mkEl('div','しおりはまだありません（上の ☆ で追加できます）','empty'));return}
+      if(!marks.length){body.appendChild(mkEl('div','お気に入りはまだありません（上の ☆ で追加できます）','empty'));return}
       /* しおりもページと同じように、コマ（ページ画像）つきのカードで並べる。ページ順に並べ替えて表示する */
       const g=mkEl('div','','cvGrid cvMarks'),io=new IntersectionObserver(es=>es.forEach(en=>{
         const cell=en.target;
@@ -6998,7 +7231,43 @@ function comicHide(){
 $('#cvHome').onclick=()=>{if(!HOME.fullscreen&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});if(typeof flushSavePos==='function')flushSavePos();if(typeof endReadSession==='function')endReadSession();closeFlip();comicHide();closeAll();document.body.classList.remove('min','reading');$('#welcome').style.display='';$('#ttl').textContent='BookReader';rShelfCards()};
 $('#cvList').onclick=()=>cvList();$('#cvSet').onclick=cvSettings;
 $('#cvShift').onclick=()=>{CV.cfg.offset=!CV.cfg.offset;cvSave('offset');cvBuild();CV.si=cvFind(CV.page);cvShow(CV.si);toast(CV.cfg.offset?'見開きを1ページずらしました':'見開きの1ページずらしをオフにしました')};
-$('#cvMark').onclick=()=>{const p=CV.page,k=marks.findIndex(m=>m.i===p);if(k>=0)marks.splice(k,1);else marks.push({i:p,f:0,p:p/CV.n,t:'p.'+(p+1)});LS.set('rd:m:'+key,marks);cvUI();toast(k>=0?'しおりを削除しました':'しおりを追加しました')};
+function cvToggleMarkPage(p){
+  const k=marks.findIndex(m=>m.i===p);
+  if(k>=0)marks.splice(k,1);
+  else marks.push({i:p,f:0,p:p/Math.max(1,CV.n),t:'p.'+(p+1)});
+  marks.sort((a,b)=>a.i-b.i);LS.set('rd:m:'+key,marks);return k<0;
+}
+function cvMarkPicker(){
+  const pages=CV.cur.slice(),isMarked=p=>marks.some(m=>m.i===p);
+  if(pages.length<2){const added=cvToggleMarkPage(pages[0]??CV.page);cvUI();toast(added?'お気に入りに登録しました':'お気に入りを解除しました');return}
+  const build=sh=>{
+    sh.classList.add('cv-mark-sheet');
+    sh.appendChild(mkEl('h3','見開きのお気に入り'));
+    sh.appendChild(mkEl('p','左右のページを個別に登録できます。片方だけでも、両方でも設定できます。','note'));
+    const list=mkEl('div','','cv-mark-options');
+    pages.forEach((p,i)=>{
+      const side=cvRtl()?(i===0?'右ページ':'左ページ'):(i===0?'左ページ':'右ページ');
+      const marked=isMarked(p),b=mkEl('button','','cv-mark-option');b.type='button';
+      const icon=mkEl('span','','cv-mark-option-icon');icon.appendChild(miEl(marked?'star-fill':'star'));
+      const tx=mkEl('span','','cv-mark-option-text');tx.appendChild(mkEl('b',side));tx.appendChild(mkEl('small','ページ '+(p+1)));
+      const state=mkEl('span',marked?'登録済み':'未登録','cv-mark-option-state');
+      b.append(icon,tx,state);if(marked)b.classList.add('on');
+      b.onclick=()=>{cvToggleMarkPage(p);cvUI();const y=sh.scrollTop;sh.innerHTML='';build(sh);sh.scrollTop=y};
+      list.appendChild(b);
+    });
+    sh.appendChild(list);
+    const all=pages.every(isMarked),both=mkEl('button',all?'両方の登録を解除':'両方に登録','cv-mark-both');both.type='button';
+    both.onclick=()=>{
+      if(all)pages.forEach(p=>{const i=marks.findIndex(m=>m.i===p);if(i>=0)marks.splice(i,1)});
+      else pages.forEach(p=>{if(!isMarked(p))cvToggleMarkPage(p)});
+      LS.set('rd:m:'+key,marks);cvUI();const y=sh.scrollTop;sh.innerHTML='';build(sh);sh.scrollTop=y;
+    };
+    sh.appendChild(both);
+    const done=mkEl('button','閉じる','cv-mark-done');done.type='button';done.onclick=closeAll;sh.appendChild(done);
+  };
+  openSheet(build);
+}
+$('#cvMark').onclick=cvMarkPicker;
 $('#cvFs').onclick=cvFs;if(!document.fullscreenEnabled)$('#cvFs').style.display='none';
 $('#cvL').onclick=()=>cvTurn(cvRtl()?1:-1);$('#cvR').onclick=()=>cvTurn(cvRtl()?-1:1);
 $('#cvSl').oninput=e=>{$('#cvCt').textContent=(+e.target.value+1)+' / '+CV.n};$('#cvSl').onchange=e=>cvGo(+e.target.value);
@@ -8173,21 +8442,14 @@ function secSettingsBox(refresh){
     if(secOpen)act('lock','ロックする','非表示の本を隠します',()=>{secLock('手動',true);refresh()});
     else act('visibility','非表示の本を表示','パスコードを入力します',()=>secUnlockSheet(refresh));
     act('edit','パスコードを変更','',()=>secSetupSheet(refresh,true));
-    g.appendChild(mkEl('h4','暗号化フォルダーの自動ロック','ds-h'));
-    g.appendChild(mkEl('p','暗号化フォルダー・非表示の本だけを自動でロックします。アプリ全体のロック設定とは独立しています。','ds-desc'));
-    const row=mkEl('div','','row');row.appendChild(mkEl('b','フォルダーを自動ロックするまで'));
+    const row=mkEl('div','','row');row.appendChild(mkEl('b','自動でロックするまで'));
     const sg=mkEl('div','','seg wrap');
-    [[0,'アプリを離れたらすぐ'],[60,'1分'],[300,'5分'],[900,'15分'],[-1,'手動のみ']].forEach(([val,t])=>{const b=mkEl('button',t);if(secDelay()===val)b.classList.add('on');b.onclick=()=>{const st=secGet();if(!st)return;st.a=val;LS.set('rd:sec',st);refresh()};sg.appendChild(b)});
+    [[0,'アプリを離れたらすぐ'],[60,'1分'],[300,'5分'],[900,'15分'],[-1,'手動のみ']].forEach(([val,t])=>{const b=mkEl('button',t);if(secDelay()===val)b.classList.add('on');b.onclick=()=>{const s=secGet();if(!s)return;s.a=val;LS.set('rd:sec',s);refresh()};sg.appendChild(b)});
     row.appendChild(sg);g.appendChild(row);
     {const l=mkEl('label','','ds-sw'),cb=document.createElement('input');cb.type='checkbox';cb.checked=!!LS.get('rd:secLog',true);cb.onchange=()=>LS.set('rd:secLog',cb.checked);
      const tx=mkEl('span');tx.appendChild(mkEl('b','動作ログを見るときもパスコードを求める'));tx.appendChild(mkEl('small','ログには本の名前が残ることがあります'));l.append(tx,cb);g.appendChild(l)}
-    g.appendChild(mkEl('h4','アプリの自動ロック','ds-h'));
-    g.appendChild(mkEl('p','アプリ全体をロックします。暗号化フォルダーの表示状態・自動ロック時間には影響しません。','ds-desc'));
-    {const l=mkEl('label','','ds-sw'),cb=document.createElement('input');cb.type='checkbox';cb.checked=!!LS.get('rd:appLock',false);cb.onchange=()=>{LS.set('rd:appLock',cb.checked);applog('security','アプリロック='+(cb.checked?'オン':'オフ'));if(!cb.checked)appLockRelease()};
+    {const l=mkEl('label','','ds-sw'),cb=document.createElement('input');cb.type='checkbox';cb.checked=!!LS.get('rd:appLock',false);cb.onchange=()=>{LS.set('rd:appLock',cb.checked);applog('security','起動時ロック='+(cb.checked?'オン':'オフ'))};
      const tx=mkEl('span');tx.appendChild(mkEl('b','アプリ起動時にロック'));tx.appendChild(mkEl('small','アプリを開いたときにパスコード／生体認証を求めます'));l.append(tx,cb);g.appendChild(l)}
-    const appChoice=(key,label,choices)=>{const r=mkEl('div','','row');r.appendChild(mkEl('b',label));const z=mkEl('div','','seg wrap'),cur=Number(LS.get(key,-1));choices.forEach(([v,t])=>{const b=mkEl('button',t);if(cur===v)b.classList.add('on');b.onclick=()=>{LS.set(key,v);refresh()};z.appendChild(b)});r.appendChild(z);g.appendChild(r)};
-    appChoice('rd:appLockBg','バックグラウンド移行後にロック',[ [0,'すぐ'],[60,'1分'],[300,'5分'],[900,'15分'],[-1,'しない'] ]);
-    appChoice('rd:appLockIdle','操作しない場合にロック',[ [60,'1分'],[300,'5分'],[900,'15分'],[1800,'30分'],[-1,'しない'] ]);
     {const l=mkEl('label','','ds-sw'),cb=document.createElement('input');cb.type='checkbox';cb.checked=!!LS.get('rd:showHiddenInRecent',false);cb.onchange=()=>{LS.set('rd:showHiddenInRecent',cb.checked);secAfterChange()};
      const tx=mkEl('span');tx.appendChild(mkEl('b','ロック解除時に「続きを読む」へ非表示本も含める'));tx.appendChild(mkEl('small','オフのときはロック解除中でも「続きを読む」に表示しません'));l.append(tx,cb);g.appendChild(l)}
     act('close','パスコードを解除','非表示をすべて解除して、パスコードを消します',()=>secRemoveSheet(refresh));
@@ -8280,14 +8542,6 @@ function folderPop(g,rect,where){
   act('folder_open','開く',()=>{finish();if(window.kdOpenCol)window.kdOpenCol(g.key);else{toggleFo(g.key);rShelfCards()}});
   act('edit','名前を変更',()=>{finish();const m=ensureManagedFolder(g);renameFolder(m.name)});
   {const hid=g.auto?(g.books.length>0&&g.books.every(x=>x.hd)):secHf().includes(g.name);if(hid)act('visibility','非表示を解除',()=>{finish();secUnhideFolder(g)});else if(!(!g.auto&&secFolderHidden(g.name)))act('visibility_off','非表示にする',()=>{finish();secHideFolder(g)})}
-  /* フォルダのメニューからも、非表示本の表示／ロックを直接切り替えられる。 */
-  if(secHas()){
-    const hc=secCounts();
-    if(hc.b+hc.f>0){
-      if(secOpen)act('lock','非表示の本を隠す',()=>{finish();secLock('手動')});
-      else act('visibility','非表示の本を表示',()=>{finish();secUnlockSheet()});
-    }
-  }
   if(typeof window.kdFolderMove==='function')act('folder','中身を別のフォルダへ移動',()=>{finish();window.kdFolderMove(g)});
   act('delete','フォルダを削除…',()=>{finish();folderDeleteSheet([g])},true);
   if(where==='lib')p.appendChild(mkEl('div','ほかの本やフォルダをタップすると続けて選択できます','bp-note'));
@@ -8366,14 +8620,6 @@ function bookPop(e,rect,where){
   act('folder','フォルダへ移動',()=>{finish();folderSheet(e)});
   act('image','種類を変更（小説／コミック）',()=>{finish();bookTypeSheet(k)});
   if(e.hd)act('visibility','非表示を解除',()=>{finish();secUnhideBook(e)});else if(!secIsHidden(e))act('visibility_off','非表示にする',()=>{finish();secHideBook(e)});
-  /* 非表示機能全体へのショートカット。個別の本の表示状態とは独立して切り替える。 */
-  if(secHas()){
-    const hc=secCounts();
-    if(hc.b+hc.f>0){
-      if(secOpen)act('lock','非表示の本を隠す',()=>{finish();secLock('手動')});
-      else act('visibility','非表示の本を表示',()=>{finish();secUnlockSheet()});
-    }
-  }
   act('check',done?'読了を解除':'読了にする',()=>{finish();setBookDone(k,!done);rShelfCards()});
   act('history','未読にする',()=>{finish();setBookUnread(k)});
   act('history','読書履歴',()=>{finish();bookHistorySheet(k)});
@@ -8446,7 +8692,7 @@ applyUiMode();
 applyUi2();
 addEventListener('resize',()=>{if((S.ui||'auto')==='auto')applyUiMode()});
 applyLanguage();
-applog('app','起動 V5.2.2・起動まで'+Math.round(performance.now())+'ms・本'+shelf().length+'冊・'+innerWidth+'x'+innerHeight+'@'+(devicePixelRatio||1)+'・'+navigator.userAgent);
+applog('app','起動 V5.2.11・起動まで'+Math.round(performance.now())+'ms・本'+shelf().length+'冊・'+innerWidth+'x'+innerHeight+'@'+(devicePixelRatio||1)+'・'+navigator.userAgent);
 (function initAndroidLocalReader(){
   const ab=window.AndroidBridge;if(!ab)return;
   const fb=$('#bAddFolder');
@@ -8466,7 +8712,7 @@ applog('app','起動 V5.2.2・起動まで'+Math.round(performance.now())+'ms・
   const syncSliders=()=>{
     if(document.hidden)return;
     for(const i of els){
-      const x=+i.max||1,p=(i.value/x*100)+'%',d=(i.style.direction||(i._dirC||(i._dirC=getComputedStyle(i).direction)))==='rtl'?'left':'right';
+      const mn=+i.min||0,mx=+i.max,sp=mx-mn,f=sp>0?Math.max(0,Math.min(1,(+i.value-mn)/sp)):0,p='calc(var(--tw,4px) / 2 + '+f+' * (100% - var(--tw,4px)))',d=(i.style.direction||(i._dirC||(i._dirC=getComputedStyle(i).direction)))==='rtl'?'left':'right';
       if(i._p!==p){i._p=p;i.style.setProperty('--p',p)}
       if(i._d!==d){i._d=d;i.style.setProperty('--dir',d);if(i.id==='prog')document.body.classList.toggle('prog-rtl',d==='left')}
     }
@@ -8848,7 +9094,7 @@ document.body.appendChild(nav);rShelfCards();
 })();
 </script>
 <script id="br5Crypto">
-/* BookReader V5.2.2: encrypted hidden books + Android Keystore biometric unlock.
+/* BookReader V5.2.11: encrypted hidden books + Android Keystore biometric unlock.
    Existing database/store names are kept. Book payloads are encrypted in-place in IndexedDB store b.
    No CSP directive is relaxed; this script is separately SHA-256 allow-listed. */
 (function(){
@@ -9016,55 +9262,20 @@ document.body.appendChild(nav);rShelfCards();
   const BR_WEB_BIO_AAD=new TextEncoder().encode('BookReader|webbio|AES-GCM|v1');
   function brB64Url(u8){let s='';for(let i=0;i<u8.length;i++)s+=String.fromCharCode(u8[i]);return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
   function brUnB64Url(s){const p=String(s||'').replace(/-/g,'+').replace(/_/g,'/');const pad=p.length%4?p+'='.repeat(4-(p.length%4)):p;const bin=atob(pad);const out=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)out[i]=bin.charCodeAt(i);return out}
-  function brHasNativeBio(){
-    const ab=window.AndroidBridge;return Boolean(ab&&typeof ab.hasBiometricUnlock==='function'&&typeof ab.biometricAvailable==='function'&&typeof ab.unlockBookKey==='function');
-  }
   function brWebBioSupported(){
-    return Boolean(!brHasNativeBio()&&window.isSecureContext&&typeof window.PublicKeyCredential==='function'&&navigator.credentials&&typeof navigator.credentials.create==='function'&&typeof navigator.credentials.get==='function');
+    return Boolean(!window.AndroidBridge&&window.isSecureContext&&typeof window.PublicKeyCredential==='function'&&navigator.credentials&&typeof navigator.credentials.create==='function'&&typeof navigator.credentials.get==='function');
   }
   function brGetWebBio(){
-    /* パスキー連携情報は再起動後も必要なため、一時メモリ fallback を使わず永続領域から読む。 */
-    try{const raw=window.localStorage.getItem(BR_WEB_BIO_KEY),r=raw?JSON.parse(raw):null;return(r&&r.v===1&&r.credId&&r.salt&&r.iv&&r.ct)?r:null}catch(_){return null}
-  }
-  function brStoreWebBio(rec){
-    const raw=JSON.stringify(rec);let oldRaw=null;
-    try{oldRaw=window.localStorage.getItem(BR_WEB_BIO_KEY)}catch(_){}
-    try{
-      window.localStorage.setItem(BR_WEB_BIO_KEY,raw);
-      const saved=window.localStorage.getItem(BR_WEB_BIO_KEY);
-      if(saved!==raw)throw new Error('保存内容を読み戻せませんでした');
-      const check=JSON.parse(saved);
-      if(!check||check.credId!==rec.credId||check.salt!==rec.salt||check.iv!==rec.iv||check.ct!==rec.ct)throw new Error('保存内容が一致しません');
-    }catch(e){
-      /* 再設定に失敗したとき、動作中の既存登録まで失わないよう元データを戻す。 */
-      try{if(oldRaw===null)window.localStorage.removeItem(BR_WEB_BIO_KEY);else window.localStorage.setItem(BR_WEB_BIO_KEY,oldRaw)}catch(_){}
-      throw new Error('パスキー連携情報をブラウザに永続保存できません。プライベートブラウズやブラウザの保存制限を解除してから再試行してください。'+(e&&e.message?' ('+e.message+')':''));
-    }
-  }
-  async function brWebBioPreflight(){
-    if(!brWebBioSupported())throw new Error('HTTPS上のSafariなど、WebAuthnに対応したブラウザで開いてください');
-    if(!crypto||!crypto.subtle)throw new Error('この環境では安全な暗号化APIを利用できません');
-    const pk=window.PublicKeyCredential;
-    if(typeof pk.isUserVerifyingPlatformAuthenticatorAvailable==='function'){
-      let available=null;
-      try{available=await pk.isUserVerifyingPlatformAuthenticatorAvailable()}catch(_){}
-      if(available===false)throw new Error('この端末でFace ID・Touch IDなどの端末内認証器を利用できません。端末のパスコードと生体認証設定を確認してください');
-    }
-    if(typeof pk.getClientCapabilities==='function'){
-      try{
-        const caps=await pk.getClientCapabilities();
-        if(caps&&caps['extension:prf']===false)throw new Error('このブラウザはPRF拡張に対応していません。iOS／Safariを更新し、iCloudキーチェーンのパスキーを利用してください');
-      }catch(e){if(e&&e.message&&e.message.includes('PRF拡張'))throw e;/* 判定API自体の失敗・未実装時は実際の認証で判定する */}
-    }
+    try{const r=LS.get(BR_WEB_BIO_KEY);return(r&&r.credId&&r.salt&&r.iv&&r.ct)?r:null}catch(_){return null}
   }
   function brBioAvailable(){
     const ab=window.AndroidBridge;
-    if(brHasNativeBio())return ab.biometricAvailable();
+    if(ab)return typeof ab.biometricAvailable==='function'&&ab.biometricAvailable();
     return brWebBioSupported();
   }
   function brHasBioUnlock(){
     const ab=window.AndroidBridge;
-    if(brHasNativeBio())return ab.hasBiometricUnlock();
+    if(ab)return typeof ab.hasBiometricUnlock==='function'&&ab.hasBiometricUnlock();
     return Boolean(brWebBioSupported()&&brGetWebBio());
   }
   async function brWebDeriveAesKey(prfBuf,usages){
@@ -9074,9 +9285,7 @@ document.body.appendChild(nav);rShelfCards();
   }
   async function brWebEnableBiometric(){
     if(!brMasterBytes)throw new Error('先にパスコードで解除してください');
-    await brWebBioPreflight();
-    const rpId=String(location.hostname||'').toLowerCase();
-    if(!rpId)throw new Error('このページのドメインを確認できません');
+    if(!brWebBioSupported())throw new Error('HTTPSまたはlocalhost環境でのみパスキー生体認証を利用できます');
     const challenge=crypto.getRandomValues(new Uint8Array(32));
     const userId=crypto.getRandomValues(new Uint8Array(32));
     const salt=crypto.getRandomValues(new Uint8Array(32));
@@ -9085,17 +9294,16 @@ document.body.appendChild(nav);rShelfCards();
       cred=await navigator.credentials.create({
         publicKey:{
           challenge,
-          rp:{id:rpId,name:'BookReader'},
+          rp:{name:'BookReader'},
           user:{id:userId,name:'bookreader-local',displayName:'BookReader'},
           pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],
-          authenticatorSelection:{authenticatorAttachment:'platform',residentKey:'required',requireResidentKey:true,userVerification:'required'},
+          authenticatorSelection:{authenticatorAttachment:'platform',residentKey:'preferred',userVerification:'required'},
           timeout:60000,
           extensions:{prf:{eval:{first:salt}}}
         }
       });
     }catch(e){
-      if(e&&e.name==='NotAllowedError')throw new Error('パスキーの作成がキャンセルされたか、端末で承認されませんでした');
-      if(e&&e.name==='SecurityError')throw new Error('このサイトのドメインではパスキーを作成できません。HTTPSとアクセス先ドメインを確認してください');
+      if(e&&e.name==='NotAllowedError')throw new Error('パスキーの作成がキャンセルされました');
       throw new Error((e&&e.message)||'パスキーを作成できませんでした');
     }
     if(!cred||!cred.rawId)throw new Error('パスキーの取得に失敗しました');
@@ -9106,7 +9314,6 @@ document.body.appendChild(nav);rShelfCards();
       try{
         assertion=await navigator.credentials.get({
           publicKey:{
-            rpId,
             challenge:crypto.getRandomValues(new Uint8Array(32)),
             allowCredentials:[{type:'public-key',id:new Uint8Array(cred.rawId)}],
             userVerification:'required',
@@ -9115,21 +9322,17 @@ document.body.appendChild(nav);rShelfCards();
           }
         });
       }catch(e){
-        if(e&&e.name==='NotAllowedError')throw new Error('パスキーは作成されましたが、Face ID・Touch IDによるPRF鍵の確認がキャンセルされました');
-        throw new Error((e&&e.message)||'パスキーのPRF鍵を確認できませんでした');
+        if(e&&e.name==='NotAllowedError')throw new Error('生体認証の確認がキャンセルされました');
+        throw new Error((e&&e.message)||'パスキーの確認に失敗しました');
       }
       const aext=assertion&&typeof assertion.getClientExtensionResults==='function'?assertion.getClientExtensionResults():{};
       prfOut=aext&&aext.prf&&aext.prf.results&&aext.prf.results.first?aext.prf.results.first:null;
     }
-    if(!prfOut)throw new Error('パスキーは作成されましたが、この認証器はPRF鍵導出に対応していません。iCloudキーチェーンのパスキーと最新のiOS／Safariを利用してください（解除にはパスコードを引き続き利用できます）');
-    const wrapKey=await brWebDeriveAesKey(prfOut,['encrypt','decrypt']);
+    if(!prfOut)throw new Error('このブラウザまたはパスキー保存先は PRF 暗号鍵導出に対応していません（パスコードをご利用ください）');
+    const wrapKey=await brWebDeriveAesKey(prfOut,['encrypt']);
     const iv=crypto.getRandomValues(new Uint8Array(12));
     const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:BR_WEB_BIO_AAD},wrapKey,brMasterBytes);
-    /* 保存前に同じPRF出力で復号できることを確認する。 */
-    const roundTrip=await crypto.subtle.decrypt({name:'AES-GCM',iv,additionalData:BR_WEB_BIO_AAD},wrapKey,ct);
-    const check=new Uint8Array(roundTrip);
-    if(check.length!==brMasterBytes.length||check.some((v,i)=>v!==brMasterBytes[i]))throw new Error('パスキー暗号鍵の検証に失敗しました');
-    brStoreWebBio({v:1,credId:brB64Url(new Uint8Array(cred.rawId)),salt:brB64(salt),iv:brB64(iv),ct:brB64(new Uint8Array(ct))});
+    LS.set(BR_WEB_BIO_KEY,{v:1,credId:brB64Url(new Uint8Array(cred.rawId)),salt:brB64(salt),iv:brB64(iv),ct:brB64(new Uint8Array(ct))});
     toast('パスキー（指紋・顔認証）を設定しました');
   }
   async function brWebBiometricUnlock(){
@@ -9139,7 +9342,6 @@ document.body.appendChild(nav);rShelfCards();
     try{
       assertion=await navigator.credentials.get({
         publicKey:{
-          rpId:String(location.hostname||'').toLowerCase(),
           challenge:crypto.getRandomValues(new Uint8Array(32)),
           allowCredentials:[{type:'public-key',id:brUnB64Url(rec.credId)}],
           userVerification:'required',
@@ -9155,14 +9357,12 @@ document.body.appendChild(nav);rShelfCards();
     const prfOut=ext&&ext.prf&&ext.prf.results&&ext.prf.results.first?ext.prf.results.first:null;
     if(!prfOut)throw new Error('パスキーから暗号鍵を取得できませんでした。パスコードで解除してください');
     const wrapKey=await brWebDeriveAesKey(prfOut,['decrypt']);
-    let plain;
-    try{plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:brUnB64(rec.iv),additionalData:BR_WEB_BIO_AAD},wrapKey,brUnB64(rec.ct))}
-    catch(_){throw new Error('パスキーから以前と同じ暗号鍵を取得できませんでした。登録時と同じサイト・パスキー保存先を使うか、パスコードで解除してください')}
+    const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:brUnB64(rec.iv),additionalData:BR_WEB_BIO_AAD},wrapKey,brUnB64(rec.ct));
     return new Uint8Array(plain);
   }
   async function brEnableBiometric(){
     if(!brMasterBytes)throw new Error('先にパスコードで解除してください');
-    if(!brHasNativeBio())return await brWebEnableBiometric();
+    if(!window.AndroidBridge)return await brWebEnableBiometric();
     const result=await brBioRequest('enableBiometricUnlock',[brB64(brMasterBytes)]);
     if(!result.ok)throw new Error(result.message);
     toast('生体認証を設定しました');
@@ -9172,7 +9372,7 @@ document.body.appendChild(nav);rShelfCards();
     if(brBioBusy)return;
     brBioBusy=true;window.__brBioBusy=true;
     try{
-      const keyBytes=brHasNativeBio()
+      const keyBytes=window.AndroidBridge
         ?(await(async()=>{const r=await brBioRequest('unlockBookKey',[]);if(!r.ok)throw new Error(r.message);return brUnB64(r.key)})())
         :(await brWebBiometricUnlock());
       await brSetMaster(keyBytes);await brMigrateHiddenBooks();
@@ -9187,7 +9387,7 @@ document.body.appendChild(nav);rShelfCards();
     }
   }
   function brDisableBiometric(){
-    if(!brHasNativeBio()){try{localStorage.removeItem(BR_WEB_BIO_KEY)}catch(_){};return}
+    if(!window.AndroidBridge){try{localStorage.removeItem(BR_WEB_BIO_KEY)}catch(_){};return}
     try{const ab=window.AndroidBridge;if(ab&&typeof ab.disableBiometricUnlock==='function')ab.disableBiometricUnlock()}catch(_){}
   }
 
@@ -9272,7 +9472,7 @@ document.body.appendChild(nav);rShelfCards();
     });
   };
 
-  /* Biometric entry point: Android may prompt natively; WebAuthn must start from a user tap (iOS Safari). */
+  /* Android-only biometric entry point on the existing unlock sheet. */
   const oldSecUnlockSheet=secUnlockSheet;
   secUnlockSheet=function(done){
     oldSecUnlockSheet(done);
@@ -9288,13 +9488,8 @@ document.body.appendChild(nav);rShelfCards();
       const inp=sh.querySelector('.sec-in')||sh.querySelector('input');
       if(inp&&inp.parentNode)inp.parentNode.insertBefore(b,inp);else sh.appendChild(b);
       if(!sh.classList.contains('on'))return;
-      /* iOS Safari rejects credentials.get() when it is launched by this timer
-         instead of a direct user gesture. Keep the WebAuthn button enabled and
-         start the request only from b.onclick. Preserve Android's native prompt. */
-      if(ab){
-        b.disabled=true;
-        brBiometricUnlock(done,false).finally(()=>{b.disabled=false});
-      }
+      b.disabled=true;
+      brBiometricUnlock(done,!ab).finally(()=>{b.disabled=false});
     },50);
   };
   const oldSecSettingsBox=secSettingsBox;
@@ -9324,79 +9519,12 @@ document.body.appendChild(nav);rShelfCards();
     }catch(e){applog('security','生体認証の状態確認に失敗：'+(e.message||e),'w')}
     return g;
   };
-  if(secHas()&&LS.get('rd:appLock',false)){
-    setTimeout(()=>appLockNow('アプリ起動'),80);
+  if(secHas()&&LS.get('rd:appLock',false)&&!secOpen){
+    document.body.classList.add('app-locked');
+    setTimeout(()=>{if(secHas()&&!secOpen)secUnlockSheet(()=>{document.body.classList.remove('app-locked')})},80);
   }
-  applog('security','V5.2.2：ロック書籍のAES-GCM暗号化とAndroid生体認証連携を初期化');
+  applog('security','V5.2.11：ロック書籍のAES-GCM暗号化とAndroid生体認証連携を初期化');
 })();
-
-/* V5.2.2: アプリ全体の自動ロックを暗号化フォルダーの自動ロックから独立 */
-let _appLocked=false,_appLockHideAt=0,_appLockLastAct=Date.now(),_appLockPrompt=false;
-function appLockRelease(){
-  _appLocked=false;_appLockHideAt=0;_appLockLastAct=Date.now();
-  document.body.classList.remove('app-locked');
-  if(typeof closeAll==='function')closeAll();
-}
-function appLockNow(reason){
-  if(!LS.get('rd:appLock',false)||!secHas()||_appLocked)return;
-  _appLocked=true;document.body.classList.add('app-locked');
-  applog('security','アプリをロック（'+(reason||'自動')+'）');
-  setTimeout(()=>appLockSheet(),80);
-}
-function appLockSheet(){
-  if(!_appLocked||_appLockPrompt)return;
-  _appLockPrompt=true;
-  secSheet('アプリをロックしています','アプリ全体のロックです。解除しても暗号化フォルダーのロック状態は変わりません。',(sh,msg,ok)=>{
-    ok.textContent='アプリのロックを解除';
-    const inp=secInput('パスコード');sh.appendChild(inp);
-    const go=async()=>{
-      if(ok.disabled)return;ok.disabled=true;ok.dataset.busy='1';msg.textContent='';
-      const r=await secVerify(inp.value);ok.dataset.busy='';
-      if(r.ok){appLockRelease();applog('security','アプリロックを解除');toast('アプリのロックを解除しました');}
-      else{msg.textContent=r.msg;inp.value='';ok.disabled=!!r.wait;if(!r.wait)inp.focus();else setTimeout(()=>{ok.disabled=false},Math.max(1000,(secGet().u-Date.now())))}
-    };
-    ok.onclick=go;inp.onkeydown=e=>{if(e.key==='Enter')go()};
-    if(typeof brHasBioUnlock==='function'&&brHasBioUnlock()){
-      const bio=mkEl('button',window.AndroidBridge?'生体認証で解除':'パスキー（Face ID／Touch ID）で解除','m3-btn-tonal');bio.type='button';bio.style.width='100%';bio.style.marginTop='10px';bio.setAttribute('aria-label',window.AndroidBridge?'生体認証でアプリロックを解除':'パスキーでアプリロックを解除');
-      bio.onclick=async()=>{
-        if(bio.disabled)return;bio.disabled=true;msg.textContent='';
-        try{
-          const keyBytes=brHasNativeBio()
-            ?await(async()=>{const r=await brBioRequest('unlockBookKey',[]);if(!r.ok)throw new Error(r.message);return brUnB64(r.key)})()
-            :await brWebBiometricUnlock();
-          await brSetMaster(keyBytes);appLockRelease();applog('security',(window.AndroidBridge?'生体認証':'パスキー')+'でアプリロックを解除');toast('アプリのロックを解除しました');
-        }catch(e){msg.textContent=e&&e.message?e.message:'生体認証に失敗しました';bio.disabled=false}
-      };
-      sh.appendChild(bio);
-    }
-    return{focus:inp,after:()=>{setTimeout(()=>{if(_appLocked)inp.focus()},250)}};
-  });
-  _appLockPrompt=false;
-}
-function appLockBgDelay(){const n=LS.get('rd:appLockBg',0);return typeof n==='number'?n:0}
-function appLockIdleDelay(){const n=LS.get('rd:appLockIdle',-1);return typeof n==='number'?n:-1}
-function appLockOnLeave(){
-  if(!LS.get('rd:appLock',false)||!secHas())return;
-  _appLockHideAt=Date.now();const d=appLockBgDelay();
-  if(d===0)appLockNow('バックグラウンド移行');
-}
-function appLockOnReturn(){
-  if(!LS.get('rd:appLock',false)||!secHas()){_appLockHideAt=0;return}
-  const d=appLockBgDelay(),now=Date.now();
-  if(d>=0&&_appLockHideAt&&now-_appLockHideAt>=d*1000){appLockNow('バックグラウンドから復帰');}
-  _appLockHideAt=0;_appLockLastAct=now;
-}
-document.addEventListener('visibilitychange',()=>{
-  if(document.visibilityState==='hidden')appLockOnLeave();else appLockOnReturn();
-});
-addEventListener('pagehide',appLockOnLeave);
-addEventListener('pageshow',appLockOnReturn);
-['pointerdown','keydown','touchstart'].forEach(n=>addEventListener(n,()=>{_appLockLastAct=Date.now()},{capture:true,passive:true}));
-setInterval(()=>{
-  if(document.hidden||_appLocked||!LS.get('rd:appLock',false)||!secHas())return;
-  const d=appLockIdleDelay();
-  if(d>0&&Date.now()-_appLockLastAct>=d*1000)appLockNow('操作のない時間');
-},3000);
 </script>
 </body>
 </html>
