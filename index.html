@@ -14,7 +14,7 @@
 -->
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-pFyMS85KSl0SLXYaf35ZMpfOPm+dAxMZWWQCcFpfb8s=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-XIwHH+1GN5VlNTsHp7rpTEw21AmP2qs6faqbqGvDlcA='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-pgw6guKkvgJJrYii95zO4aZDWVk69ztADjTqd09vRY4=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-oEM8GXZygBbbNAc2mSCG3gizJjsTzGt1sCidBATVgH4='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#fdf8ff">
@@ -5738,7 +5738,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 const LIC_TEXT={
 ja:{title:'ライセンス情報',
  h:['1. 著作権・クレジット表示','2. 利用条件','3. 禁止事項','4. 第三者ライブラリのライセンス','5. EPUBの利用とプライバシー','6. 問い合わせ先'],
- copy:['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.1.8','License：BookReader NonCommercial Attribution License 1.1（全文は配布物のLICENSEファイルを参照）','取り込んだ書籍ファイル（IndexedDB）と読書統計・目標・履歴・設定・生体認証／パスキー連携情報（localStorage / Android Keystore）はすべて端末内に保存され、外部へ送信されません。','改変版を配布する場合は、改変版であることを明確に表示してください。','Kosaの著作権表示・ライセンス表示を保持してください。'],
+ copy:['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.1.9','License：BookReader NonCommercial Attribution License 1.1（全文は配布物のLICENSEファイルを参照）','取り込んだ書籍ファイル（IndexedDB）と読書統計・目標・履歴・設定・生体認証／パスキー連携情報（localStorage / Android Keystore）はすべて端末内に保存され、外部へ送信されません。','改変版を配布する場合は、改変版であることを明確に表示してください。','Kosaの著作権表示・ライセンス表示を保持してください。'],
  allow:['許可する行為','個人・非商用目的での利用','個人の端末へのダウンロード','非商用目的での改変','本ライセンスと著作権表示を保持した非商用目的での再配布','任意の寄付・投げ銭は、利用や配布の対価・条件でない限り、それだけで商用利用とは扱いません。'],
  deny:['禁止する行為','商用利用（販売、有料提供、有料サポート、広告・アフィリエイト等の収益化、営利事業上の利用を含む）','会社・事業者等による社内利用を、業務上の利益・効率化等のために行うこと','Kosaの著作権表示・クレジット・ライセンス表示の削除または改変','製作者を偽る行為、または本ソフトウェア・改変版を自作したものとして表示する行為','改変版であることを明示せずに配布する行為','Kosaの名前・Xアカウント・クレジットを、Kosaが改変版や利用者を推薦・公認しているかのように表示する行為'],
  exc:'非営利団体による利用を含め、利用目的・実態から商用か判断しにくい場合、社内評価・研究利用、寄付・投げ銭など本ライセンスの境界に当たる場合は、利用前にKosaへ相談してください。明示的な許諾がない限り商用利用はできません。',
@@ -6030,7 +6030,7 @@ function homeSettings(){
     }
     const licBtn=mkEl('button','ライセンス情報');licBtn.style.cssText='display:block;width:100%;margin:14px 0 0';licBtn.onclick=licenseSheet;sh.appendChild(licBtn);
     const credit=mkEl('div');credit.style.cssText='text-align:center;margin:16px 0 6px;opacity:.7;font-size:12px;line-height:1.7';
-    const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.1.8'];
+    const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.1.9'];
     const nativeVer=AppNative.getNativeVersion();
     if(nativeVer){
     creditItems.push('アプリ本体バージョン：'+nativeVer);
@@ -9089,7 +9089,7 @@ document.body.appendChild(nav);rShelfCards();
     document.body.classList.add('app-locked');
     setTimeout(()=>{if(secHas()&&!secOpen)secUnlockSheet(()=>{document.body.classList.remove('app-locked')})},80);
   }
-  applog('security','V5.1.8：ロック書籍のAES-GCM暗号化とAndroid生体認証連携を初期化');
+  applog('security','V5.1.9：ロック書籍のAES-GCM暗号化とAndroid生体認証連携を初期化');
 })();
 </script>
 </body>
