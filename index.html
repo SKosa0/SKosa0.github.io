@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ja">
 <!--
-  BookReader V5.1.2
+  BookReader V5.2.0
   Copyright (c) 2026 Kosa.
   Source-available under the BookReader NonCommercial Attribution License 1.1.
   You may use, modify, and redistribute this software for noncommercial purposes,
@@ -14,14 +14,14 @@
 -->
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-VTxuq/ZdXVr+aW8zDhXpIyBHxVW08Kbk0D+kcaSbP/8=' 'sha256-Rh8XYNiHWcOV2ycfv/QEdsVVDMAHMTGz1mgtazPRAoQ=' 'sha256-h7lD0r9NQdyeuRe+ub8GQTJXjUMan6qik4bw9rA9aGU='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-y1vMzFA32JgHsc3znwCV6zlYzSfLRYsV8uCRwNwJ7ZA=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-t9lL/I0ThEu6mUZ91Ncq7JwoCOr4wMrf0UCehteHfE8='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#fdf8ff">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>BookReader V5.1.2</title>
+<title>BookReader V5.2.0</title>
 <style>
 :root{--bg:#fdf8ff;--fg:#1c1b20;--sub:#48454e;--bar:#f1ecf4;--line:#cac4cf;--acc:#3569c8;--link:#3569c8;--md-pc:#e6deff;--md-opc:#180054;--md-sc:#e4dff8;--md-osc:#1b192c;--md-surf:#f7f2fa;--md-on-primary:#ffffff;--md-card-bg:#f7f2fa;--md-chip-bg:#e4dff8;--md-chip-fg:#1b192c;color-scheme:light;}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="sepia"]):not([data-theme="oled"]){--bg:#141318;--fg:#e5e1e9;--sub:#cac4cf;--bar:#201f25;--line:#48454e;--acc:#cfbcff;--link:#cfbcff;--md-pc:#4d358a;--md-opc:#e6deff;--md-sc:#474459;--md-osc:#e4dff8;--md-surf:#1c1b20;--md-on-primary:#381e72;--md-card-bg:#26242b;--md-chip-bg:#474459;--md-chip-fg:#e4dff8;color-scheme:dark}}
@@ -709,6 +709,16 @@ html.kd .sv-body{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 .sv-cp{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:12px;border:1px solid var(--line);margin:6px 0;cursor:pointer;width:100%;text-align:left;background:transparent;color:var(--fg)}
 .sv-cp:hover{border-color:var(--acc)}
 @media (max-width:699px) and (not (display-mode:standalone)){html.web-env #kdTabs{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))!important}html.web-env #kdNow{bottom:calc(82px + env(safe-area-inset-bottom,0px))!important}}
+/* V5.1.6 Lightweight Mode (html.ui2.ui-lite) */
+html.ui2.ui-lite{--paper-grain:none!important;--glass-shadow:0 6px 18px -10px rgba(0,0,0,.22)!important}
+html.ui2.ui-lite :is(#welcome,#colView,#sheet,#side){background-image:none!important}
+html.ui2.ui-lite :is(#top,#bot,#kdTabs,#kdNow,#bulkbar,#quickSet,.col-top,#colActs,#progTip,.flip-top,.flip-bot,body.comic #cvTop,body.comic #cvBot,.home-head,#sheet,#side,#autoScanVeil>div,#flipView,.cvbar,#selbar.on){-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background-color:var(--bar)!important}
+html.ui2.ui-lite :is(#sheet,#side){background-color:var(--card)!important}
+#bkPop{width:min(92vw,340px)!important}
+#bkPop .bp-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+#bkPop .bp-act{height:40px!important;padding:0 8px!important;font-size:12.5px!important;gap:7px!important}
+#bkPop .bp-act span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#bkPop .bp-act.dng{grid-column:1 / -1}
 </style>
 <style id="lb">
 /* BookReader Library UI — single source of truth for #welcome (Home / Library), dock and now-reading card.
@@ -893,14 +903,15 @@ html.kd body.kd-modal-open :is(#kdNow,#kdTabs){display:none!important}
 /* V4.2.3: iPad・PC（幅700px以上・高さ560px以上）— 下部は「読書中カード + ナビ」を横並びのフローティングバーにし、続きを読むは左揃えの均一カードにする */
 .home-head{background:color-mix(in srgb,var(--bg) 88%,transparent)}
 @media (min-width:600px) and (min-height:440px){
- :root{--lb-dk:clamp(220px,36vw,380px);--lb-dg:max(var(--lb-pad),calc((100% - 1280px)/2 + var(--lb-pad)))}
- #welcome{padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))}
- #kdTabs{left:auto!important;right:var(--lb-dg)!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))!important;transform:none!important;width:var(--lb-dk);padding:6px;gap:4px;border-radius:24px;justify-content:space-between;box-shadow:0 18px 36px -14px rgba(0,0,0,.55),inset 0 0 0 1px var(--lb-hair)}
- #kdTabs button{height:54px;border-radius:18px;padding:0 10px;gap:6px}
- #kdNow{left:var(--lb-dg)!important;right:auto!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))!important;transform:none!important;width:min(560px,calc(100% - var(--lb-dk) - 2*var(--lb-dg) - 14px));min-height:66px!important;border-radius:24px}
+ :root{--lb-dk:clamp(290px,42vw,480px);--lb-dg:max(var(--lb-pad),calc((100% - 1280px)/2 + var(--lb-pad)))}
+ #welcome{padding-bottom:calc(132px + env(safe-area-inset-bottom,0px))}
+ #kdTabs{left:auto!important;right:var(--lb-dg)!important;bottom:calc(16px + env(safe-area-inset-bottom,0px))!important;transform:none!important;width:var(--lb-dk);padding:8px;gap:8px;border-radius:26px;justify-content:space-between;box-shadow:0 18px 36px -14px rgba(0,0,0,.55),inset 0 0 0 1px var(--lb-hair)}
+ #kdTabs button{height:58px;border-radius:20px;padding:0 18px;gap:10px;font-size:15px}
+ #kdTabs button svg{width:24px;height:24px}
+ #kdNow{left:var(--lb-dg)!important;right:auto!important;bottom:calc(16px + env(safe-area-inset-bottom,0px))!important;transform:none!important;width:min(640px,calc(100% - var(--lb-dk) - 2*var(--lb-dg) - 16px));min-height:74px!important;border-radius:26px}
  html.dock-swap #kdTabs{right:auto!important;left:var(--lb-dg)!important}
  html.dock-swap #kdNow{left:auto!important;right:var(--lb-dg)!important}
- html.kd body.kd-no-now #kdTabs{left:50%!important;right:auto!important;transform:translateX(-50%)!important}
+ html.kd body.kd-no-now #kdTabs{left:50%!important;right:auto!important;width:min(520px,76vw)!important;transform:translateX(-50%)!important}
 }
 @media (min-width:700px) and (min-height:560px){
  .kd-row.foc{--lb-an:max(calc(var(--lb-gut) + 24px),calc(22% - 74px));padding:84px calc(var(--lb-gut) + 24px) 24px var(--lb-an);gap:34px;scroll-snap-type:x proximity;scroll-padding-inline:var(--lb-an) calc(var(--lb-gut) + 24px)}
@@ -2047,6 +2058,116 @@ const UI_EN={
 
 
 
+  '非表示とパスコード':'Hidden items & passcode',
+  '本やフォルダを非表示にし、書籍本体をAES-GCMで暗号化して保存します。パスコードを入力したときだけ復号して表示します。タイトルなどの本棚情報はアプリ内に残ります。':'Hide books and folders and store book data encrypted with AES-GCM. Data is decrypted only after entering your passcode. Library metadata such as titles remains stored in the app.',
+  '本やフォルダを非表示にして、パスコードを入力したときだけ表示します。本・フォルダを長押しするか、「選択」→「非表示」で設定できます。':'Hide books and folders so they appear only after entering your passcode. Long-press a book or folder, or use Select → Hide.',
+  'パスコードを設定':'Set passcode',
+  '4〜12桁の数字。設定すると、本を非表示にできます':'4–12 digits. Lets you hide books and folders',
+  '本やフォルダを非表示にするためのパスコードを決めます。4〜12桁の数字です。忘れると非表示の本を見られなくなります（リセットすると非表示の本は削除されます）。':'Choose a 4–12 digit passcode to hide books and folders. If you forget it, hidden books cannot be viewed (resetting deletes hidden books).',
+  '4〜12桁の数字です。忘れると非表示の本を見られなくなります（リセットすると非表示の本は削除されます）。':'4–12 digits. If you forget it, hidden books cannot be viewed (resetting deletes hidden books).',
+  '新しいパスコード':'New passcode',
+  '今のパスコード':'Current passcode',
+  'もう一度入力':'Re-enter passcode',
+  '設定する':'Set passcode',
+  '変更する':'Change',
+  'パスコード':'Passcode',
+  'パスコードを入力':'Enter passcode',
+  '非表示の本を表示します。アプリを離れると自動でロックされます。':'Shows hidden books. Automatically locks when you leave the app.',
+  'ロック解除':'Unlock',
+  '非表示の本を表示':'Show hidden books',
+  'パスコードを入力します':'Enter your passcode',
+  '非表示の本を表示しました':'Hidden books unlocked',
+  'ロックする':'Lock',
+  '非表示の本を隠します':'Hide hidden books',
+  'パスコードを変更':'Change passcode',
+  '自動でロックするまで':'Auto-lock delay',
+  'アプリを離れたらすぐ':'Immediately on leave',
+  '手動のみ':'Manual only',
+  '動作ログを見るときもパスコードを求める':'Require passcode to view activity log',
+  'ログには本の名前が残ることがあります':'Logs may contain book titles',
+  'アプリを開いたときにパスコード／生体認証を求めます':'Require passcode or biometrics when opening the app',
+  'オフのときはロック解除中でも「続きを読む」に表示しません':'When off, hidden books stay out of Continue reading even while unlocked',
+  'パスコードを解除':'Remove passcode',
+  '非表示をすべて解除して、パスコードを消します':'Unhide all items and remove the passcode',
+  '非表示にしていた本・フォルダは、すべて通常どおり表示されます。':'All hidden books and folders will be shown normally.',
+  '解除すると、暗号化した書籍を通常のデータに戻し、生体認証設定も削除します。':'Removing the passcode decrypts hidden books back to normal storage and clears biometric settings.',
+  '解除する':'Remove',
+  'パスコードを解除しました':'Passcode removed',
+  'パスコードを設定しました':'Passcode set',
+  'パスコードを変更しました':'Passcode changed',
+  'パスコードを忘れたとき':'Forgot passcode',
+  '非表示の本を削除してリセット':'Delete hidden books & reset',
+  '削除してリセット':'Delete & reset',
+  '非表示の本を削除して、パスコードをリセットしました':'Deleted hidden books and reset passcode',
+  'パスコードが設定されていません':'No passcode is set',
+  '4〜12桁の数字で入力してください':'Enter 4–12 digits',
+  '新しいパスコードは4〜12桁の数字にしてください':'New passcode must be 4–12 digits',
+  '2つの入力が違います':'Passcodes do not match',
+  'パスコードが違います。しばらく待ってください':'Incorrect passcode. Please wait a moment.',
+  '暗号鍵を復元できませんでした':'Could not restore encryption key',
+  '非表示にしました（ロックすると見えなくなります）':'Hidden (will disappear when locked)',
+  '非表示にしました。見るには「ライブラリ」の「…」→「非表示の本を表示」':'Hidden. To view, open Library → … → Show hidden books',
+  '非表示を解除しました':'Unhidden',
+  '上のフォルダが非表示のため、そのフォルダから解除してください':'The parent folder is hidden; unhide from that folder instead',
+  '非表示にする本かフォルダを選んでください':'Select books or folders to hide',
+  '解除するには、先に非表示の本を表示してください':'Unlock hidden books first to unhide items',
+  '生体認証（指紋・顔認証）':'Biometric unlock (Fingerprint / Face)',
+  '指紋認証や顔認証（クラス2対応を含む）を使ってロックを解除します。':'Unlock hidden books using fingerprint or face authentication (including Class 2).',
+  '※ 生体認証を利用するには、まず上の「パスコードを設定」からパスコードを作成してください。':'Note: To use biometrics, first create a passcode via "Set passcode" above.',
+  '※ 生体認証を設定するには、先にパスコードを入力して一度ロックを解除してください。':'Note: To set up biometrics, first unlock once using your passcode.',
+  '※ このブラウザではパスキー（WebAuthn）を利用できません。':'Note: Passkeys (WebAuthn) are not supported in this browser.',
+  '※ ローカルファイル直開き（file://）ではWeb生体認証は利用できません。GitHub Pages などの https:// または http://localhost から開くとパスキー（指紋・顔認証）が利用できます。':'Note: Web biometrics are unavailable when opened directly from a local file (file://). Open via https:// (such as GitHub Pages) or http://localhost to use passkeys.',
+  '※ この端末では生体認証を利用できないか、端末に生体認証が登録されていません。':'Note: Biometrics are unavailable on this device or no biometric credentials are enrolled.',
+  'パスキー（指紋・顔認証）を設定':'Set up passkey (Fingerprint / Face)',
+  'WebAuthn パスキー（PRF拡張）で解除できるように登録します':'Register a WebAuthn passkey (PRF extension) to unlock',
+  '生体認証（指紋・顔認証）を設定':'Set up biometrics (Fingerprint / Face)',
+  '指紋や顔認証で解除できるように登録します':'Register fingerprint or face authentication to unlock',
+  'パスキー生体認証で解除をテスト':'Test passkey biometric unlock',
+  '生体認証で解除をテスト':'Test biometric unlock',
+  '登録済みの指紋・顔認証の動作を確認します':'Verify that your registered fingerprint or face unlock works',
+  'パスキー生体認証を再設定':'Re-register passkey biometrics',
+  '生体認証を再設定':'Re-register biometrics',
+  '指紋・顔認証キーを更新します':'Update your fingerprint / face unlock key',
+  'パスキー生体認証を無効化':'Disable passkey biometrics',
+  '生体認証を無効化':'Disable biometrics',
+  'ブラウザに保存したパスキー連携キーを削除します':'Remove the passkey unlock key saved in this browser',
+  'Android Keystore に保存した生体認証キーを削除します':'Remove the biometric key saved in Android Keystore',
+  'パスキー（指紋・顔認証）で解除':'Unlock with passkey (Fingerprint / Face)',
+  '指紋・顔認証で解除':'Unlock with biometrics',
+  '生体認証でロックを解除しました':'Unlocked with biometrics',
+  '生体認証を設定しました':'Biometrics enabled',
+  'パスキー（指紋・顔認証）を設定しました':'Passkey biometrics enabled',
+  '生体認証を無効にしました':'Biometrics disabled',
+  '生体認証テストに失敗しました':'Biometric test failed',
+  '生体認証を再設定できませんでした':'Could not re-register biometrics',
+  '生体認証を設定できませんでした':'Could not set up biometrics',
+  '生体認証で解除できませんでした':'Could not unlock with biometrics',
+  '生体認証に失敗しました':'Biometric authentication failed',
+  '生体認証がキャンセルされました':'Biometric authentication was canceled',
+  '生体認証の確認がキャンセルされました':'Biometric verification was canceled',
+  'パスキーの作成がキャンセルされました':'Passkey creation was canceled',
+  'パスキーを作成できませんでした':'Could not create passkey',
+  'パスキーの取得に失敗しました':'Failed to obtain passkey',
+  'パスキーの確認に失敗しました':'Failed to verify passkey',
+  'パスキー生体認証が設定されていません':'Passkey biometrics are not set up',
+  '先にパスコードで解除してください':'Unlock with your passcode first',
+  'HTTPSまたはlocalhost環境でのみパスキー生体認証を利用できます':'Passkey biometrics require HTTPS or localhost',
+  'このブラウザまたはパスキー保存先は PRF 暗号鍵導出に対応していません（パスコードをご利用ください）':'This browser or passkey provider does not support PRF key derivation (use your passcode instead)',
+  'パスキーから暗号鍵を取得できませんでした。パスコードで解除してください':'Could not retrieve the encryption key from the passkey. Unlock with your passcode.',
+  'Androidの生体認証機能を利用できません':'Android biometric authentication is unavailable',
+  '生体認証の応答がありません':'Biometric authentication timed out',
+  'PRF鍵のサイズが不正です':'Invalid PRF key size',
+  '現行':'Standard',
+  '軽量':'Lite',
+  'この本を削除':'Delete this book',
+  'フォルダを削除…':'Delete folder…',
+  'フォルダと中の本をすべて削除':'Delete folder and all books inside',
+  '非表示にする':'Hide',
+  '非表示を解除':'Unhide',
+  '中身を別のフォルダへ移動':'Move contents to another folder',
+  '未読にする':'Mark unread',
+  '種類を変更（小説／コミック）':'Change type (Novel / Comic)',
+  'スキップ':'Skip'
 };;
 const UI_ORIGINAL=new WeakMap();
 function tr(v){
@@ -2056,6 +2177,17 @@ function tr(v){
   const pm=s.match(/^([^\p{L}\p{N}]+)(.+)$/u);
   if(pm&&Object.prototype.hasOwnProperty.call(UI_EN,pm[2]))return pm[1]+UI_EN[pm[2]];
   let x=s;
+  x=x.replace(/^非表示：本 (\d+)冊・フォルダ (\d+)個\s*（(ロック中|いま表示中)）$/,(_,b,f,st)=>'Hidden: '+b+' books · '+f+' folders ('+(st==='ロック中'?'Locked':'Unlocked')+')');
+  x=x.replace(/^非表示の本を見る方法はありません。リセットすると、非表示の本（(\d+)冊）と非表示のフォルダ（(\d+)個）を、本棚からすべて削除してパスコードを消します。元に戻せません。$/,(_,b,f)=>'There is no way to view hidden books without the passcode. Resetting will permanently delete '+b+' hidden books and '+f+' hidden folders from your library and remove the passcode. This cannot be undone.');
+  x=x.replace(/^間違いが続いたため、(\d+)(秒|分)待ってください$/,(_,n,u)=>'Too many incorrect attempts. Wait '+n+(u==='分'?' min':' s')+'.');
+  x=x.replace(/^パスコードが違います（あと(\d+)回で一時ロック）$/,(_,n)=>'Incorrect passcode ('+n+' attempts left before temporary lock)');
+  x=x.replace(/^非表示にできませんでした：/,'Could not hide: ');
+  x=x.replace(/^復号できませんでした：/,'Could not decrypt: ');
+  x=x.replace(/^フォルダを非表示にできませんでした：/,'Could not hide folder: ');
+  x=x.replace(/^フォルダ内の書籍を復号できませんでした：/,'Could not decrypt books in folder: ');
+  x=x.replace(/^処理を完了できませんでした：/,'Could not complete action: ');
+  x=x.replace(/^書籍データを復号できませんでした：/,'Could not decrypt book data: ');
+  x=x.replace(/^アプリ本体バージョン：/,'App version: ');
   x=x.replace(/^(\d+)冊選択中$/, '$1 selected');
   x=x.replace(/^見つからない本が(\d+)冊あります$/,'$1 books not found');
   x=x.replace(/^元の書庫ファイル「(.*)」が見つからないか、読み込めませんでした$/,'Could not find or read the original archive "$1"');
@@ -2191,7 +2323,7 @@ const getFile=p=>zip.file(p)||zip.file(encodeURI(p));
 const L=(n,name)=>Array.from(n.getElementsByTagNameNS('*',name));
 const xml=t=>new DOMParser().parseFromString(t,'application/xml');
 function parseDoc(t){let s=new DOMParser().parseFromString(t,'application/xhtml+xml');if(s.querySelector('parsererror'))s=new DOMParser().parseFromString(t,'text/html');return s}
-let importOnlyMode=false;let activeImportFolder=null;let tt;function toast(m){applog('toast',m);const e=$('#toast');e.textContent=m;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),1800)} let importStatusTimer;function showImportStatus(m){const e=$('#importStatus');if(!e)return;$('#importStatusText').textContent=m||'追加中…';e.classList.add('on')}function hideImportStatus(){const e=$('#importStatus');if(e)e.classList.remove('on')} 
+let importOnlyMode=false;let activeImportFolder=null;let tt;function toast(m){applog('toast',m);const e=$('#toast');e.textContent=m;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),1800)} window.__brExtractLastAt=Date.now();window.__brExtractPing=function(){window.__brExtractLastAt=Date.now()};function brRunWithNoProgressSkip(label,ms,fn){window.__brExtractPing();return new Promise((resolve,reject)=>{let done=false;const failSkip=()=>{if(done)return;done=true;clearInterval(iv);if(window.__brForceSkip===failSkip)window.__brForceSkip=null;const err=new Error('展開が進まないためスキップしました：'+label);err.isStallSkip=true;reject(err)};window.__brForceSkip=failSkip;const iv=setInterval(()=>{if(!done&&Date.now()-(window.__brExtractLastAt||0)>=ms)failSkip()},1000);Promise.resolve().then(fn).then(v=>{if(!done){done=true;clearInterval(iv);if(window.__brForceSkip===failSkip)window.__brForceSkip=null;resolve(v)}},e=>{if(!done){done=true;clearInterval(iv);if(window.__brForceSkip===failSkip)window.__brForceSkip=null;reject(e)}});});}let importStatusTimer;function showImportStatus(m){window.__brExtractPing();const e=$('#importStatus');if(!e)return;$('#importStatusText').textContent=m||'追加中…';e.classList.add('on')}function hideImportStatus(){const e=$('#importStatus');if(e)e.classList.remove('on')} 
 const isPaged=()=>S.mode==='p';
 const bindRtl=()=>dirset==='r'||(dirset==='a'&&(bookRtl||eff==='v'));
 const labelFor=i=>{if(isComic)return(i+1)+' / '+spine.length+'ページ';const t=toc.find(t=>t.path===spine[i].path);return t?t.label:'セクション '+(i+1)};
@@ -3133,7 +3265,7 @@ function remainText(f,pn){
   let rest=chLeft,known=true;for(let i=idx+1;i<spine.length;i++){if(RT.chars[i]==null){known=false;break}rest+=RT.chars[i]}
   return 'この章あと'+fmtRemain(chLeft*spc)+(known&&idx<spine.length-1?'・本あと'+fmtRemain(rest*spc):'');
 }
-function updateProg(){
+function updateProg(){if(typeof window.__syncSliders==='function')window.__syncSliders();
   if(CV.on||isComic||!spine.length||pending)return;
   const f=frac(),all=(idx+f)/spine.length;lastAct=Date.now();
   if(all>=.98&&key&&!flipState.on&&typeof maybeOfferDone==='function')maybeOfferDone(key);
@@ -3587,7 +3719,7 @@ function folderDeleteSheet(gs,after){
   openSheet(sh=>{
     sh.appendChild(mkEl('h3','フォルダを削除'));
     sh.appendChild(mkEl('p',label+'を削除します。中の本は'+nb.size+'冊です（子フォルダの本を含む）。','note'));
-    const keep=mkEl('button','フォルダだけ削除（本は未分類に戻す）'),all=mkEl('button','中の本ごと削除'),no=mkEl('button','キャンセル');
+    const keep=mkEl('button','フォルダだけ削除（本は未分類に戻す）'),all=mkEl('button','フォルダと中の本をすべて削除'),no=mkEl('button','キャンセル');
     [keep,all,no].forEach(b=>b.style.cssText='display:block;width:100%;margin:6px 0');all.style.color='#e5484d';
     keep.onclick=async()=>{closeAll();const r=await deleteFolders(gs,false);toast(r.folders+'個のフォルダを削除しました');if(after)after();rShelfCards()};
     all.onclick=()=>{closeAll();confirmSheet(label+'と中の本'+nb.size+'冊を本棚から削除します。読書位置・しおり・ハイライトも削除され、元に戻せません。','本ごと削除',async()=>{const r=await deleteFolders(gs,true);toast(r.folders+'個のフォルダと'+r.books+'冊を削除しました');if(after)after();rShelfCards()})};
@@ -3757,8 +3889,9 @@ function autoScanOverlay(msg){
     o.style.cssText='position:fixed;inset:0;z-index:40;display:flex;align-items:flex-end;justify-content:center;padding:0 16px calc(24px + env(safe-area-inset-bottom,0px));background:rgba(0,0,0,.18)';
     const c=document.createElement('div');c.style.cssText='display:flex;align-items:center;gap:12px;padding:10px 12px 10px 18px;border-radius:24px;background:var(--md-surf,var(--bar));color:var(--fg);box-shadow:0 2px 12px rgba(0,0,0,.35);font-size:14px';
     const t=document.createElement('span');t.id='autoScanTxt';
-    const bt=document.createElement('button');bt.textContent=tr('中止');bt.onclick=()=>{window.__autoScanAbort=true;bt.disabled=true};
-    c.append(t,bt);o.appendChild(c);document.body.appendChild(o);
+    const sk=document.createElement('button');sk.textContent='スキップ';sk.onclick=()=>{if(typeof window.__brForceSkip==='function')window.__brForceSkip()};
+    const bt=document.createElement('button');bt.textContent=tr('中止');bt.onclick=()=>{window.__autoScanAbort=true;bt.disabled=true;if(typeof window.__brForceSkip==='function')window.__brForceSkip()};
+    c.append(t,sk,bt);o.appendChild(c);document.body.appendChild(o);
   }
   document.getElementById('autoScanTxt').textContent=msg;
 }
@@ -3837,14 +3970,27 @@ window.__onLocalBooksImported=async function(items,fromFolder){
       if(bulk){const el=(performance.now()-tAll)/1000,eta=i?Math.round(el/i*(todo.length-i)):0;autoScanOverlay('新しい本を取り込んでいます… '+(i+1)+'/'+todo.length+(eta>5?'（残り約'+(eta>=60?Math.round(eta/60)+'分':eta+'秒')+'）':''))}
       let importedOk=false;
       try{
-        const f=await fetchLocalBookFile({uri:it.uri,fileName:it.name,mtime:it.mtime});
-        if(/\.epub$/i.test(it.name||'')){
-          activeLocalMeta={uri:it.uri,fileName:it.name,size:it.size,mtime:it.mtime,treeUri:it.treeUri||''};
-          importOnlyMode=true;const ok=await openBook(f); importedOk=!!ok;importOnlyMode=false;
-          
-          if(!ok)failed++;
-        }else{window.__importKeys=[];window.__importSrc=fromFolder?{uri:it.uri,name:it.name,size:it.size||f.size||0,mtime:it.mtime||0,treeUri:it.treeUri||''}:null;let r;try{r=await importFile(f)}finally{it._keys=window.__importKeys||[];window.__importKeys=null;window.__importSrc=null;window.__importInner=null}importedOk=true;if(r===false)notBook++} /* 本が入っていない書庫も記録して、次回は読まない */
-      }catch(e){CON.warn('local import failed:',it.name,e);applog('scan','取り込み失敗：'+(it.name||'?')+' '+fmtStorageBytes(it.size||0)+' '+applogVal(e),'e');failed++}
+        await brRunWithNoProgressSkip(it.name||'file',7500,async()=>{
+          const f=await fetchLocalBookFile({uri:it.uri,fileName:it.name,mtime:it.mtime});
+          window.__brExtractPing();
+          if(/\.epub$/i.test(it.name||'')){
+            activeLocalMeta={uri:it.uri,fileName:it.name,size:it.size,mtime:it.mtime,treeUri:it.treeUri||''};
+            importOnlyMode=true;const ok=await openBook(f); importedOk=!!ok;importOnlyMode=false;
+            if(!ok)failed++;
+          }else{window.__importKeys=[];window.__importSrc=fromFolder?{uri:it.uri,name:it.name,size:it.size||f.size||0,mtime:it.mtime||0,treeUri:it.treeUri||''}:null;let r;try{r=await importFile(f)}finally{it._keys=window.__importKeys||[];window.__importKeys=null;window.__importSrc=null;window.__importInner=null}importedOk=true;if(r===false)notBook++}
+        });
+      }catch(e){
+        importOnlyMode=false;
+        if(e&&e.isStallSkip){
+          CON.warn('stall skip:',it.name);
+          applog('scan','展開が進まないためスキップ：'+(it.name||'?')+' '+fmtStorageBytes(it.size||0),'w');
+          if(!bulk)rawToast('展開が進まないためスキップしました：'+(it.name||''));
+        }else{
+          CON.warn('local import failed:',it.name,e);
+          applog('scan','取り込み失敗：'+(it.name||'?')+' '+fmtStorageBytes(it.size||0)+' '+applogVal(e),'e');
+        }
+        failed++;
+      }
       finally{activeLocalMeta=null}
       /* 書庫は「中から取り込んだ本のキー」も記録し、次回それらの本がそろっているかを確かめる */
       {const ku=h53(normUri(it.uri)),ks='s:'+h53(fileSig(it)),val=Array.isArray(it._keys)?{s:ledgerSig(it),k:[...new Set(it._keys)]}:ledgerSig(it);if(importedOk){led[ku]=val;led[ks]=val}else{delete led[ku];delete led[ks]}} // 失敗は次回スキャンで再試行
@@ -4167,8 +4313,7 @@ function bookLabel(e,books){
 }
 function byTitle(a,b,books){
   const x=groupVolumeInfo(a,books),y=groupVolumeInfo(b,books);
-  if(x.rank!==y.rank)return x.rank-y.rank;
-  if(x.rank===0&&x.n!==y.n)return x.n-y.n;
+  if(x.rank===0&&y.rank===0&&x.n!==y.n&&titleSimilarity(a.t,b.t)>=0.72)return x.n-y.n;
   return (a.t||'').localeCompare(b.t||'','ja',{numeric:true,sensitivity:'base'});
 }
 /* V4.6.0Beta 高速化：シリーズの判定（タイトルの似ている度合い）は本の数の2乗に比例して重いので、同じ組み合わせの結果を覚えておく */
@@ -4530,7 +4675,7 @@ async function ensureCovers(force){
   if(!CVS.ready)setTimeout(async()=>{if(await CVS.load())rShelfCards()},5000);
 })();
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){cvTry={};cvAt={};setTimeout(ensureCovers,600)}});
-setInterval(()=>{try{if(document.visibilityState==='visible'&&shelf().filter(e=>e&&e.t).sort((a,b)=>(b.at||0)-(a.at||0)).slice(0,CVS.limit).some(e=>!e.cv))ensureCovers()}catch(e){}},30000);
+setInterval(()=>{try{if(document.visibilityState==='visible'&&!document.body.classList.contains('reading')&&shelf().filter(e=>e&&e.t).sort((a,b)=>(b.at||0)-(a.at||0)).slice(0,CVS.limit).some(e=>!e.cv))ensureCovers()}catch(e){}},30000);
 /* V4.4Beta2: 表紙画像が壊れて読み込めない場合は破棄して自動で再生成する */
 document.addEventListener('error',ev=>{
   try{
@@ -5593,7 +5738,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 const LIC_TEXT={
 ja:{title:'ライセンス情報',
  h:['1. 著作権・クレジット表示','2. 利用条件','3. 禁止事項','4. 第三者ライブラリのライセンス','5. EPUBの利用とプライバシー','6. 問い合わせ先'],
- copy:['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.1.2','License：BookReader NonCommercial Attribution License 1.1（全文は配布物のLICENSEファイルを参照）','取り込んだ書籍ファイル（IndexedDB）と読書統計・目標・履歴・設定・生体認証／パスキー連携情報（localStorage / Android Keystore）はすべて端末内に保存され、外部へ送信されません。','改変版を配布する場合は、改変版であることを明確に表示してください。','Kosaの著作権表示・ライセンス表示を保持してください。'],
+ copy:['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.2.0','License：BookReader NonCommercial Attribution License 1.1（全文は配布物のLICENSEファイルを参照）','取り込んだ書籍ファイル（IndexedDB）と読書統計・目標・履歴・設定・生体認証／パスキー連携情報（localStorage / Android Keystore）はすべて端末内に保存され、外部へ送信されません。','改変版を配布する場合は、改変版であることを明確に表示してください。','Kosaの著作権表示・ライセンス表示を保持してください。'],
  allow:['許可する行為','個人・非商用目的での利用','個人の端末へのダウンロード','非商用目的での改変','本ライセンスと著作権表示を保持した非商用目的での再配布','任意の寄付・投げ銭は、利用や配布の対価・条件でない限り、それだけで商用利用とは扱いません。'],
  deny:['禁止する行為','商用利用（販売、有料提供、有料サポート、広告・アフィリエイト等の収益化、営利事業上の利用を含む）','会社・事業者等による社内利用を、業務上の利益・効率化等のために行うこと','Kosaの著作権表示・クレジット・ライセンス表示の削除または改変','製作者を偽る行為、または本ソフトウェア・改変版を自作したものとして表示する行為','改変版であることを明示せずに配布する行為','Kosaの名前・Xアカウント・クレジットを、Kosaが改変版や利用者を推薦・公認しているかのように表示する行為'],
  exc:'非営利団体による利用を含め、利用目的・実態から商用か判断しにくい場合、社内評価・研究利用、寄付・投げ銭など本ライセンスの境界に当たる場合は、利用前にKosaへ相談してください。明示的な許諾がない限り商用利用はできません。',
@@ -5602,7 +5747,7 @@ ja:{title:'ライセンス情報',
  contact:'連絡先：',back:'戻る',close:'閉じる'},
 en:{title:'License information',
  h:['1. Copyright and attribution','2. Terms of use','3. Prohibited actions','4. Third-party library licenses','5. EPUB use and privacy','6. Contact'],
- copy:['Creator: Kosa','X: @SKosa_0','Copyright © 2026 Kosa','Product: BookReader','Version: 5.1.2','License: BookReader NonCommercial Attribution License 1.1 (full text in the LICENSE file distributed with this software)','Imported book files (IndexedDB) and reading stats, goals, history, settings, and biometric/passkey wrap metadata (localStorage / Android Keystore) are stored locally on your device and are never sent externally.','Clearly identify modified versions when distributing them.','Retain Kosa’s copyright, attribution, and license notices.'],
+ copy:['Creator: Kosa','X: @SKosa_0','Copyright © 2026 Kosa','Product: BookReader','Version: 5.2.0','License: BookReader NonCommercial Attribution License 1.1 (full text in the LICENSE file distributed with this software)','Imported book files (IndexedDB) and reading stats, goals, history, settings, and biometric/passkey wrap metadata (localStorage / Android Keystore) are stored locally on your device and are never sent externally.','Clearly identify modified versions when distributing them.','Retain Kosa’s copyright, attribution, and license notices.'],
  allow:['Permitted','Personal and noncommercial use','Downloading to your own device','Modification for noncommercial purposes','Redistribution for noncommercial purposes, provided this license and copyright notices are retained','Voluntary donations or tips are not commercial use by themselves, provided they are not consideration for or a condition of access or distribution.'],
  deny:['Prohibited','Commercial use, including sale, paid access or support, advertising or affiliate monetization, and use in for-profit business operations','Internal use by a company or business for operational benefit, efficiency, or other business purposes','Removing or altering Kosa’s copyright, attribution, or license notices','Misrepresenting the creator or presenting this software or a modified version as your own work','Distributing a modified version without clearly identifying it as modified','Using Kosa’s name, X account, or attribution to imply that Kosa endorses or recommends a modified version or its distributor'],
  exc:'If the commercial or noncommercial nature of a use is unclear—including use by nonprofit organizations, internal evaluation or research, or donations and tips—contact Kosa before use. Commercial use is not permitted without explicit prior permission.',
@@ -5801,17 +5946,13 @@ function libMoreSheet(){
   });
 }
 function applyUi2(){
-  const on=HOME.ui2!==false,html=document.documentElement;html.classList.toggle('ui2',on);html.classList.toggle('ui2-sys',on&&HOME.ui2Font==='sys');
+  if(HOME.ui2===false){HOME.ui2=true;try{LS.set('rd:home',HOME)}catch(_){}}
+  const html=document.documentElement;html.classList.add('ui2');html.classList.toggle('ui2-sys',HOME.ui2Font==='sys');html.classList.toggle('ui-lite',HOME.uiLite===true);
   const tools=$('.home-tools'),search=$('#librarySearch');if(!tools||!search)return;
   let more=$('#bLibMore');
-  if(on){
-    if(!more){more=document.createElement('button');more.id='bLibMore';more.type='button';more.setAttribute('aria-label','その他の操作');more.title='その他の操作';more.appendChild(miEl('more_horiz'));more.onclick=libMoreSheet}
-    search.append($('#bLibSort'),$('#bSelectMode'),more);
-    const af=$('#bAddFolder');if(af){af.setAttribute('aria-label','フォルダを追加');af.title='フォルダを追加'}
-  }else{
-    LIB_TOOL_ORDER.forEach(id=>{const e=document.getElementById(id);if(e)tools.appendChild(e)});
-    if(more)more.remove();
-  }
+  if(!more){more=document.createElement('button');more.id='bLibMore';more.type='button';more.setAttribute('aria-label','その他の操作');more.title='その他の操作';more.appendChild(miEl('more_horiz'));more.onclick=libMoreSheet}
+  search.append($('#bLibSort'),$('#bSelectMode'),more);
+  const af=$('#bAddFolder');if(af){af.setAttribute('aria-label','フォルダを追加');af.title='フォルダを追加'}
   if(typeof syncLibSortBtn==='function')syncLibSortBtn();
 }
 function homeSettings(){
@@ -5839,9 +5980,8 @@ function homeSettings(){
     themeRow.appendChild(themeSeg);sh.appendChild(themeRow);
     renderAccentPicker(sh,true);
     if(!isPhoneDevice())uiModeRow(sh);
-    {const ds=mkEl('div','','seg');[[true,'紙とガラス（新）'],[false,'従来']].forEach(([on,t])=>{const b=mkEl('button',t);if((HOME.ui2!==false)===on)b.classList.add('on');b.onclick=()=>{HOME.ui2=on;LS.set('rd:home',HOME);applyUi2();applog('setting','デザイン='+(on?'紙とガラス':'従来'));homeSettings()};ds.appendChild(b)});row('デザイン',ds)}
-    /* 見出し・題名の書体（新しいデザインのときだけ） */
-    if(HOME.ui2!==false){const fs=mkEl('div','','seg');[['serif','明朝'],['sys','従来の書体']].forEach(([f,t])=>{const b=mkEl('button',t);if((HOME.ui2Font||'serif')===f)b.classList.add('on');b.onclick=()=>{HOME.ui2Font=f;LS.set('rd:home',HOME);applyUi2();fs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));applog('setting','見出しの書体='+t)};fs.appendChild(b)});row('見出しと題名の書体',fs)}
+    {const ds=mkEl('div','','seg');[[false,'現行'],[true,'軽量']].forEach(([lite,t])=>{const b=mkEl('button',t);if((HOME.uiLite===true)===lite)b.classList.add('on');b.onclick=()=>{HOME.uiLite=lite;LS.set('rd:home',HOME);applyUi2();ds.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));applog('setting','UIモード='+t)};ds.appendChild(b)});row('UI表示',ds)}
+    {const fs=mkEl('div','','seg');[['serif','明朝'],['sys','ゴシック']].forEach(([f,t])=>{const b=mkEl('button',t);if((HOME.ui2Font||'serif')===f)b.classList.add('on');b.onclick=()=>{HOME.ui2Font=f;LS.set('rd:home',HOME);applyUi2();fs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));applog('setting','見出しの書体='+t)};fs.appendChild(b)});row('見出しと題名の書体',fs)}
     if(!isPhoneDevice()){const sd=mkEl('div','','seg');[['r','ナビを右'],['l','ナビを左']].forEach(([v,t])=>{const b=mkEl('button',t);if((HOME.dockSide||'r')===v)b.classList.add('on');b.onclick=()=>{HOME.dockSide=v;LS.set('rd:home',HOME);sd.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));document.documentElement.classList.toggle('dock-swap',v==='l')};sd.appendChild(b)});row('iPad・PCの下部バー配置（ナビと読書中カードの左右）',sd)}
     }else if(homeTabCur==='d'){
     /* V4.6.0Beta：「データ」タブを目的ごとのまとまりに整理（中の機能は同じ）
@@ -5890,7 +6030,7 @@ function homeSettings(){
     }
     const licBtn=mkEl('button','ライセンス情報');licBtn.style.cssText='display:block;width:100%;margin:14px 0 0';licBtn.onclick=licenseSheet;sh.appendChild(licBtn);
     const credit=mkEl('div');credit.style.cssText='text-align:center;margin:16px 0 6px;opacity:.7;font-size:12px;line-height:1.7';
-    const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.1.2'];
+    const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.2.0'];
     const nativeVer=AppNative.getNativeVersion();
     if(nativeVer){
     creditItems.push('アプリ本体バージョン：'+nativeVer);
@@ -5913,7 +6053,7 @@ function rShelfCards(){
   if(!gs.length){el.appendChild(mkEl('div',q||status!=='all'?'条件に一致する本はありません。':'本はまだありません。上の「本を追加」から読み込んでください。','library-empty'));return}
   const kdOn=document.documentElement.classList.contains('kd'),colTiles=[];
   gs.forEach(g=>{
-    g.books.sort(g.auto||HOME.sort==='title'?(a,b)=>byTitle(a,b,g.books):(a,b)=>(b.at||0)-(a.at||0));
+    g.books.sort(g.name||g.auto||HOME.sort==='title'?(a,b)=>byTitle(a,b,g.books):(a,b)=>(b.at||0)-(a.at||0));
     if(kdOn&&g.name){if(!String(g.name).includes('/'))colTiles.push(g);return}
     const folder=g.name||'未分類';
     const expanded=g.name?fopen(g.key):true;
@@ -7002,7 +7142,7 @@ $('#prog').oninput=e=>{$('#pct').textContent=Math.round(e.target.value/10)+'%'};
 $('#prog').onchange=e=>{if(!spine.length||pending)return;const v=e.target.value/1000*spine.length,i=Math.min(Math.floor(v),spine.length-1);loadWithBack(i,v-i)};
 async function importZip(file){
   try{
-    const z=await JSZip.loadAsync(file);
+    const z=await brRunWithNoProgressSkip((file&&file.name)||'ZIP',7500,()=>JSZip.loadAsync(file));window.__brExtractPing();
     const ok=n=>!z.files[n].dir&&!n.split('/').some(x=>x.startsWith('__MACOSX')||x.startsWith('.'));
     const entries=Object.keys(z.files).filter(n=>ok(n)&&/\.epub$/i.test(n));
     if(z.file('backup.json')){backupRestore(file);return true}
@@ -7018,7 +7158,7 @@ async function importZip(file){
         if(inner.length&&!importZip._nested){
           applog('file','ZIPの中の書庫 '+inner.length+'件を取り込み：'+(file.name||''));
           let any=false;importZip._nested=true;
-          try{for(const n of inner){let bl=await z.file(n).async('blob');const inF=new File([bl],n.split('/').pop(),{lastModified:file.lastModified||Date.now()});bl=null;try{if(await importFile(inF))any=true}catch(err){applog('file','中の書庫を読み込めません：'+n+' '+applogVal(err),'w')}}}
+          try{for(const n of inner){window.__brExtractPing();try{await brRunWithNoProgressSkip(n,7500,async()=>{let bl=await z.file(n).async('blob');window.__brExtractPing();const inF=new File([bl],n.split('/').pop(),{lastModified:file.lastModified||Date.now()});bl=null;if(await importFile(inF))any=true})}catch(err){applog('file','中の書庫をスキップ：'+n+' '+applogVal(err),'w')}}}
           finally{importZip._nested=false}
           return any;
         }
@@ -7046,17 +7186,27 @@ async function importZip(file){
     }
     const folderName=(file.name||'ZIP').replace(/\.zip$/i,'').trim()||'ZIPから読み込み';
     let done=0;
-    for(const path of entries){
-      let blob=await z.file(path).async('blob');
-      const name=path.split('/').pop();
-      let epub=new File([blob],name,{type:'application/epub+zip',lastModified:file.lastModified||Date.now()});
-      blob=null;
-      window.__importInner={type:'zipEpub',path};
-      const okOpen=await openBook(epub);
-      epub=null;
-      if(!okOpen)continue;
-      if(key&&activeImportFolder)shelfUp(key,{f:activeImportFolder});
-      done++;
+    for(let ei=0;ei<entries.length;ei++){
+      const path=entries[ei];
+      showImportStatus('EPUBを展開中… '+(ei+1)+' / '+entries.length);
+      try{
+        await brRunWithNoProgressSkip(path,7500,async()=>{
+          let blob=await z.file(path).async('blob');
+          window.__brExtractPing();
+          const name=path.split('/').pop();
+          let epub=new File([blob],name,{type:'application/epub+zip',lastModified:file.lastModified||Date.now()});
+          blob=null;
+          window.__importInner={type:'zipEpub',path};
+          const okOpen=await openBook(epub);
+          epub=null;
+          if(okOpen){
+            if(key&&activeImportFolder)shelfUp(key,{f:activeImportFolder});
+            done++;
+          }
+        });
+      }catch(epErr){
+        applog('file','ZIP内のEPUBをスキップ：'+path+' '+applogVal(epErr),'w');
+      }
       await new Promise(r=>setTimeout(r,0));
     }
     rShelfCards();
@@ -7390,24 +7540,33 @@ const xesc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 async function comicEpub(name,imgs){
   const tCe=performance.now();
   imgs.sort((a,b)=>a.name.localeCompare(b.name,'ja',{numeric:true}));
-  const z=new JSZip(),n=imgs.length,pad=k=>String(k+1).padStart(4,'0');let man='',spn='',nav='';
+  const z=new JSZip(),n=imgs.length,pad=k=>String(k+1).padStart(4,'0');let man='',spn='',nav='',kept=0;
   z.file('mimetype','application/epub+zip',{compression:'STORE'});
   z.file('META-INF/container.xml','<?xml version="1.0"?><container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><rootfiles><rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/></rootfiles></container>');
   for(let k=0;k<n;k++){
+    window.__brExtractPing();
     if(k%6===0){showImportStatus('展開中… '+(k+1)+' / '+n);await new Promise(r=>setTimeout(r,0))}
     const item=imgs[k];
     const ext=item.name.split('.').pop().toLowerCase(),f='images/'+pad(k)+'.'+ext;
-    const payload=item.zipEntry?await item.zipEntry.async('blob'):(item.solidBlob||(item.method===0&&item.sourceFile?await rarStoredBlob(item):await rarGet(item)));
+    let payload;
+    try{
+      payload=await brRunWithNoProgressSkip(item.name||('page_'+(k+1)),7500,()=>item.zipEntry?item.zipEntry.async('blob'):(item.solidBlob||(item.method===0&&item.sourceFile?rarStoredBlob(item):rarGet(item))));
+    }catch(stErr){
+      if(stErr&&stErr.isStallSkip){applog('scan','展開が進まない画像をスキップ：'+(item.name||k),'w');item.data=null;item.zipEntry=null;item.solidBlob=null;imgs[k]=null;continue}
+      throw stErr;
+    }
     z.file('OEBPS/'+f,payload,{binary:true,compression:'STORE'});
     item.data=null;item.zipEntry=null;item.solidBlob=null;imgs[k]=null;
     z.file('OEBPS/p'+pad(k)+'.xhtml','<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="utf-8"/><title>'+(k+1)+'</title></head><body style="margin:0"><p style="text-align:center;margin:0"><img src="'+f+'" alt=""/></p></body></html>');
-    man+='<item id="i'+k+'" href="'+f+'" media-type="'+(RMIME[ext]||'image/jpeg')+'"'+(k?'':' properties="cover-image"')+'/><item id="p'+k+'" href="p'+pad(k)+'.xhtml" media-type="application/xhtml+xml"/>';
+    man+='<item id="i'+k+'" href="'+f+'" media-type="'+(RMIME[ext]||'image/jpeg')+'"'+(kept?'':' properties="cover-image"')+'/><item id="p'+k+'" href="p'+pad(k)+'.xhtml" media-type="application/xhtml+xml"/>';
     spn+='<itemref idref="p'+k+'"/>';
-    if(k%10===0)nav+='<li><a href="p'+pad(k)+'.xhtml">'+(k+1)+'ページ</a></li>';
+    if(kept%10===0)nav+='<li><a href="p'+pad(k)+'.xhtml">'+(k+1)+'ページ</a></li>';
+    kept++;
   }
+  if(!kept){applog('scan','展開できた画像がないためスキップ：'+name,'w');return null}
   z.file('OEBPS/nav.xhtml','<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops"><head><meta charset="utf-8"/><title>目次</title></head><body><nav epub:type="toc"><ol>'+nav+'</ol></nav></body></html>');
   z.file('OEBPS/content.opf','<?xml version="1.0" encoding="UTF-8"?><package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="id"><metadata xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:identifier id="id">rdr-comic-'+Date.now()+'</dc:identifier><dc:title>'+xesc(name)+'</dc:title><dc:language>ja</dc:language><meta name="rdr:comic" content="1"/></metadata><manifest><item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>'+man+'</manifest><spine page-progression-direction="rtl">'+spn+'</spine></package>');
-  const outFile=new File([await z.generateAsync({type:'blob',compression:'STORE',streamFiles:true})],name+'.epub',{type:'application/epub+zip'});
+  const outFile=new File([await brRunWithNoProgressSkip(name||'EPUB',7500,()=>z.generateAsync({type:'blob',compression:'STORE',streamFiles:true},()=>{window.__brExtractPing()}))],name+'.epub',{type:'application/epub+zip'});
   applog('time','コミックの変換 '+name+'（'+n+'枚・'+fmtStorageBytes(outFile.size)+'）'+Math.round(performance.now()-tCe)+'ms');
   return outFile;
 }
@@ -7438,9 +7597,10 @@ async function rarSolidPrepare(list){
   const want=e=>!e.name.split('/').some(x=>x.startsWith('__MACOSX')||x.startsWith('.'))&&(RIMG.test(e.name)||/\.epub$/i.test(e.name));
   for(let i=0;i<ents.length;i++){
     const e=ents[i];if(e.enc||e.split)break; /* 暗号化・欠けた分割データ以降は辞書を再現できない */
+    window.__brExtractPing();
     if(i%4===0){showImportStatus('ソリッド圧縮を展開中… '+(i+1)+' / '+ents.length);await new Promise(r=>setTimeout(r,0))}
     try{
-      const d=e.data||new Uint8Array(await rarDataBlob(e).arrayBuffer()),u=decode(d,e.unp,e.solid);
+      const d=e.data||new Uint8Array(await brRunWithNoProgressSkip(e.name||'rar',7500,()=>rarDataBlob(e).arrayBuffer())),u=decode(d,e.unp,e.solid);
       if(e.crc!=null&&crc32(u)!==(e.crc>>>0))throw new Error('crc');
       if(want(e))e.solidBlob=new Blob([u]);
     }catch(err){CON.warn('solid rar',e.name,err);break}
@@ -7500,7 +7660,7 @@ async function importRar(input){
     for(let i=0;i<tasks.length;i++){
       showImportStatus((comic?'コミックを展開・追加中… ':'本を追加中… ')+(i+1)+' / '+tasks.length);
       try{
-        const f=await tasks[i]();if(!await openBook(f)){bad++;continue}
+        const f=await brRunWithNoProgressSkip('RAR_'+(i+1),7500,()=>tasks[i]());if(!await openBook(f)){bad++;continue}
         if(dupHit){dups++;continue}
         if(key&&activeImportFolder)shelfUp(key,{f:activeImportFolder});
         done++;
@@ -7654,7 +7814,7 @@ function secRefreshMarks(){
   const map=new Map(shelf().map(e=>[e.k,e]));
   document.querySelectorAll('#welcome [data-k],#colView [data-k],#kdHome [data-k]').forEach(n=>{const e=map.get(n.dataset.k);n.classList.toggle('sec-hdn',!!e&&secIsHidden(e))});
   document.querySelectorAll('#welcome [data-fk],#colView [data-fk],#kdHome [data-fk]').forEach(n=>{const fk=String(n.dataset.fk||'');n.classList.toggle('sec-hdn',fk.startsWith('f:')&&secFolderHidden(fk.slice(2)))});
-  if(!_secMo&&typeof MutationObserver==='function'){_secMo=new MutationObserver(()=>{cancelAnimationFrame(_secRaf);_secRaf=requestAnimationFrame(secRefreshMarks)});_secMo.observe(document.body,{childList:true,subtree:true})}
+  if(!_secMo&&typeof MutationObserver==='function'){_secMo=new MutationObserver(()=>{if(document.hidden||document.body.classList.contains('reading'))return;cancelAnimationFrame(_secRaf);_secRaf=requestAnimationFrame(secRefreshMarks)});['welcome','colView'].forEach(id=>{const el=document.getElementById(id);if(el)_secMo.observe(el,{childList:true,subtree:true})})}
 }
 function secLock(why,quiet){
   if(!secOpen)return;
@@ -7663,15 +7823,44 @@ function secLock(why,quiet){
   if(!quiet)try{closeAll()}catch(_){}
   secAfterChange();
 }
-/* 解除の状態は、アプリを離れたときに戻す。操作がない時間でも戻す */
-document.addEventListener('visibilitychange',()=>{
+/* 解除の状態は、アプリを離れたときに戻す。操作がない時間でも戻す（Safari / PWA / マルチウィンドウ対応） */
+var _secBlurT=0,_secFileAt=0;
+document.addEventListener('click',e=>{const t=e&&e.target;if(t&&((t.tagName==='INPUT'&&t.type==='file')||(t.closest&&t.closest('label')&&t.closest('label').querySelector('input[type=file]'))))_secFileAt=Date.now()},{capture:true,passive:true});
+function _secCheckOnLeave(why,quiet){
   if(!secOpen)return;const d=secDelay();
-  if(document.visibilityState==='hidden'){secHideAt=Date.now();if(d===0)secLock('アプリを離れた')}
-  else if(d>0&&secHideAt&&Date.now()-secHideAt>=d*1000)secLock('時間が経った');
+  secHideAt=Date.now();
+  if(d===0)secLock(why||'アプリを離れた',quiet);
+}
+function _secCheckOnReturn(){
+  if(!secOpen){secHideAt=0;return}
+  const d=secDelay(),now=Date.now();
+  if(d===0&&secHideAt){secLock('アプリを離れた');secHideAt=0;return}
+  if(d>0&&((secHideAt&&now-secHideAt>=d*1000)||now-secLastAct>=d*1000)){secLock('時間が経った');secHideAt=0;return}
+  secHideAt=0;
+}
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='hidden')_secCheckOnLeave('アプリを離れた');
+  else _secCheckOnReturn();
 });
-addEventListener('pagehide',()=>{if(secOpen&&secDelay()===0)secLock('アプリを離れた',true)});
+addEventListener('pagehide',()=>_secCheckOnLeave('アプリを離れた',true));
+addEventListener('pageshow',()=>_secCheckOnReturn());
+document.addEventListener('freeze',()=>_secCheckOnLeave('アプリを離れた',true));
+document.addEventListener('resume',()=>_secCheckOnReturn());
+addEventListener('blur',()=>{
+  if(!secOpen)return;
+  if(secDelay()!==0){if(!secHideAt)secHideAt=Date.now();return}
+  clearTimeout(_secBlurT);
+  _secBlurT=setTimeout(()=>{
+    if(!secOpen||secDelay()!==0||document.hasFocus())return;
+    if(window.__brBioBusy)return;
+    const ae=document.activeElement;if(ae&&ae.tagName==='INPUT'&&ae.type==='file')return;
+    if(_secFileAt&&Date.now()-_secFileAt<60000)return;
+    secLock('アプリを離れた');
+  },200);
+});
+addEventListener('focus',()=>{clearTimeout(_secBlurT);_secFileAt=0;_secCheckOnReturn()});
 ['pointerdown','keydown','touchstart'].forEach(n=>addEventListener(n,()=>{secLastAct=Date.now()},{capture:true,passive:true}));
-setInterval(()=>{if(secOpen){const d=secDelay();if(d>0&&Date.now()-secLastAct>d*1000)secLock('操作のない時間')}},5000);
+setInterval(()=>{if(!document.hidden&&secOpen){const d=secDelay();if(d>0&&Date.now()-secLastAct>=d*1000)secLock('操作のない時間')}},5000);
 
 async function secVerify(p){
   const s=secGet();if(!s)return{ok:false,msg:'パスコードが設定されていません'};
@@ -7706,13 +7895,13 @@ function secSheet(title,note,build){
 }
 function secUnlockSheet(done){
   secSheet('パスコードを入力','非表示の本を表示します。アプリを離れると自動でロックされます。',(sh,msg,ok)=>{
-    ok.textContent='解除';
+    ok.textContent='ロック解除';
     const inp=secInput('パスコード');sh.appendChild(inp);
     const tick=()=>{const s=secGet(),w=s&&s.u>Date.now()?Math.ceil((s.u-Date.now())/1000):0;if(w){msg.textContent='間違いが続いたため、'+secWait(w)+'待ってください';ok.disabled=true;setTimeout(tick,1000)}else if(ok.disabled&&ok.dataset.busy!=='1'){ok.disabled=false}};
     const go=async()=>{
       if(ok.disabled)return;ok.disabled=true;ok.dataset.busy='1';msg.textContent='';
       const r=await secVerify(inp.value);ok.dataset.busy='';
-      if(r.ok){secOpen=true;document.body.classList.remove('app-locked');secLastAct=Date.now();applog('security','アンロック');closeAll();toast('非表示の本を表示しました');secAfterChange();if(done)done()}
+      if(r.ok){secOpen=true;secHideAt=0;document.body.classList.remove('app-locked');secLastAct=Date.now();applog('security','アンロック');closeAll();toast('非表示の本を表示しました');secAfterChange();if(done)done()}
       else{msg.textContent=r.msg;inp.value='';ok.disabled=!!r.wait;if(r.wait)tick();else inp.focus()}
     };
     ok.onclick=go;inp.onkeydown=e=>{if(e.key==='Enter')go()};
@@ -7722,7 +7911,7 @@ function secUnlockSheet(done){
 }
 function secSetupSheet(done,change){
   secSheet(change?'パスコードを変更':'パスコードを設定',(change?'':'本やフォルダを非表示にするためのパスコードを決めます。')+'4〜12桁の数字です。忘れると非表示の本を見られなくなります（リセットすると非表示の本は削除されます）。',(sh,msg,ok)=>{
-    ok.textContent=change?'変更':'設定';
+    ok.textContent=change?'変更する':'設定する';
     const cur=change?secInput('今のパスコード'):null,a=secInput('新しいパスコード'),b=secInput('もう一度入力');
     if(cur)sh.appendChild(cur);sh.append(a,b);
     const go=async()=>{
@@ -7777,9 +7966,9 @@ function secSetBooks(keys,hide){
 }
 function secSetFolders(names,hide){const hf=new Set(secHf());names.forEach(n=>hide?hf.add(n):hf.delete(n));LS.set('rd:hf',[...hf])}
 function secHideNote(){return secOpen?'非表示にしました（ロックすると見えなくなります）':'非表示にしました。見るには「ライブラリ」の「…」→「非表示の本を表示」'}
-function secHideBook(e){secNeedPass(()=>{secSetBooks([e.k],true);applog('security','非表示：本1冊');secAfterChange();toast(secHideNote())})}
+function secHideBook(e){secSetBooks([e.k],true);applog('security','非表示：本1冊');secAfterChange();toast(secHideNote())}
 function secUnhideBook(e){if(!secOpen)return;secSetBooks([e.k],false);applog('security','非表示を解除：本1冊');secAfterChange();toast('非表示を解除しました')}
-function secHideFolder(g){secNeedPass(()=>{if(g.auto)secSetBooks((g.books||[]).map(e=>e.k),true);else secSetFolders([g.name],true);applog('security','非表示：フォルダ1個');secAfterChange();toast(secHideNote())})}
+function secHideFolder(g){if(g.auto)secSetBooks((g.books||[]).map(e=>e.k),true);else secSetFolders([g.name],true);applog('security','非表示：フォルダ1個');secAfterChange();toast(secHideNote())}
 function secUnhideFolder(g){
   if(!secOpen)return;
   if(g.auto)secSetBooks((g.books||[]).map(e=>e.k),false);
@@ -7801,7 +7990,7 @@ function secBulkHide(){
     applog('security',(hide?'非表示':'非表示を解除')+'：本'+bk.size+'冊・フォルダ'+fn.length+'個（一括）');
     toast(hide?secHideNote():'非表示を解除しました');endSelection();secAfterChange();
   };
-  if(hide)secNeedPass(apply);else apply();
+  apply();
 }
 /* 設定の画面 */
 function secGuardLog(){
@@ -7915,17 +8104,17 @@ function folderPop(g,rect,where){
   const ic=document.createElement('span');ic.className='bp-fico';ic.appendChild(miEl('folder'));hd.appendChild(ic);
   const tx=document.createElement('div');tx.appendChild(mkEl('b',g.name.split('/').pop()));tx.appendChild(mkEl('small',(g.auto?'自動シリーズ・':'')+(g.auto?g.books.length:n)+'冊'+(subs?'・子フォルダ'+subs+'個':'')));hd.appendChild(tx);p.appendChild(hd);
   const finish=()=>{bookPopClose();if(where==='lib')endSelection()};
-  const act=(icn,label,fn,danger)=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','menuitem');b.className='bp-act'+(danger?' dng':'');b.appendChild(miEl(icn));b.appendChild(mkEl('span',label));b.onclick=ev=>{ev.stopPropagation();fn()};p.appendChild(b)};
+  const gr=document.createElement('div');gr.className='bp-grid';p.appendChild(gr);const act=(icn,label,fn,danger)=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','menuitem');b.className='bp-act'+(danger?' dng':'');b.appendChild(miEl(icn));b.appendChild(mkEl('span',label));b.onclick=ev=>{ev.stopPropagation();fn()};gr.appendChild(b)};
   act('folder_open','開く',()=>{finish();if(window.kdOpenCol)window.kdOpenCol(g.key);else{toggleFo(g.key);rShelfCards()}});
   act('edit','名前を変更',()=>{finish();const m=ensureManagedFolder(g);renameFolder(m.name)});
   {const hid=g.auto?(g.books.length>0&&g.books.every(x=>x.hd)):secHf().includes(g.name);if(hid)act('visibility','非表示を解除',()=>{finish();secUnhideFolder(g)});else if(!(!g.auto&&secFolderHidden(g.name)))act('visibility_off','非表示にする',()=>{finish();secHideFolder(g)})}
   if(typeof window.kdFolderMove==='function')act('folder','中身を別のフォルダへ移動',()=>{finish();window.kdFolderMove(g)});
-  act('delete','フォルダを削除',()=>{finish();folderDeleteSheet([g])},true);
+  act('delete','フォルダを削除…',()=>{finish();folderDeleteSheet([g])},true);
   if(where==='lib')p.appendChild(mkEl('div','ほかの本やフォルダをタップすると続けて選択できます','bp-note'));
   document.body.appendChild(p);
   const pw=p.offsetWidth,ph=p.offsetHeight,m=10,vw=innerWidth,vh=innerHeight;
   let x=Math.min(vw-pw-m,Math.max(m,rect.left+Math.min(rect.width,240)/2-pw/2)),y=rect.bottom+8;
-  if(y+ph>vh-m){y=rect.top-ph-8;if(y<m)y=Math.max(m,Math.min(vh-ph-m,rect.top+rect.height/2-ph/2))}
+  if(y+ph>vh-m){y=rect.top-ph-8;if(y<m)y=(rect.top+rect.height/2<vh/2)?Math.max(m,vh-ph-m):m}
   p.style.left=x+'px';p.style.top=y+'px';p.style.transformOrigin='50% '+(y>rect.top?'0':'100%');
   requestAnimationFrame(()=>p.classList.add('on'));
 }
@@ -7992,7 +8181,7 @@ function bookPop(e,rect,where){
   const done=typeof isBookDone==='function'&&isBookDone(k);
   /* 選択中の本に対する操作はメニューを閉じて選択を終える */
   const finish=()=>{bookPopClose();if(where==='lib')endSelection();else if(where==='col'&&typeof window.kdColEndEdit==='function')window.kdColEndEdit()};
-  const act=(ic,label,fn,danger)=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','menuitem');b.className='bp-act'+(danger?' dng':'');b.appendChild(miEl(ic));b.appendChild(mkEl('span',label));b.onclick=ev=>{ev.stopPropagation();fn()};p.appendChild(b)};
+  const gr=document.createElement('div');gr.className='bp-grid';p.appendChild(gr);const act=(ic,label,fn,danger)=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','menuitem');b.className='bp-act'+(danger?' dng':'');b.appendChild(miEl(ic));b.appendChild(mkEl('span',label));b.onclick=ev=>{ev.stopPropagation();fn()};gr.appendChild(b)};
   act('menu_book','開く',()=>{finish();openShelf(k)});
   act('folder','フォルダへ移動',()=>{finish();folderSheet(e)});
   act('image','種類を変更（小説／コミック）',()=>{finish();bookTypeSheet(k)});
@@ -8000,13 +8189,13 @@ function bookPop(e,rect,where){
   act('check',done?'読了を解除':'読了にする',()=>{finish();setBookDone(k,!done);rShelfCards()});
   act('history','未読にする',()=>{finish();setBookUnread(k)});
   act('history','読書履歴',()=>{finish();bookHistorySheet(k)});
-  act('delete','本棚から削除',()=>{finish();delBook(e)},true);
+  act('delete','この本を削除',()=>{finish();delBook(e)},true);
   if(where!=='home'){const n=mkEl('div','ほかの本をタップすると続けて選択できます','bp-note');p.appendChild(n)}
   document.body.appendChild(p);
   /* 本の下に出す。入らなければ上に。左右は画面内に収める */
   const pw=p.offsetWidth,ph=p.offsetHeight,m=10,vw=innerWidth,vh=innerHeight;
   let x=Math.min(vw-pw-m,Math.max(m,rect.left+rect.width/2-pw/2)),y=rect.bottom+8;
-  if(y+ph>vh-m){y=rect.top-ph-8;if(y<m)y=Math.max(m,Math.min(vh-ph-m,rect.top+rect.height/2-ph/2))}
+  if(y+ph>vh-m){y=rect.top-ph-8;if(y<m)y=(rect.top+rect.height/2<vh/2)?Math.max(m,vh-ph-m):m}
   p.style.left=x+'px';p.style.top=y+'px';p.style.transformOrigin=(rect.left+rect.width/2-x)+'px '+(y>rect.top?'0':'100%');
   requestAnimationFrame(()=>p.classList.add('on'));
 }
@@ -8069,7 +8258,7 @@ applyUiMode();
 applyUi2();
 addEventListener('resize',()=>{if((S.ui||'auto')==='auto')applyUiMode()});
 applyLanguage();
-applog('app','起動 V5.1.2・起動まで'+Math.round(performance.now())+'ms・本'+shelf().length+'冊・'+innerWidth+'x'+innerHeight+'@'+(devicePixelRatio||1)+'・'+navigator.userAgent);
+applog('app','起動 V5.2.0・起動まで'+Math.round(performance.now())+'ms・本'+shelf().length+'冊・'+innerWidth+'x'+innerHeight+'@'+(devicePixelRatio||1)+'・'+navigator.userAgent);
 (function initAndroidLocalReader(){
   const ab=window.AndroidBridge;if(!ab)return;
   const fb=$('#bAddFolder');
@@ -8086,14 +8275,19 @@ applog('app','起動 V5.1.2・起動まで'+Math.round(performance.now())+'ms・
   /* V4.6.0Beta 高速化：スライダーの塗り（--p）と向き（--dir）は、値が変わったときだけ書き換える。
      以前は0.2秒ごとに必ず書き換えと計算をしていて、画面全体のスタイル再計算が常に起きていた。 */
   const els=['#prog','#cvSl','#flipSl'].map(s=>document.querySelector(s)).filter(Boolean);
-  setInterval(()=>{
+  const syncSliders=()=>{
     if(document.hidden)return;
     for(const i of els){
       const x=+i.max||1,p=(i.value/x*100)+'%',d=(i.style.direction||(i._dirC||(i._dirC=getComputedStyle(i).direction)))==='rtl'?'left':'right';
       if(i._p!==p){i._p=p;i.style.setProperty('--p',p)}
       if(i._d!==d){i._d=d;i.style.setProperty('--dir',d);if(i.id==='prog')document.body.classList.toggle('prog-rtl',d==='left')}
     }
-  },200);
+  };
+  window.__syncSliders=syncSliders;
+  for(const i of els){i.addEventListener('input',syncSliders,{passive:true});i.addEventListener('change',syncSliders,{passive:true})}
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)syncSliders()},{passive:true});
+  addEventListener('resize',syncSliders,{passive:true});
+  syncSliders();
 })();
 </script>
 <script id="kdJs">/* Floating Home: Home / Library tabs + now-reading bar. Session-memory fallback when browser storage is blocked. */
@@ -8265,7 +8459,7 @@ function renderCol(){
   for(const k of [...colSel])if(!bk.some(e=>e.k===k))colSel.delete(k);
   const keep=colScroll;cGrid.textContent='';
   const prefix=(g.name?g.name+'/':'');
-  const children=g.name?folders().filter(n=>n.startsWith(prefix)&&!n.slice(prefix.length).includes('/')&&(typeof secFolderVisible!=='function'||secFolderVisible(n))):[];
+  const children=g.name?folders().filter(n=>n.startsWith(prefix)&&!n.slice(prefix.length).includes('/')&&(typeof secFolderVisible!=='function'||secFolderVisible(n))).sort((a,b)=>a.slice(prefix.length).localeCompare(b.slice(prefix.length),'ja',{numeric:true})):[];
   children.forEach(name=>{const path='f:'+name,childBooks=shelf().filter(e=>(e.f===name||String(e.f||'').startsWith(name+'/'))&&(typeof secVisible!=='function'||secVisible(e)));const tile=el('button','col-subfolder');tile.type='button';tile.appendChild(ico('M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'));tile.appendChild(el('span',name.slice(prefix.length)));tile.appendChild(el('small',childBooks.length+(ja?' 冊':' books')));tile.dataset.fk=path;tile.onclick=()=>openCol(path);cGrid.appendChild(tile)});
   if(!bk.length&&!children.length)cGrid.appendChild(el('div','col-empty',T.cemp));
   bk.forEach(e=>{
@@ -8466,7 +8660,7 @@ document.body.appendChild(nav);rShelfCards();
 })();
 </script>
 <script id="br5Crypto">
-/* BookReader V5.1.2: encrypted hidden books + Android Keystore biometric unlock.
+/* BookReader V5.2.0: encrypted hidden books + Android Keystore biometric unlock.
    Existing database/store names are kept. Book payloads are encrypted in-place in IndexedDB store b.
    No CSP directive is relaxed; this script is separately SHA-256 allow-listed. */
 (function(){
@@ -8598,7 +8792,7 @@ document.body.appendChild(nav);rShelfCards();
   }
   async function brSetFolders(names,hide){
     const ns=names.map(String),targets=shelf().filter(e=>e&&e.k&&ns.some(n=>String(e.f||'')===n||String(e.f||'').startsWith(n+'/')));
-    if(hide){for(const e of targets)await brEncryptBookKey(e.k);secSetFolders(ns,true)}
+    if(hide){if(brMasterKey){for(const e of targets)await brEncryptBookKey(e.k)}secSetFolders(ns,true)}
     else{
       const remaining=secHf().filter(n=>!ns.includes(n));
       for(const e of targets){
@@ -8610,7 +8804,7 @@ document.body.appendChild(nav);rShelfCards();
   }
   async function brSetBooks(keys,hide){
     const ks=[...new Set(keys.map(String))];
-    if(hide){for(const k of ks)await brEncryptBookKey(k);const a=shelf(),set=new Set(ks);a.forEach(e=>{if(set.has(String(e.k)))e.hd=1});LS.set('rd:shelf',a)}
+    if(hide){if(brMasterKey){for(const k of ks)await brEncryptBookKey(k)}const a=shelf(),set=new Set(ks);a.forEach(e=>{if(set.has(String(e.k)))e.hd=1});LS.set('rd:shelf',a)}
     else{
       const before=shelf(),set=new Set(ks);
       for(const k of ks){const e=before.find(x=>String(x.k)===k);if(e&&!secFolderHidden(e.f))await brDecryptBookKey(k)}
@@ -8742,20 +8936,20 @@ document.body.appendChild(nav);rShelfCards();
   let brBioBusy=false;
   async function brBiometricUnlock(done,silent){
     if(brBioBusy)return;
-    brBioBusy=true;
+    brBioBusy=true;window.__brBioBusy=true;
     try{
       const keyBytes=window.AndroidBridge
         ?(await(async()=>{const r=await brBioRequest('unlockBookKey',[]);if(!r.ok)throw new Error(r.message);return brUnB64(r.key)})())
         :(await brWebBiometricUnlock());
       await brSetMaster(keyBytes);await brMigrateHiddenBooks();
       const st=secGet();if(st){st.f=0;st.u=0;LS.set('rd:sec',st)}
-      secOpen=true;document.body.classList.remove('app-locked');secLastAct=Date.now();applog('security','生体認証でアンロック');closeAll();toast('生体認証でロックを解除しました');secAfterChange();
+      secOpen=true;secHideAt=0;document.body.classList.remove('app-locked');secLastAct=Date.now();applog('security','生体認証でアンロック');closeAll();toast('生体認証でロックを解除しました');secAfterChange();
       if(typeof done==='function')done();
     }catch(e){
       brClearMaster();
       if(!silent)toast(e&&e.message?e.message:'生体認証で解除できませんでした');
     }finally{
-      brBioBusy=false;
+      brBioBusy=false;window.__brBioBusy=false;
     }
   }
   function brDisableBiometric(){
@@ -8795,9 +8989,9 @@ document.body.appendChild(nav);rShelfCards();
 
   /* Async hide/unhide routines ensure data is encrypted before the hidden flag is committed. */
   secSetBooks=brSetBooks;
-  secHideBook=function(e){secNeedPass(async()=>{try{await brSetBooks([e.k],true);applog('security','暗号化して非表示：本1冊');secAfterChange();toast(secHideNote())}catch(err){toast('暗号化できませんでした：'+(err.message||err));applog('security','本の暗号化に失敗：'+(err.message||err),'e')}})};
+  secHideBook=function(e){(async()=>{try{await brSetBooks([e.k],true);applog('security',(brMasterKey?'暗号化して':'')+'非表示：本1冊');secAfterChange();toast(secHideNote())}catch(err){toast('非表示にできませんでした：'+(err.message||err));applog('security','本の非表示に失敗：'+(err.message||err),'e')}})()};
   secUnhideBook=function(e){if(!secOpen)return; (async()=>{try{await brSetBooks([e.k],false);applog('security','復号して非表示を解除：本1冊');secAfterChange();toast('非表示を解除しました')}catch(err){toast('復号できませんでした：'+(err.message||err))}})()};
-  secHideFolder=function(g){secNeedPass(async()=>{try{if(g.auto)await brSetBooks((g.books||[]).map(e=>e.k),true);else await brSetFolders([g.name],true);applog('security','暗号化して非表示：フォルダ1個');secAfterChange();toast(secHideNote())}catch(err){toast('フォルダ内の書籍を暗号化できませんでした：'+(err.message||err));applog('security','フォルダ暗号化に失敗：'+(err.message||err),'e')}})};
+  secHideFolder=function(g){(async()=>{try{if(g.auto)await brSetBooks((g.books||[]).map(e=>e.k),true);else await brSetFolders([g.name],true);applog('security',(brMasterKey?'暗号化して':'')+'非表示：フォルダ1個');secAfterChange();toast(secHideNote())}catch(err){toast('フォルダを非表示にできませんでした：'+(err.message||err));applog('security','フォルダ非表示に失敗：'+(err.message||err),'e')}})()};
   secUnhideFolder=function(g){
     if(!secOpen)return;
     (async()=>{try{
@@ -8822,7 +9016,7 @@ document.body.appendChild(nav);rShelfCards();
         toast(hide?secHideNote():'非表示を解除しました');endSelection();secAfterChange();
       }catch(err){toast('処理を完了できませんでした：'+(err.message||err));applog('security','一括暗号化処理に失敗：'+(err.message||err),'e')}
     };
-    if(hide)secNeedPass(apply);else await apply();
+    await apply();
   };
 
   /* The old-version hidden books are migrated on first correct passcode unlock. */
@@ -8895,7 +9089,7 @@ document.body.appendChild(nav);rShelfCards();
     document.body.classList.add('app-locked');
     setTimeout(()=>{if(secHas()&&!secOpen)secUnlockSheet(()=>{document.body.classList.remove('app-locked')})},80);
   }
-  applog('security','V5.1.2：ロック書籍のAES-GCM暗号化とAndroid生体認証連携を初期化');
+  applog('security','V5.2.0：ロック書籍のAES-GCM暗号化とAndroid生体認証連携を初期化');
 })();
 </script>
 </body>
