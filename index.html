@@ -14,7 +14,7 @@
 -->
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-vl05aNUJYa5UDiEq7ewIJ24xPsFHoOtY/qGdXIm3bPY=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-gxt5FlLOuz8NTeC6qrH8RAPP+sOvq4bGcog+RHtMgbA='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Jl8pI3EG96jJ9AubPba3ZggLY87FCFuoo8ZgR1fbw6k=' 'sha256-fpxgqV/yEaVWabsGDOCNtWfcTaVmFLV1RbIZtDKw7rw=' 'sha256-JX3eQxW+yv4aVir5ZYUVvet7opTmzhBrkgdHeD1hd5c=' 'self'   ; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#fdf8ff">
@@ -1083,7 +1083,7 @@ body.reading #top #bAa{font-size:15px;font-weight:700;font-family:Georgia,'Hirag
    ・見出しを明朝体＋細い罫線の、本屋のような落ち着いた組版に
    ・ガラス面に光の縁取り（上辺のハイライトと細いリム）
    ・ライブラリ上部を「見出し → 検索と操作 → 絞り込み」の3段に整理
-   を加える。ホーム設定 → 見た目 →「デザイン」で従来に戻せる。
+   を加える。環境設定 → 見た目 →「デザイン」で従来に戻せる。
    ========================================================================== */
 html.ui2{
   --paper-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .34 0 0 0 0 .26 0 0 0 .055 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -1223,7 +1223,7 @@ html.ui2 :is(#toast,#welcome .book-select,#welcome #shelf .book-actions button,.
 #sheet .lc-btns button{height:32px;min-width:0;padding:0 12px;font-size:12px;white-space:nowrap}
 #sheet .lc-btns button.dng{color:#e5484d}
 
-/* ---------- V4.6.0Beta：ホーム設定「データ」タブ ---------- */
+/* ---------- V4.6.0Beta：環境設定「データ」タブ ---------- */
 #sheet .ds-group{margin:14px 0;padding:12px 14px 8px;border:1px solid var(--ink-hair,var(--line));border-radius:18px;background:var(--md-card-bg,var(--bar))}
 #sheet .ds-h{margin:0 0 2px;font-size:15px;font-weight:700}
 #sheet .ds-desc{margin:0 0 8px;font-size:12px;color:var(--sub);line-height:1.5}
@@ -1290,7 +1290,7 @@ html.ui2 :is(#toast,#welcome .book-select,#welcome #shelf .book-actions button,.
 /* =====================================================================
    V4.6.0Beta 共通部品（新しいデザイン html.ui2）
    バージョンごとに少しずつ違う書き方が混ざっていた部品を、同じ見た目の決まりにそろえる。
-   ・切り替え（タブ・選択肢）…丸い入れ物の中で、選んでいるものをアクセントカラーで塗る（ホーム設定のタブと同じ）
+   ・切り替え（タブ・選択肢）…丸い入れ物の中で、選んでいるものをアクセントカラーで塗る（環境設定のタブと同じ）
    ・項目のまとまり（カード）…同じ背景・枠・角の丸み・余白
    ・見出し／小見出し／説明文…同じ文字の大きさと色
    ・オン・オフ…チェックボックスをスイッチの形にして、右端にそろえる
@@ -1499,7 +1499,7 @@ body.app-locked #welcome,body.app-locked #stage,body.app-locked #kdTabs,body.app
   <div id="fr" role="document" aria-label="本文"></div>
   <div id="welcome">
     <div class="home-head">
-      <div><h1>ライブラリ</h1></div><button id="bHomeSet" class="home-settings" aria-label="ホーム設定" title="ホーム設定"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="m388-80-20-126q-19-7-40-19t-37-25l-118 54-93-164 108-79q-2-9-2.5-20.5T185-480q0-9 .5-20.5T188-521L80-600l93-164 118 54q16-13 37-25t40-18l20-127h184l20 126q19 7 40.5 18.5T669-710l118-54 93 164-108 77q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l108 78-93 164-118-54q-16 13-36.5 25.5T592-206L572-80H388Zm48-60h88l14-112q33-8 62.5-25t53.5-41l106 46 40-72-94-69q4-17 6.5-33.5T715-480q0-17-2-33.5t-7-33.5l94-69-40-72-106 46q-23-26-52-43.5T538-708l-14-112h-88l-14 112q-34 7-63.5 24T306-642l-106-46-40 72 94 69q-4 17-6.5 33.5T245-480q0 17 2.5 33.5T254-413l-94 69 40 72 106-46q24 24 53.5 41t62.5 25l14 112Zm44-210q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Zm0-130Z"/></svg></button>
+      <div><h1>ライブラリ</h1></div><button id="bHomeSet" class="home-settings" aria-label="環境設定" title="環境設定"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="m388-80-20-126q-19-7-40-19t-37-25l-118 54-93-164 108-79q-2-9-2.5-20.5T185-480q0-9 .5-20.5T188-521L80-600l93-164 118 54q16-13 37-25t40-18l20-127h184l20 126q19 7 40.5 18.5T669-710l118-54 93 164-108 77q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l108 78-93 164-118-54q-16 13-36.5 25.5T592-206L572-80H388Zm48-60h88l14-112q33-8 62.5-25t53.5-41l106 46 40-72-94-69q4-17 6.5-33.5T715-480q0-17-2-33.5t-7-33.5l94-69-40-72-106 46q-23-26-52-43.5T538-708l-14-112h-88l-14 112q-34 7-63.5 24T306-642l-106-46-40 72 94 69q-4 17-6.5 33.5T245-480q0 17 2.5 33.5T254-413l-94 69 40 72 106-46q24 24 53.5 41t62.5 25l14 112Zm44-210q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Zm0-130Z"/></svg></button>
       <div class="home-adds"><label class="big home-add"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M560-574v-48q33-14 67.5-21t72.5-7q26 0 51 4t49 10v44q-24-9-48.5-13.5T700-610q-38 0-73 9.5T560-574Zm0 220v-49q33-13.5 67.5-20.25T700-430q26 0 51 4t49 10v44q-24-9-48.5-13.5T700-390q-38 0-73 9t-67 27Zm0-110v-48q33-14 67.5-21t72.5-7q26 0 51 4t49 10v44q-24-9-48.5-13.5T700-500q-38 0-73 9.5T560-464ZM248-300q53.57 0 104.28 12.5Q403-275 452-250v-427q-45-30-97.62-46.5Q301.76-740 248-740q-38 0-74.5 9.5T100-707v434q31-14 70.5-20.5T248-300Zm264 50q50-25 98-37.5T712-300q38 0 78.5 6t69.5 16v-429q-34-17-71.82-25-37.82-8-76.18-8-54 0-104.5 16.5T512-677v427Zm-30 90q-51-38-111-58.5T248-239q-36.54 0-71.77 9T106-208q-23.1 11-44.55-3Q40-225 40-251v-463q0-15 7-27.5T68-761q42-20 87.39-29.5 45.4-9.5 92.61-9.5 63 0 122.5 17T482-731q51-35 109.5-52T712-800q46.87 0 91.93 9.5Q849-781 891-761q14 7 21.5 19.5T920-714v463q0 27.89-22.5 42.45Q875-194 853-208q-34-14-69.23-22.5Q748.54-239 712-239q-63 0-121 21t-109 58ZM276-489Z"/></svg>本を追加<input class="fin" type="file" multiple accept=".epub,.zip,.cbz,.rar,.cbr,application/epub+zip,application/zip,application/vnd.rar,application/x-rar-compressed" hidden></label><button type="button" id="bAddFolder" class="big home-add alt"><svg class="mi" viewBox="0 -960 960 960" aria-hidden="true" focusable="false"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640v400q0 33-23.5 56.5T800-160H160Zm0-80h640v-400H447l-80-80H160v480Zm0 0v-480 480Z"/></svg>フォルダを追加</button><input id="dirPicker" type="file" webkitdirectory directory multiple hidden></div>
     </div>
     
@@ -1689,7 +1689,7 @@ const MI={"home":"M220-180h150v-250h220v250h150v-390L480-765 220-570v390Zm-60 60
 const MI_G={'✕':'close','📁':'folder','📂':'folder_open','✎':'edit','🗑':'delete','▾':'keyboard_arrow_down','▸':'keyboard_arrow_right','📝':'edit_note','✓':'check','📖':'menu_book','🖼':'image','○':'radio_button_unchecked','＋':'create_new_folder'};
 const miEl=(n,c)=>{const v=document.createElementNS('http://www.w3.org/2000/svg','svg');const vb=(n==='fingerprint'||(MI[n]&&MI[n].startsWith('M17.81')))?'0 0 24 24':'0 -960 960 960';v.setAttribute('viewBox',vb);v.setAttribute('class','mi'+(c?' '+c:''));v.setAttribute('aria-hidden','true');v.setAttribute('focusable','false');const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',MI[n]);v.appendChild(p);return v};
 function setIcoText(el,str){str=String(str);let rest=str,m,k=0,any=false;const re=/^(✕|📁|📂|✎|🗑|▾|▸|📝|✓|📖|🖼|○|＋)(?:\s|$)/u;el.textContent='';while(k++<3&&(m=re.exec(rest))){el.appendChild(miEl(MI_G[m[1]]));rest=rest.slice(m[0].length);any=true}if(rest||!any)el.appendChild(document.createTextNode(rest))}
-/* UIレイアウト切替テスト：ベータ版では true。正式版をビルドするときは false に変更すると、ホーム設定・読書設定の両方から切替項目が非表示になります。 */
+/* UIレイアウト切替テスト：ベータ版では true。正式版をビルドするときは false に変更すると、環境設定・読書設定の両方から切替項目が非表示になります。 */
 const ENABLE_UI_LAYOUT_TEST = false;
 const S=Object.assign({fs:innerWidth>=768?22:19,lh:1.9,font:'serif',theme:'light',mode:'p',bk:'b',spread:'a',mg:0,mt:0,mb:0,gut:48,curlMs:300,fw:400,auto:true,tapMode:'std',ui:'auto',lang:((navigator.language||'ja').toLowerCase().startsWith('ja')?'ja':'en'),trackTime:true,idleMin:5,goalNotify:true,statUnit:'min',saveHistory:true,streakMin:5},LS.get('rd:set',{}));
 const FONTS={serif:"'Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif",sans:"'Hiragino Sans','Yu Gothic','Noto Sans JP',sans-serif",sys:"system-ui,sans-serif"};
@@ -1705,7 +1705,7 @@ const UI_EN={
 '縦書きと横書きを切り替え':'Toggle vertical / horizontal text','本文':'Book text','左のページへ':'Go to left page','右のページへ':'Go to right page',
 '本棚':'Library','次のページ':'Next page','前のページ':'Previous page','本棚に戻る':'Back to library','目次':'Contents','しおり':'Bookmarks','検索':'Search','メモ':'Notes','別の本を開く':'Open another book',
 '本棚':'Library','シリーズ・フォルダごとに本を管理できます。':'Organize books by series and folders.',
-'ホーム設定':'Home settings','下部ナビの並び順':'Bottom navigation order','読書中':'Reading','読書中ボタンを表示':'Show Reading button','ホーム':'Home','ライブラリ':'Library','UI表示':'Interface layout','モバイル':'Mobile','PC':'Desktop','本を追加':'Add books','ライブラリ':'Library','＋ フォルダ':'＋ Folder',
+'環境設定':'Home settings','下部ナビの並び順':'Bottom navigation order','読書中':'Reading','読書中ボタンを表示':'Show Reading button','ホーム':'Home','ライブラリ':'Library','UI表示':'Interface layout','モバイル':'Mobile','PC':'Desktop','本を追加':'Add books','ライブラリ':'Library','＋ フォルダ':'＋ Folder',
 'シリーズ自動仕分け：オン':'Auto-organize series: On','選択':'Select','タイトル・著者名で検索':'Search title or author','クリア':'Clear',
 '0冊選択中':'0 selected','フォルダへ移動':'Move to folder','削除':'Delete','キャンセル':'Cancel',
 'EPUB・ZIP・CBZ・RAR（コミックの画像書庫にも対応）を追加できます。RAR4はStore形式のみ対応し、暗号化RARには対応していません。分割RAR（.part1.rar など）は全パートを同時に選んでください。複数のファイルを一度に追加できます。':'Add EPUB, ZIP, CBZ, or RAR files (including image comic archives). RAR4 Store is supported; encrypted RAR files are not supported. For split RAR files (.part1.rar etc.), select all parts together. Multiple files can be added at once.',
@@ -1720,13 +1720,13 @@ const UI_EN={
 '文字サイズ':'Font size','行間':'Line spacing','余白':'Margins','上の余白':'Top margin','下の余白':'Bottom margin','追加フォント':'Custom fonts',
 'TTF・OTF・WOFF・WOFF2に対応しています。':'Supports TTF, OTF, WOFF, and WOFF2 fonts.',
 '向きと送り方向は本ごとに記憶されます。「自動」は本の指定に従います。縦書きは横スクロール式で、画面の左右端をタップするとページ送りできます。中央をタップすると操作バーを隠せます。':'Text direction and page-turn direction are saved per book. “Auto” follows the book settings. Vertical text uses horizontal scrolling; tap the left or right edge to turn pages. Tap the center to hide the controls.',
-'ホーム設定':'Home settings','下部ナビの並び順':'Bottom navigation order','読書中':'Reading','読書中ボタンを表示':'Show Reading button','ホーム':'Home','ライブラリ':'Library','iPadでの本の表示列数':'Book columns on iPad','表紙サイズ':'Cover size','小':'Small','大':'Large','並び順':'Sort order',
+'環境設定':'Home settings','下部ナビの並び順':'Bottom navigation order','読書中':'Reading','読書中ボタンを表示':'Show Reading button','ホーム':'Home','ライブラリ':'Library','iPadでの本の表示列数':'Book columns on iPad','表紙サイズ':'Cover size','小':'Small','大':'Large','並び順':'Sort order',
 '最近読んだ順':'Recently read','タイトル順':'Title','最終閲覧日時を表示':'Show last opened date','読書進捗を表示':'Show reading progress',
 '同じシリーズの本をシリーズ名のフォルダにまとめる（追加時）':'Group books of the same series into a folder named after the series (when adding)',
 '自動バックアップ（7日ごと・端末内に最大2世代）':'Automatic backup (every 7 days, up to 2 local copies)',
 'ZIPを追加すると中のEPUBを自動展開します。複数冊の場合はZIP名のフォルダにまとめる設定も選べます。列数・表紙サイズはiPadなどの広い画面に適用されます。':'When you add a ZIP, EPUBs inside are extracted automatically. You can group multiple books into a folder named after the ZIP. Column count and cover size apply to larger screens such as iPad.',
 '読書統計':'Reading statistics','バックアップ':'Backup','復元':'Restore','自動バックアップから復元':'Restore automatic backup','本棚の整理':'Organize library',
-'データ':'Data','初期設定に戻す':'Reset to defaults','保存':'Save','ホーム設定を保存しました':'Home settings saved',
+'データ':'Data','初期設定に戻す':'Reset to defaults','保存':'Save','環境設定を保存しました':'Home settings saved',
 '読む向き':'Reading direction','右開き（右→左）':'Right-to-left (right → left)','左開き（左→右）':'Left-to-right (left → right)',
 '見開き':'Spread','見開きの表紙を単独で表示':'Show cover as a single page','表示':'Fit','全体を表示':'Fit entire page','幅に合わせる':'Fit width',
 '背景':'Background','黒':'Black','グレー':'Gray','白':'White','左右タップでページ送り':'Tap left/right sides to turn pages',
@@ -1995,7 +1995,7 @@ const UI_EN={
 "データ":"Data",
 "初期設定に戻す":"Reset to defaults",
 "保存":"Save",
-"ホーム設定を保存しました":"Home settings saved",
+"環境設定を保存しました":"Home settings saved",
 "累計の読書時間":"Total reading time",
 "読書した日数":"Days read",
 "1日あたり":"Daily average",
@@ -3486,7 +3486,7 @@ function uiModeRow(container){
 function uiModeRowRefresh(r){
   const cur=S.ui||'auto';r.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.uiMode===cur));
 }
-/* 設定タブ（読書設定・コミック設定・ホーム設定で共通） */
+/* 設定タブ（読書設定・コミック設定・環境設定で共通） */
 function tabBar(cur,tabs,go){
   const w=document.createElement('div');w.className='stabs';w.setAttribute('role','tablist');
   tabs.forEach(([k,l])=>{const x=document.createElement('button');x.textContent=l;x.setAttribute('role','tab');x.setAttribute('aria-selected',k===cur?'true':'false');if(k===cur)x.className='on';x.onclick=()=>go(k);w.appendChild(x)});
@@ -3554,7 +3554,7 @@ const BEER_APP_CSS=`.mi{width:1.35em;height:1.35em;fill:currentColor;flex:none;d
 .beer.app .accent-custom-text{display:flex!important;flex-direction:column!important;gap:2px!important;min-inline-size:0;flex:1}
 .beer.app .accent-custom-text strong{font-size:.9375rem;font-weight:600}
 .beer.app .accent-custom-text small{font-size:.75rem;color:var(--sub);letter-spacing:.04em}
-/* ===== V4.6.0Beta 共通部品（新しいデザイン）：タブ・切り替えボタンをホーム設定と同じ形にそろえる ===== */
+/* ===== V4.6.0Beta 共通部品（新しいデザイン）：タブ・切り替えボタンを環境設定と同じ形にそろえる ===== */
 .beer.app.ui2{display:flex;flex-direction:column;flex:1 1 auto;min-height:0}
 .beer.app.ui2>.bm-sc{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:2px 16px 8px}
 .beer.app.ui2 .tabs{min-block-size:0!important;position:static;flex:none;display:flex;gap:4px;padding:4px;margin:0 0 10px;border:1px solid var(--ui-bd,var(--line));border-radius:999px;background:color-mix(in srgb,var(--fg) 6%,transparent);box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;block-size:auto}
@@ -4088,7 +4088,7 @@ window.__onLocalBooksImported=async function(items,fromFolder){
   applog('bridge','← 端末のファイル '+n+'件を受け取り'+(fromFolder?'（フォルダ）':'')+(window.__autoScanning?'（自動スキャン）':''));
   try{return await f0.apply(this,arguments)}finally{applog('time','端末ファイルの取り込み処理 '+n+'件 '+Math.round(performance.now()-t0)+'ms')}
 }}
-/* ホーム設定：連携フォルダの管理（Android） */
+/* 環境設定：連携フォルダの管理（Android） */
 function folderSyncBox(){
   const ab=window.AndroidBridge,box=mkEl('section','','ds-group folder-sync');
   const draw=()=>{
@@ -4232,11 +4232,11 @@ function toggleFo(k){const o=LS.get('rd:fo',{});o[k]=!fopen(k);LS.set('rd:fo',o)
   sh.addEventListener('touchend',end);sh.addEventListener('touchcancel',end);
 })();
 /* ---------- V4.6.0Beta：シートの「1つ前に戻る」 ----------
-   シートを開いた順番を覚えておき、「戻る」で1つ前のシートに戻す（ホーム設定 → バックアップ → 戻る でホーム設定に戻る など）。
+   シートを開いた順番を覚えておき、「戻る」で1つ前のシートに戻す（環境設定 → バックアップ → 戻る で環境設定に戻る など）。
    同じ画面の作り直し（タブの切り替えなど）は積み重ねない。すでに奥にある画面を開いたときは、そこまで戻ったことにする。
    シートを閉じた直後に同じ操作の中で別のシートを開いたときも、前のシートから進んだものとして扱う。 */
 const SHEET={stack:[],cur:null,clearT:0};
-/* タブのあるシート（ホーム設定・コミックの設定など）は、見出しとタブを上に置いたまま、その下の中身だけをスクロールさせる。
+/* タブのあるシート（環境設定・コミックの設定など）は、見出しとタブを上に置いたまま、その下の中身だけをスクロールさせる。
    タブの後ろに中身が透けたり、タブのまわりに別の背景の角ができたりしないようにするため（新しいデザインのときだけ） */
 function splitTabbedSheet(sh){
   if(!document.documentElement.classList.contains('ui2')||sh.classList.contains('cv-sheet'))return;
@@ -6029,7 +6029,7 @@ function applyUi2(){
 }
 function homeSettings(){
   openSheet(sh=>{
-    sh.appendChild(mkEl('h3','ホーム設定'));
+    sh.appendChild(mkEl('h3','環境設定'));
     if(!['s','a','d','l','o'].includes(homeTabCur))homeTabCur='s';
     sh.appendChild(tabBar(homeTabCur,[['s','本棚'],['a','見た目'],['d','データ'],['l','ロック'],['o','その他']],k=>{homeTabCur=k;homeSettings()}));
     const row=(label,control)=>{const d=mkEl('div','','row');d.appendChild(mkEl('b',label));d.appendChild(control);sh.appendChild(d)};
@@ -6095,11 +6095,12 @@ function homeSettings(){
     sh.appendChild(appLogBox());
     sh.appendChild(langRow(homeSettings));
     }
-    const actions=mkEl('div','','seg'),reset=mkEl('button','初期設定に戻す'),done=mkEl('button','保存');reset.onclick=()=>{Object.assign(HOME,HOME_DEFAULT);delete HOME.dockSide;document.documentElement.classList.remove('dock-swap');closeAll();applyUi2();saveHome();syncBackExit();if(HOME.hideMissing)syncPresentBookKeys(true)};done.onclick=()=>{closeAll();saveHome();toast('ホーム設定を保存しました')};actions.append(reset,done);sh.appendChild(actions);
+    const actions=mkEl('div','','seg'),reset=mkEl('button','初期設定に戻す'),done=mkEl('button','保存');reset.onclick=()=>{Object.assign(HOME,HOME_DEFAULT);delete HOME.dockSide;document.documentElement.classList.remove('dock-swap');closeAll();applyUi2();saveHome();syncBackExit();if(HOME.hideMissing)syncPresentBookKeys(true)};done.onclick=()=>{closeAll();saveHome();toast('環境設定を保存しました')};actions.append(reset,done);sh.appendChild(actions);
     if(homeTabCur==='o'){
     if(AppNative.canUpdate()&&typeof updBox==='function'){
     sh.appendChild(updBox());
     }
+    const reloadBtn=mkEl('button','アプリを再読み込み');reloadBtn.type='button';reloadBtn.style.cssText='display:block;width:100%;margin:14px 0 0';reloadBtn.onclick=()=>{closeAll();location.reload()};sh.appendChild(reloadBtn);
     const licBtn=mkEl('button','ライセンス情報');licBtn.style.cssText='display:block;width:100%;margin:14px 0 0';licBtn.onclick=licenseSheet;sh.appendChild(licBtn);
     const credit=mkEl('div');credit.style.cssText='text-align:center;margin:16px 0 6px;opacity:.7;font-size:12px;line-height:1.7';
     const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.2.0'];
@@ -6799,7 +6800,7 @@ function cvFs(){const d=document;try{
   if(d.fullscreenElement){fsSuppress=true;d.exitFullscreen().catch(()=>{});applog('ui','全画面を終了')}
   else if(d.documentElement.requestFullscreen){fsSuppress=false;appFsEnter().then(ok=>{if(!ok)toast('全画面にできません');else applog('ui','全画面を開始')})}
   else toast('このブラウザは全画面に対応していません')}catch(e){toast('全画面にできません')}}
-/* ホーム設定「常に全画面で表示」：全画面は操作（タップ・キー）がないと始められない決まりなので、
+/* 環境設定「常に全画面で表示」：全画面は操作（タップ・キー）がないと始められない決まりなので、
    起動後や全画面が解除されたあと、次に画面に触れたときに自動で全画面に戻す。全画面ボタンで自分で解除したときは戻さない。 */
 ['pointerup','keydown'].forEach(n=>document.addEventListener(n,()=>{if(HOME.fullscreen&&!fsSuppress&&!document.fullscreenElement&&document.fullscreenEnabled)appFsEnter()},true));
 document.addEventListener('fullscreenchange',()=>{const on=!!document.fullscreenElement;document.documentElement.classList.toggle('app-fs',on);const fb=$('#cvFs');if(fb)fb.classList.toggle('on',on)});
@@ -6846,7 +6847,7 @@ function cvList(tab){
   const build=sh=>{
     sh.classList.add('cv-sheet');
     /* 「ページ／しおり」の切り替えは上に固定して、一覧を下までスクロールしても見えるようにする */
-    /* ホーム設定と同じタブ（tabBar）を使う。タブはスクロールする中身の外に置き、一覧だけをスクロールさせる */
+    /* 環境設定と同じタブ（tabBar）を使う。タブはスクロールする中身の外に置き、一覧だけをスクロールさせる */
     const tb=tabBar(tab,[['t','ページ'],['m','しおり']],k=>{if(k===tab)return;cvListTab=k;cvList(k)});tb.classList.add('cv-tabs');
     if(marks.length){const c=mkEl('span',String(marks.length),'cv-tabcount');tb.lastChild.appendChild(c)}
     sh.appendChild(tb);
@@ -8923,8 +8924,11 @@ document.body.appendChild(nav);rShelfCards();
   const BR_WEB_BIO_AAD=new TextEncoder().encode('BookReader|webbio|AES-GCM|v1');
   function brB64Url(u8){let s='';for(let i=0;i<u8.length;i++)s+=String.fromCharCode(u8[i]);return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
   function brUnB64Url(s){const p=String(s||'').replace(/-/g,'+').replace(/_/g,'/');const pad=p.length%4?p+'='.repeat(4-(p.length%4)):p;const bin=atob(pad);const out=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)out[i]=bin.charCodeAt(i);return out}
+  function brHasNativeBio(){
+    const ab=window.AndroidBridge;return Boolean(ab&&typeof ab.hasBiometricUnlock==='function'&&typeof ab.biometricAvailable==='function'&&typeof ab.unlockBookKey==='function');
+  }
   function brWebBioSupported(){
-    return Boolean(!window.AndroidBridge&&window.isSecureContext&&typeof window.PublicKeyCredential==='function'&&navigator.credentials&&typeof navigator.credentials.create==='function'&&typeof navigator.credentials.get==='function');
+    return Boolean(!brHasNativeBio()&&window.isSecureContext&&typeof window.PublicKeyCredential==='function'&&navigator.credentials&&typeof navigator.credentials.create==='function'&&typeof navigator.credentials.get==='function');
   }
   function brGetWebBio(){
     /* パスキー連携情報は再起動後も必要なため、一時メモリ fallback を使わず永続領域から読む。 */
@@ -8963,12 +8967,12 @@ document.body.appendChild(nav);rShelfCards();
   }
   function brBioAvailable(){
     const ab=window.AndroidBridge;
-    if(ab)return typeof ab.biometricAvailable==='function'&&ab.biometricAvailable();
+    if(brHasNativeBio())return ab.biometricAvailable();
     return brWebBioSupported();
   }
   function brHasBioUnlock(){
     const ab=window.AndroidBridge;
-    if(ab)return typeof ab.hasBiometricUnlock==='function'&&ab.hasBiometricUnlock();
+    if(brHasNativeBio())return ab.hasBiometricUnlock();
     return Boolean(brWebBioSupported()&&brGetWebBio());
   }
   async function brWebDeriveAesKey(prfBuf,usages){
@@ -9066,7 +9070,7 @@ document.body.appendChild(nav);rShelfCards();
   }
   async function brEnableBiometric(){
     if(!brMasterBytes)throw new Error('先にパスコードで解除してください');
-    if(!window.AndroidBridge)return await brWebEnableBiometric();
+    if(!brHasNativeBio())return await brWebEnableBiometric();
     const result=await brBioRequest('enableBiometricUnlock',[brB64(brMasterBytes)]);
     if(!result.ok)throw new Error(result.message);
     toast('生体認証を設定しました');
@@ -9076,7 +9080,7 @@ document.body.appendChild(nav);rShelfCards();
     if(brBioBusy)return;
     brBioBusy=true;window.__brBioBusy=true;
     try{
-      const keyBytes=window.AndroidBridge
+      const keyBytes=brHasNativeBio()
         ?(await(async()=>{const r=await brBioRequest('unlockBookKey',[]);if(!r.ok)throw new Error(r.message);return brUnB64(r.key)})())
         :(await brWebBiometricUnlock());
       await brSetMaster(keyBytes);await brMigrateHiddenBooks();
@@ -9091,7 +9095,7 @@ document.body.appendChild(nav);rShelfCards();
     }
   }
   function brDisableBiometric(){
-    if(!window.AndroidBridge){try{localStorage.removeItem(BR_WEB_BIO_KEY)}catch(_){};return}
+    if(!brHasNativeBio()){try{localStorage.removeItem(BR_WEB_BIO_KEY)}catch(_){};return}
     try{const ab=window.AndroidBridge;if(ab&&typeof ab.disableBiometricUnlock==='function')ab.disableBiometricUnlock()}catch(_){}
   }
 
@@ -9261,14 +9265,14 @@ function appLockSheet(){
     };
     ok.onclick=go;inp.onkeydown=e=>{if(e.key==='Enter')go()};
     if(typeof brHasBioUnlock==='function'&&brHasBioUnlock()){
-      const bio=mkEl('button','生体認証で解除','m3-btn-tonal');bio.type='button';bio.style.width='100%';bio.style.marginTop='10px';
+      const bio=mkEl('button',window.AndroidBridge?'生体認証で解除':'パスキー（Face ID／Touch ID）で解除','m3-btn-tonal');bio.type='button';bio.style.width='100%';bio.style.marginTop='10px';bio.setAttribute('aria-label',window.AndroidBridge?'生体認証でアプリロックを解除':'パスキーでアプリロックを解除');
       bio.onclick=async()=>{
         if(bio.disabled)return;bio.disabled=true;msg.textContent='';
         try{
-          const keyBytes=window.AndroidBridge
+          const keyBytes=brHasNativeBio()
             ?await(async()=>{const r=await brBioRequest('unlockBookKey',[]);if(!r.ok)throw new Error(r.message);return brUnB64(r.key)})()
             :await brWebBiometricUnlock();
-          await brSetMaster(keyBytes);appLockRelease();applog('security','生体認証でアプリロックを解除');toast('アプリのロックを解除しました');
+          await brSetMaster(keyBytes);appLockRelease();applog('security',(window.AndroidBridge?'生体認証':'パスキー')+'でアプリロックを解除');toast('アプリのロックを解除しました');
         }catch(e){msg.textContent=e&&e.message?e.message:'生体認証に失敗しました';bio.disabled=false}
       };
       sh.appendChild(bio);
