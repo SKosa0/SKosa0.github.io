@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ja">
 <!--
-  BookReader V5.3.0
+  BookReader V5.3.6
   Copyright (c) 2026 Kosa.
   Source-available under the BookReader NonCommercial Attribution License 1.1.
   You may use, modify, and redistribute this software for noncommercial purposes,
@@ -14,14 +14,14 @@
 -->
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-NYGDYZnItVM37izyjeVFwBnxDnab3OEp8kmBZkHOt2U=' 'sha256-4+Hm/C8eEyTPzl4E8FAjjIT277K8FVhTrAUZYehLwYc=' 'sha256-k6GlF6k2Zmf4J/Udf93WMSd/5JC+8wkOtNdj6YHeMcE=' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-rIkSG2rzIGWtlUy8zZ3kN6sTIEUFC/HSAYKEpPPsf2c=' 'sha256-4+Hm/C8eEyTPzl4E8FAjjIT277K8FVhTrAUZYehLwYc=' 'sha256-bBOR9ekeEMiKer4BC9QyjdbrFTefgXUZFh35BN6skSg='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#fdf8ff">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>BookReader V5.3.0</title>
+<title>BookReader V5.3.6</title>
 <style>
 :root{--bg:#fdf8ff;--fg:#1c1b20;--sub:#48454e;--bar:#f1ecf4;--line:#cac4cf;--acc:#3569c8;--link:#3569c8;--md-pc:#e6deff;--md-opc:#180054;--md-sc:#e4dff8;--md-osc:#1b192c;--md-surf:#f7f2fa;--md-on-primary:#ffffff;--md-card-bg:#f7f2fa;--md-chip-bg:#e4dff8;--md-chip-fg:#1b192c;color-scheme:light;}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="sepia"]):not([data-theme="oled"]){--bg:#141318;--fg:#e5e1e9;--sub:#cac4cf;--bar:#201f25;--line:#48454e;--acc:#cfbcff;--link:#cfbcff;--md-pc:#4d358a;--md-opc:#e6deff;--md-sc:#474459;--md-osc:#e4dff8;--md-surf:#1c1b20;--md-on-primary:#381e72;--md-card-bg:#26242b;--md-chip-bg:#474459;--md-chip-fg:#e4dff8;color-scheme:dark}}
@@ -720,7 +720,7 @@ html.ui2.ui-lite :is(#sheet,#side){background-color:var(--card)!important}
 #bkPop .bp-act span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #bkPop .bp-act.dng{grid-column:1 / -1}
 
-/* === V5.3.0 Novel Sidebar Overflow Fix & UI Polish === */
+/* === V5.3.3 Novel Sidebar Overflow Fix & UI Polish === */
 #side{overflow:hidden!important}
 #side .tabs{flex:none;padding:0 6px;gap:2px;box-sizing:border-box}
 #side .tabs button{flex:1 1 0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-inline:4px;font-size:clamp(11px,2.9vw,13.5px);height:44px}
@@ -736,6 +736,71 @@ html.ui2.ui-lite :is(#sheet,#side){background-color:var(--card)!important}
 #side .open{flex:none;display:block;text-align:center;padding:12px 14px calc(12px + env(safe-area-inset-bottom,0px));font-weight:600;font-size:14px;box-sizing:border-box}
 @media (min-width:680px) and (min-height:500px){
   #side{padding-top:max(0px,var(--ui-top-space,0px))!important}
+}
+
+/* === V5.3.6 PC UI Optimization === */
+@media (min-width:720px) and (min-height:440px){
+  body.pc-ui #sheet,
+  body.pc-ui #sheet:has(.stabs),
+  body.pc-ui #sheet.settings-unified,
+  body.pc-ui #sheet.rdset{
+    left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;
+    width:min(620px,calc(100vw - 48px))!important;
+    max-height:min(86vh,860px)!important;
+    border-radius:28px!important;
+    transform:translate(-50%,-48%) scale(.98)!important;
+  }
+  body.pc-ui #sheet.settings-unified,
+  body.pc-ui #sheet.rdset{
+    width:min(680px,calc(100vw - 48px))!important;
+    height:auto!important;
+  }
+  body.pc-ui #sheet.on,
+  body.pc-ui #sheet:has(.stabs).on,
+  body.pc-ui #sheet.settings-unified.on,
+  body.pc-ui #sheet.rdset.on{
+    transform:translate(-50%,-50%) scale(1)!important;
+  }
+}
+@media (hover:hover) and (pointer:fine){
+  body.pc-ui :is(.library-book,.col-tile,.col-book,.kd-card,#kdNow,#kdTabs button,.ds-act,.sv-card,.lb-chip){
+    cursor:pointer;
+  }
+  body.pc-ui :is(.library-book,.col-tile,.col-book,.kd-card):hover{
+    transform:translateY(-2px);
+    transition:transform .16s ease,box-shadow .16s ease;
+  }
+  body.pc-ui #kdNow:hover{
+    box-shadow:0 10px 28px rgba(0,0,0,.16);
+  }
+  body.pc-ui :is(button,a,input,select,[tabindex]):focus-visible{
+    outline:2px solid var(--acc,#1a73e8);
+    outline-offset:2px;
+  }
+  body.pc-ui :is(#welcome,#sheet,#side,#colBody,#fr){
+    scrollbar-width:thin;
+  }
+}
+@media (min-width:1100px){
+  body.pc-ui .library-folder-body,
+  body.pc-ui .col-grid{
+    grid-template-columns:repeat(auto-fill,minmax(154px,188px));
+    justify-content:start;
+    gap:28px 22px;
+  }
+}
+/* PC-only density refinements; tablet breakpoints stay untouched. */
+@media (min-width:1100px) and (hover:hover) and (pointer:fine){
+  body.pc-ui{--lb-pad:clamp(36px,4vw,72px);--lb-gut:max(var(--lb-pad),calc((100% - 1480px)/2 + var(--lb-pad)))}
+  body.pc-ui #shelf{max-width:1560px}
+  body.pc-ui #kdTabs{width:min(520px,42vw)}
+  body.pc-ui #kdNow{width:min(680px,calc(100% - min(520px,42vw) - 2*var(--lb-dg) - 24px))}
+  body.pc-ui .pc-shortcuts{padding:16px 18px;border-radius:20px;background:color-mix(in srgb,var(--md-surf,var(--bg)) 72%,transparent)}
+  body.pc-ui .pc-shortcut-row{display:flex;align-items:center;gap:14px;padding:8px 0;border-bottom:1px solid var(--line)}
+  body.pc-ui .pc-shortcut-row:last-of-type{border-bottom:0}
+  body.pc-ui .pc-shortcut-row>span{flex:1}
+  body.pc-ui .pc-shortcut-row button{min-width:150px;font-family:ui-monospace,Consolas,monospace}
+  body.pc-ui .pc-shortcut-row button.listening{background:var(--acc);color:var(--bg)}
 }
 
 </style>
@@ -3552,7 +3617,16 @@ function applyAccentColor(){
 }
 function setAccentColor(color,fromHome=false){S.accent=validAccent(color);LS.set('rd:set',S);applyAccentColor();restyle();if(fromHome)homeSettings();else renderSheet()}
 
-function applyUiMode(){const mode=S.ui||'auto',pc=mode==='pc'||(mode==='auto'&&matchMedia('(min-width: 900px)').matches);document.body.classList.toggle('pc-ui',pc)}
+function isDesktopDevice(){
+  const ua=navigator.userAgent||'',touchMac=/Macintosh/.test(ua)&&(navigator.maxTouchPoints||0)>1;
+  return !touchMac&&!/Android|iPhone|iPad|iPod|Mobile|Tablet/i.test(ua)&&innerWidth>=900&&matchMedia('(hover:hover) and (pointer:fine)').matches;
+}
+function applyUiMode(){const mode=S.ui||'auto',pc=isDesktopDevice()&&mode!=='mobile';document.body.classList.toggle('pc-ui',pc)}
+function pcKeyCombo(e){
+  const key=e.key===' '?'Space':e.key.length===1?e.key.toUpperCase():e.key;
+  return [e.ctrlKey?'Ctrl':null,e.altKey?'Alt':null,e.shiftKey?'Shift':null,e.metaKey?'Meta':null,key].filter(Boolean).join('+');
+}
+function pcShortcutMatches(e,name){const keys=S.pcShortcuts||{};return isDesktopDevice()&&!!keys[name]&&pcKeyCombo(e)===keys[name]}
 
 /* ---------- position ---------- */
 function metrics(){
@@ -4086,10 +4160,25 @@ function link(h){
 function keyTargetEditable(e){const t=(e.composedPath&&e.composedPath()[0])||e.target;return !!(t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName||'')))}
 function onKey(e){
   if(CV.on){cvKey(e);return}
-  if(keyTargetEditable(e)||!spine.length)return;
-  const k=e.key,v=bindRtl();
-  /* 本棚表示中は、閉じた本のページを裏で送らない（Escapeのみ処理する） */
-  if(k!=='Escape'&&!document.body.classList.contains('reading'))return;
+  if(keyTargetEditable(e))return;
+  const k=e.key,reading=document.body.classList.contains('reading');
+  if(isDesktopDevice()&&pcShortcutMatches(e,'search')&&!reading&&!$('#sheet')?.classList.contains('on')){
+    const q=$('#shelfQuery');if(q){e.preventDefault();if(typeof window.kdGo==='function')window.kdGo('lib');q.focus();q.select();return}
+  }
+  if(isDesktopDevice()&&reading&&spine.length){
+    if(pcShortcutMatches(e,'prev')){turn(-1);e.preventDefault();return}
+    if(pcShortcutMatches(e,'next')){turn(1);e.preventDefault();return}
+  }
+  if(!reading){
+    if((k==='/'||(k.toLowerCase()==='k'&&(e.ctrlKey||e.metaKey)))&&!$('#sheet')?.classList.contains('on')){
+      const q=$('#shelfQuery');
+      if(q){e.preventDefault();if(typeof window.kdGo==='function')window.kdGo('lib');q.focus();q.select();return}
+    }
+    if(k==='Escape'){if(flipState.on)closeFlip(true);else closeAll();}
+    return;
+  }
+  if(!spine.length)return;
+  const v=bindRtl();
   if(k==='ArrowLeft'){turn(v?1:-1);e.preventDefault()}
   else if(k==='ArrowRight'){turn(v?-1:1);e.preventDefault()}
   else if(k==='PageDown'||k===' '){turn(1);e.preventDefault()}
@@ -4097,6 +4186,15 @@ function onKey(e){
   else if(k==='Escape'){if(flipState.on)closeFlip(true);else closeAll();}
 }
 document.addEventListener('keydown',onKey);
+{let _pcWhAt=0;fr.addEventListener('wheel',e=>{
+  if(!document.body.classList.contains('pc-ui')||!document.body.classList.contains('reading')||CV.on||!isPaged()||e.ctrlKey||e.metaKey)return;
+  const dx=Math.abs(e.deltaX),dy=Math.abs(e.deltaY);
+  if(dx<4&&dy<4)return;
+  const now=Date.now();if(now-_pcWhAt<180){e.preventDefault();return}
+  _pcWhAt=now;e.preventDefault();
+  const delta=dy>=dx?e.deltaY:(bindRtl()?-e.deltaX:e.deltaX);
+  turn(delta>0?1:-1);
+},{passive:false})}
 function toggleUI(){document.body.classList.toggle('min')}
 
 /* ---------- panels ---------- */
@@ -6515,7 +6613,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 const LIC_TEXT={
 ja:{title:'ライセンス情報',
  h:['1. 著作権・クレジット表示','2. 利用条件','3. 禁止事項','4. 第三者ライブラリのライセンス','5. EPUBの利用とプライバシー','6. 問い合わせ先'],
- copy:['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.3.0','License：BookReader NonCommercial Attribution License 1.1（全文は配布物のLICENSEファイルを参照）','取り込んだ書籍ファイル（IndexedDB）と読書統計・目標・履歴・設定・生体認証／パスキー連携情報（localStorage / Android Keystore）はすべて端末内に保存され、外部へ送信されません。','改変版を配布する場合は、改変版であることを明確に表示してください。','Kosaの著作権表示・ライセンス表示を保持してください。'],
+ copy:['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.3.6','License：BookReader NonCommercial Attribution License 1.1（全文は配布物のLICENSEファイルを参照）','取り込んだ書籍ファイル（IndexedDB）と読書統計・目標・履歴・設定・生体認証／パスキー連携情報（localStorage / Android Keystore）はすべて端末内に保存され、外部へ送信されません。','改変版を配布する場合は、改変版であることを明確に表示してください。','Kosaの著作権表示・ライセンス表示を保持してください。'],
  allow:['許可する行為','個人・非商用目的での利用','個人の端末へのダウンロード','非商用目的での改変','本ライセンスと著作権表示を保持した非商用目的での再配布','任意の寄付・投げ銭は、利用や配布の対価・条件でない限り、それだけで商用利用とは扱いません。'],
  deny:['禁止する行為','商用利用（販売、有料提供、有料サポート、広告・アフィリエイト等の収益化、営利事業上の利用を含む）','会社・事業者等による社内利用を、業務上の利益・効率化等のために行うこと','Kosaの著作権表示・クレジット・ライセンス表示の削除または改変','製作者を偽る行為、または本ソフトウェア・改変版を自作したものとして表示する行為','改変版であることを明示せずに配布する行為','Kosaの名前・Xアカウント・クレジットを、Kosaが改変版や利用者を推薦・公認しているかのように表示する行為'],
  exc:'非営利団体による利用を含め、利用目的・実態から商用か判断しにくい場合、社内評価・研究利用、寄付・投げ銭など本ライセンスの境界に当たる場合は、利用前にKosaへ相談してください。明示的な許諾がない限り商用利用はできません。',
@@ -6524,7 +6622,7 @@ ja:{title:'ライセンス情報',
  contact:'連絡先：',back:'戻る',close:'閉じる'},
 en:{title:'License information',
  h:['1. Copyright and attribution','2. Terms of use','3. Prohibited actions','4. Third-party library licenses','5. EPUB use and privacy','6. Contact'],
- copy:['Creator: Kosa','X: @SKosa_0','Copyright © 2026 Kosa','Product: BookReader','Version: 5.3.0','License: BookReader NonCommercial Attribution License 1.1 (full text in the LICENSE file distributed with this software)','Imported book files (IndexedDB) and reading stats, goals, history, settings, and biometric/passkey wrap metadata (localStorage / Android Keystore) are stored locally on your device and are never sent externally.','Clearly identify modified versions when distributing them.','Retain Kosa’s copyright, attribution, and license notices.'],
+ copy:['Creator: Kosa','X: @SKosa_0','Copyright © 2026 Kosa','Product: BookReader','Version: 5.3.6','License: BookReader NonCommercial Attribution License 1.1 (full text in the LICENSE file distributed with this software)','Imported book files (IndexedDB) and reading stats, goals, history, settings, and biometric/passkey wrap metadata (localStorage / Android Keystore) are stored locally on your device and are never sent externally.','Clearly identify modified versions when distributing them.','Retain Kosa’s copyright, attribution, and license notices.'],
  allow:['Permitted','Personal and noncommercial use','Downloading to your own device','Modification for noncommercial purposes','Redistribution for noncommercial purposes, provided this license and copyright notices are retained','Voluntary donations or tips are not commercial use by themselves, provided they are not consideration for or a condition of access or distribution.'],
  deny:['Prohibited','Commercial use, including sale, paid access or support, advertising or affiliate monetization, and use in for-profit business operations','Internal use by a company or business for operational benefit, efficiency, or other business purposes','Removing or altering Kosa’s copyright, attribution, or license notices','Misrepresenting the creator or presenting this software or a modified version as your own work','Distributing a modified version without clearly identifying it as modified','Using Kosa’s name, X account, or attribution to imply that Kosa endorses or recommends a modified version or its distributor'],
  exc:'If the commercial or noncommercial nature of a use is unclear—including use by nonprofit organizations, internal evaluation or research, or donations and tips—contact Kosa before use. Commercial use is not permitted without explicit prior permission.',
@@ -6669,6 +6767,34 @@ function updBox(){
 
 /* スマホ（短辺600px未満）ではiPad・PC向けの設定項目を隠す */
 function isPhoneDevice(){try{return Math.min(screen.width||innerWidth,screen.height||innerHeight)<600}catch(e){return Math.min(innerWidth,innerHeight)<600}}
+function pcKeyboardSettingsBox(){
+  if(!isDesktopDevice())return null;
+  const g=mkEl('section','','bk-set-group pc-shortcuts');g.appendChild(mkEl('b','PC キーボードショートカット'));
+  g.appendChild(mkEl('p','キーを追加できます。標準のキー操作はそのまま使えます。入力欄を選び、割り当てたいキーを押してください。','note'));
+  const defs=[['search','本棚検索','Ctrl+K'],['prev','前のページ','ArrowLeft'],['next','次のページ','ArrowRight']];
+  const label=v=>v.replaceAll('ArrowLeft','←').replaceAll('ArrowRight','→').replaceAll('PageUp','Page Up').replaceAll('PageDown','Page Down');
+  defs.forEach(([id,title,defaultKey])=>{
+    const row=mkEl('div','','pc-shortcut-row'),name=mkEl('span',title),button=mkEl('button',label((S.pcShortcuts||{})[id]||defaultKey));button.type='button';button.setAttribute('aria-label',title+'の追加キーを設定');
+    button.onclick=()=>{
+      button.textContent='キーを押してください…';button.classList.add('listening');button.focus();
+      const done=()=>{document.removeEventListener('keydown',capture,true);button.classList.remove('listening');button.textContent=label((S.pcShortcuts||{})[id]||defaultKey)};
+      const capture=e=>{
+        if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();done();return}
+        if(['Control','Alt','Shift','Meta'].includes(e.key))return;
+        e.preventDefault();e.stopImmediatePropagation();
+        const combo=pcKeyCombo(e),reserved=['Ctrl+L','Ctrl+R','Ctrl+W','Ctrl+T','Ctrl+N','Ctrl+Shift+N','Alt+F4','Meta+Q','Meta+R','Meta+W'];
+        if(reserved.includes(combo)){toast('ブラウザーの操作に使うキーは割り当てられません');done();return}
+        const keys=Object.assign({},S.pcShortcuts||{});
+        if(Object.entries(keys).some(([other,value])=>other!==id&&value===combo)){toast('このキーは別の操作に割り当て済みです');done();return}
+        keys[id]=combo;S.pcShortcuts=keys;LS.set('rd:set',S);done();applog('setting','PCショートカット '+title+'='+combo);toast(title+'の追加キーを設定しました');
+      };
+      document.addEventListener('keydown',capture,true);
+    };
+    row.append(name,button);g.appendChild(row);
+  });
+  const reset=mkEl('button','追加キーをリセット');reset.type='button';reset.onclick=()=>{delete S.pcShortcuts;LS.set('rd:set',S);const fresh=pcKeyboardSettingsBox();if(fresh)g.replaceWith(fresh);else g.remove();toast('PCショートカットを標準に戻しました')};g.appendChild(reset);
+  return g;
+}
 /* ---------- 動作ログの表示 ---------- */
 function appLogText(){
   APPLOG.flush();const p=n=>String(n).padStart(2,'0');
@@ -6814,6 +6940,7 @@ function homeSettings(){
     }else if(homeTabCur==='l'){
     sh.appendChild(secSettingsBox(homeSettings));
     }else{
+    const pcKeys=pcKeyboardSettingsBox();if(pcKeys)sh.appendChild(pcKeys);
     (function(){
       const g=mkEl('div','','bk-set-group');g.appendChild(mkEl('b','戻る操作'));
       const chk=(k,label)=>{const l=mkEl('label',label);l.style.cssText='display:flex;align-items:center;gap:10px;margin:12px 0';const c=document.createElement('input');c.type='checkbox';c.checked=HOME[k]!==false;c.onchange=()=>{HOME[k]=c.checked;LS.set('rd:home',HOME);syncBackExit()};l.prepend(c);return l};
@@ -6836,7 +6963,7 @@ function homeSettings(){
     const reloadBtn=mkEl('button','アプリを再読み込み');reloadBtn.type='button';reloadBtn.style.cssText='display:block;width:100%;margin:14px 0 0';reloadBtn.onclick=()=>{closeAll();location.reload()};sh.appendChild(reloadBtn);
     const licBtn=mkEl('button','ライセンス情報');licBtn.style.cssText='display:block;width:100%;margin:14px 0 0';licBtn.onclick=licenseSheet;sh.appendChild(licBtn);
     const credit=mkEl('div');credit.style.cssText='text-align:center;margin:16px 0 6px;opacity:.7;font-size:12px;line-height:1.7';
-    const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.3.0'];
+    const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.3.6'];
     const nativeVer=AppNative.getNativeVersion();
     if(nativeVer){
     creditItems.push('アプリ本体バージョン：'+nativeVer);
@@ -9503,7 +9630,7 @@ applyUiMode();
 applyUi2();
 addEventListener('resize',()=>{if((S.ui||'auto')==='auto')applyUiMode()});
 applyLanguage();
-applog('app','起動 V5.3.0・起動まで'+Math.round(performance.now())+'ms・本'+shelf().length+'冊・'+innerWidth+'x'+innerHeight+'@'+(devicePixelRatio||1)+'・'+navigator.userAgent);
+applog('app','起動 V5.3.6・起動まで'+Math.round(performance.now())+'ms・本'+shelf().length+'冊・'+innerWidth+'x'+innerHeight+'@'+(devicePixelRatio||1)+'・'+navigator.userAgent);
 (function initAndroidLocalReader(){
   const ab=window.AndroidBridge;if(!ab)return;
   const fb=$('#bAddFolder');
@@ -9905,7 +10032,7 @@ document.body.appendChild(nav);rShelfCards();
 })();
 </script>
 <script id="br5Crypto">
-/* BookReader V5.3.0: encrypted hidden books + Android Keystore biometric unlock.
+/* BookReader V5.3.6: encrypted hidden books + Android Keystore biometric unlock.
    Existing database/store names are kept. Book payloads are encrypted in-place in IndexedDB store b.
    No CSP directive is relaxed; this script is separately SHA-256 allow-listed. */
 (function(){
@@ -10146,19 +10273,24 @@ document.body.appendChild(nav);rShelfCards();
              authenticators as well as the OS platform authenticator. */
           authenticatorSelection:{residentKey:'required',requireResidentKey:true,userVerification:'required'},
           timeout:60000,
-          /* Enable PRF at registration; request the actual salted output in credentials.get(). */
-          extensions:{prf:{}}
+          /* Request the wrapped-key input during registration so authenticators that
+             support registration-time PRF can avoid a second Windows Hello prompt. */
+          extensions:{prf:{eval:{first:salt}}}
         }
       });
       cred=await createRequest;
     }catch(e){
-      if(e&&e.name==='NotAllowedError')throw new Error('パスキーの作成がキャンセルされたか、端末で承認されませんでした');
+      if(e&&e.name==='NotAllowedError')throw new Error('パスキー登録をWindows Helloまたはパスキー保存先で完了できませんでした。画面の認証を最後まで行い、同じブラウザーで再試行してください');
       if(e&&e.name==='SecurityError')throw new Error('このサイトのドメインではパスキーを作成できません。HTTPSとアクセス先ドメインを確認してください');
       throw new Error((e&&e.message)||'パスキーを作成できませんでした');
     }
     if(!cred||!cred.rawId)throw new Error('パスキーの取得に失敗しました');
     const ext=typeof cred.getClientExtensionResults==='function'?cred.getClientExtensionResults():{};
     let prfOut=ext&&ext.prf&&ext.prf.results&&ext.prf.results.first?ext.prf.results.first:null;
+    /* Registration explicitly reports whether this credential can use PRF.
+       Avoid opening a second Windows Hello prompt when the selected provider
+       has already confirmed that it cannot derive the wrapping key. */
+    if(!prfOut&&ext&&ext.prf&&ext.prf.enabled===false)throw new Error('このパスキー保存先は暗号鍵の導出（PRF）に対応していません。PRF対応の保存先を使うか、パスコードで解除してください');
     if(!prfOut){
       let assertion;
       try{
@@ -10173,7 +10305,7 @@ document.body.appendChild(nav);rShelfCards();
           }
         });
       }catch(e){
-        if(e&&e.name==='NotAllowedError')throw new Error('パスキーは作成されましたが、Face ID・Touch IDによるPRF鍵の確認がキャンセルされました');
+        if(e&&e.name==='NotAllowedError')throw new Error('パスキーは作成されましたが、Windows Helloまたはパスキー保存先がPRF鍵の確認を完了できませんでした。認証を再試行するか、PRF対応のパスキー保存先を使ってください');
         throw new Error((e&&e.message)||'パスキーのPRF鍵を確認できませんでした');
       }
       const aext=assertion&&typeof assertion.getClientExtensionResults==='function'?assertion.getClientExtensionResults():{};
@@ -10207,12 +10339,15 @@ document.body.appendChild(nav);rShelfCards();
       });
       assertion=await getRequest;
     }catch(e){
-      if(e&&e.name==='NotAllowedError')throw new Error('生体認証がキャンセルされました');
-      throw new Error((e&&e.message)||'生体認証に失敗しました');
+      const name=String(e&&e.name||'Error'),detail=String(e&&e.message||'');
+      try{applog('security','WebAuthn パスキー認証に失敗 ('+name+')'+(detail?'：'+detail:''),'w')}catch(_){}
+      if(name==='NotAllowedError')throw new Error('Windows セキュリティがパスキー認証を完了できませんでした。キャンセル・時間切れ・登録済みパスキーが見つからない場合があります。同じWindowsユーザーとブラウザーでGitHub Pagesを開き、再試行してください。続く場合はパスコードで解除してから、環境設定でパスキーを再登録してください。');
+      if(name==='SecurityError')throw new Error('パスキーの登録時とサイトのドメインが異なります。GitHub Pagesの同じURLから開いてください。');
+      throw new Error('パスキー認証に失敗しました ('+name+')'+(detail?'：'+detail:''));
     }
     const ext=assertion&&typeof assertion.getClientExtensionResults==='function'?assertion.getClientExtensionResults():{};
     const prfOut=ext&&ext.prf&&ext.prf.results&&ext.prf.results.first?ext.prf.results.first:null;
-    if(!prfOut)throw new Error('パスキーから暗号鍵を取得できませんでした。パスコードで解除してください');
+    if(!prfOut){try{applog('security','WebAuthn assertion returned no PRF output','w')}catch(_){}throw new Error('パスキー認証は完了しましたが、暗号化解除に必要なPRF鍵が返されませんでした。パスコードで解除してください。Windows Helloまたは現在のパスキープロバイダーがPRFを返さない場合は、PRF対応の保存先でパスキーを再登録してください。')}
     const wrapKey=await brWebDeriveAesKey(prfOut,['decrypt']);
     let plain;
     try{plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:brUnB64(rec.iv),additionalData:BR_WEB_BIO_AAD},wrapKey,brUnB64(rec.ct))}
@@ -10408,7 +10543,7 @@ document.body.appendChild(nav);rShelfCards();
     try{document.body.classList.add('app-locked')}catch(_){} /* 起動直後から中身を見せない */
     setTimeout(()=>appLockNow('アプリ起動',true),80);
   }
-  applog('security','V5.3.0：ロック書籍のAES-GCM暗号化とAndroid生体認証連携を初期化');
+  applog('security','V5.3.6：ロック書籍のAES-GCM暗号化とAndroid生体認証連携を初期化');
 })();
 
 /* V5.2.4: アプリ全体の自動ロックを暗号化フォルダーの自動ロックから独立
