@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ja">
 <!--
-  BookReader V5.3.6
+  BookReader V5.3.7
   Copyright (c) 2026 Kosa.
   Source-available under the BookReader NonCommercial Attribution License 1.1.
   You may use, modify, and redistribute this software for noncommercial purposes,
@@ -14,14 +14,14 @@
 -->
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-rIkSG2rzIGWtlUy8zZ3kN6sTIEUFC/HSAYKEpPPsf2c=' 'sha256-4+Hm/C8eEyTPzl4E8FAjjIT277K8FVhTrAUZYehLwYc=' 'sha256-bBOR9ekeEMiKer4BC9QyjdbrFTefgXUZFh35BN6skSg='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-y69Mmze+2rg7Fk83tWTCSEPDw4zlJP7FtiCKw2QLDJ8=' 'sha256-4+Hm/C8eEyTPzl4E8FAjjIT277K8FVhTrAUZYehLwYc=' 'sha256-kpqB+QFEoAGEdDzavSashmlf/QNeFt7qBaYg3rYFaSQ='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' blob: data:; frame-src 'none'; child-src 'none'; worker-src 'none'; manifest-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#fdf8ff">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>BookReader V5.3.6</title>
+<title>BookReader V5.3.7</title>
 <style>
 :root{--bg:#fdf8ff;--fg:#1c1b20;--sub:#48454e;--bar:#f1ecf4;--line:#cac4cf;--acc:#3569c8;--link:#3569c8;--md-pc:#e6deff;--md-opc:#180054;--md-sc:#e4dff8;--md-osc:#1b192c;--md-surf:#f7f2fa;--md-on-primary:#ffffff;--md-card-bg:#f7f2fa;--md-chip-bg:#e4dff8;--md-chip-fg:#1b192c;color-scheme:light;}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="sepia"]):not([data-theme="oled"]){--bg:#141318;--fg:#e5e1e9;--sub:#cac4cf;--bar:#201f25;--line:#48454e;--acc:#cfbcff;--link:#cfbcff;--md-pc:#4d358a;--md-opc:#e6deff;--md-sc:#474459;--md-osc:#e4dff8;--md-surf:#1c1b20;--md-on-primary:#381e72;--md-card-bg:#26242b;--md-chip-bg:#474459;--md-chip-fg:#e4dff8;color-scheme:dark}}
@@ -6613,7 +6613,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 const LIC_TEXT={
 ja:{title:'ライセンス情報',
  h:['1. 著作権・クレジット表示','2. 利用条件','3. 禁止事項','4. 第三者ライブラリのライセンス','5. EPUBの利用とプライバシー','6. 問い合わせ先'],
- copy:['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.3.6','License：BookReader NonCommercial Attribution License 1.1（全文は配布物のLICENSEファイルを参照）','取り込んだ書籍ファイル（IndexedDB）と読書統計・目標・履歴・設定・生体認証／パスキー連携情報（localStorage / Android Keystore）はすべて端末内に保存され、外部へ送信されません。','改変版を配布する場合は、改変版であることを明確に表示してください。','Kosaの著作権表示・ライセンス表示を保持してください。'],
+ copy:['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.3.7','License：BookReader NonCommercial Attribution License 1.1（全文は配布物のLICENSEファイルを参照）','取り込んだ書籍ファイル（IndexedDB）と読書統計・目標・履歴・設定・生体認証／パスキー連携情報（localStorage / Android Keystore）はすべて端末内に保存され、外部へ送信されません。','改変版を配布する場合は、改変版であることを明確に表示してください。','Kosaの著作権表示・ライセンス表示を保持してください。'],
  allow:['許可する行為','個人・非商用目的での利用','個人の端末へのダウンロード','非商用目的での改変','本ライセンスと著作権表示を保持した非商用目的での再配布','任意の寄付・投げ銭は、利用や配布の対価・条件でない限り、それだけで商用利用とは扱いません。'],
  deny:['禁止する行為','商用利用（販売、有料提供、有料サポート、広告・アフィリエイト等の収益化、営利事業上の利用を含む）','会社・事業者等による社内利用を、業務上の利益・効率化等のために行うこと','Kosaの著作権表示・クレジット・ライセンス表示の削除または改変','製作者を偽る行為、または本ソフトウェア・改変版を自作したものとして表示する行為','改変版であることを明示せずに配布する行為','Kosaの名前・Xアカウント・クレジットを、Kosaが改変版や利用者を推薦・公認しているかのように表示する行為'],
  exc:'非営利団体による利用を含め、利用目的・実態から商用か判断しにくい場合、社内評価・研究利用、寄付・投げ銭など本ライセンスの境界に当たる場合は、利用前にKosaへ相談してください。明示的な許諾がない限り商用利用はできません。',
@@ -6622,7 +6622,7 @@ ja:{title:'ライセンス情報',
  contact:'連絡先：',back:'戻る',close:'閉じる'},
 en:{title:'License information',
  h:['1. Copyright and attribution','2. Terms of use','3. Prohibited actions','4. Third-party library licenses','5. EPUB use and privacy','6. Contact'],
- copy:['Creator: Kosa','X: @SKosa_0','Copyright © 2026 Kosa','Product: BookReader','Version: 5.3.6','License: BookReader NonCommercial Attribution License 1.1 (full text in the LICENSE file distributed with this software)','Imported book files (IndexedDB) and reading stats, goals, history, settings, and biometric/passkey wrap metadata (localStorage / Android Keystore) are stored locally on your device and are never sent externally.','Clearly identify modified versions when distributing them.','Retain Kosa’s copyright, attribution, and license notices.'],
+ copy:['Creator: Kosa','X: @SKosa_0','Copyright © 2026 Kosa','Product: BookReader','Version: 5.3.7','License: BookReader NonCommercial Attribution License 1.1 (full text in the LICENSE file distributed with this software)','Imported book files (IndexedDB), reading stats, goals, history, settings, and biometric/passkey wrap metadata (localStorage / Android Keystore) are stored locally on your device and are never sent externally.','Clearly identify modified versions when distributing them.','Retain Kosa’s copyright, attribution, and license notices.'],
  allow:['Permitted','Personal and noncommercial use','Downloading to your own device','Modification for noncommercial purposes','Redistribution for noncommercial purposes, provided this license and copyright notices are retained','Voluntary donations or tips are not commercial use by themselves, provided they are not consideration for or a condition of access or distribution.'],
  deny:['Prohibited','Commercial use, including sale, paid access or support, advertising or affiliate monetization, and use in for-profit business operations','Internal use by a company or business for operational benefit, efficiency, or other business purposes','Removing or altering Kosa’s copyright, attribution, or license notices','Misrepresenting the creator or presenting this software or a modified version as your own work','Distributing a modified version without clearly identifying it as modified','Using Kosa’s name, X account, or attribution to imply that Kosa endorses or recommends a modified version or its distributor'],
  exc:'If the commercial or noncommercial nature of a use is unclear—including use by nonprofit organizations, internal evaluation or research, or donations and tips—contact Kosa before use. Commercial use is not permitted without explicit prior permission.',
@@ -6963,7 +6963,7 @@ function homeSettings(){
     const reloadBtn=mkEl('button','アプリを再読み込み');reloadBtn.type='button';reloadBtn.style.cssText='display:block;width:100%;margin:14px 0 0';reloadBtn.onclick=()=>{closeAll();location.reload()};sh.appendChild(reloadBtn);
     const licBtn=mkEl('button','ライセンス情報');licBtn.style.cssText='display:block;width:100%;margin:14px 0 0';licBtn.onclick=licenseSheet;sh.appendChild(licBtn);
     const credit=mkEl('div');credit.style.cssText='text-align:center;margin:16px 0 6px;opacity:.7;font-size:12px;line-height:1.7';
-    const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.3.6'];
+    const creditItems=['製作者：Kosa','X：@SKosa_0','Copyright © 2026 Kosa','Product：BookReader','Version：5.3.7'];
     const nativeVer=AppNative.getNativeVersion();
     if(nativeVer){
     creditItems.push('アプリ本体バージョン：'+nativeVer);
@@ -9074,9 +9074,12 @@ document.addEventListener('click',e=>{const t=e&&e.target;if(t&&((t.tagName==='I
 function _secCheckOnLeave(why,quiet){
   if(!secOpen)return;const d=secDelay();
   secHideAt=Date.now();
+  /* Windows Hello temporarily backgrounds the page while a credential prompt is active. */
+  if(window.__brBioBusy)return;
   if(d===0)secLock(why||'アプリを離れた',quiet);
 }
 function _secCheckOnReturn(){
+  if(window.__brBioBusy)return;
   if(!secOpen){secHideAt=0;return}
   const d=secDelay(),now=Date.now();
   if(d===0&&secHideAt){secLock('アプリを離れた');secHideAt=0;return}
@@ -9105,7 +9108,7 @@ addEventListener('blur',()=>{
 });
 addEventListener('focus',()=>{clearTimeout(_secBlurT);_secFileAt=0;_secCheckOnReturn()});
 ['pointerdown','keydown','touchstart'].forEach(n=>addEventListener(n,()=>{secLastAct=Date.now()},{capture:true,passive:true}));
-setInterval(()=>{if(!document.hidden&&secOpen){const d=secDelay();if(d>0&&Date.now()-secLastAct>=d*1000)secLock('操作のない時間')}},5000);
+setInterval(()=>{if(window.__brBioBusy||document.hidden||!secOpen)return;const d=secDelay();if(d>0&&Date.now()-secLastAct>=d*1000)secLock('操作のない時間')},5000);
 
 async function secVerify(p){
   const s=secGet();if(!s)return{ok:false,msg:'パスコードが設定されていません'};
@@ -9630,7 +9633,7 @@ applyUiMode();
 applyUi2();
 addEventListener('resize',()=>{if((S.ui||'auto')==='auto')applyUiMode()});
 applyLanguage();
-applog('app','起動 V5.3.6・起動まで'+Math.round(performance.now())+'ms・本'+shelf().length+'冊・'+innerWidth+'x'+innerHeight+'@'+(devicePixelRatio||1)+'・'+navigator.userAgent);
+applog('app','起動 V5.3.7・起動まで'+Math.round(performance.now())+'ms・本'+shelf().length+'冊・'+innerWidth+'x'+innerHeight+'@'+(devicePixelRatio||1)+'・'+navigator.userAgent);
 (function initAndroidLocalReader(){
   const ab=window.AndroidBridge;if(!ab)return;
   const fb=$('#bAddFolder');
@@ -10032,7 +10035,8 @@ document.body.appendChild(nav);rShelfCards();
 })();
 </script>
 <script id="br5Crypto">
-/* BookReader V5.3.6: encrypted hidden books + Android Keystore biometric unlock.
+/* BookReader V5.3.7: defer auto-lock only while platform biometric prompts are active.
+   Encrypted hidden books + Android Keystore biometric unlock.
    Existing database/store names are kept. Book payloads are encrypted in-place in IndexedDB store b.
    No CSP directive is relaxed; this script is separately SHA-256 allow-listed. */
 (function(){
@@ -10313,12 +10317,16 @@ document.body.appendChild(nav);rShelfCards();
     }
     if(!prfOut)throw new Error('パスキーは作成されましたが、このブラウザまたはパスキー保存先はPRF鍵導出に対応していません。別のパスキー保存先を使うか、パスコードで解除してください');
     const wrapKey=await brWebDeriveAesKey(prfOut,['encrypt','decrypt']);
+    const masterForWrap=brMasterBytes;
+    if(!(masterForWrap instanceof Uint8Array)||masterForWrap.length!==32)throw new Error('パスキー登録中にアプリがロックされました。パスコードで解除してから、もう一度設定してください');
     const iv=crypto.getRandomValues(new Uint8Array(12));
-    const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:BR_WEB_BIO_AAD},wrapKey,brMasterBytes);
+    const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:BR_WEB_BIO_AAD},wrapKey,masterForWrap);
+    if(brMasterBytes!==masterForWrap)throw new Error('パスキー登録中にアプリがロックされました。パスコードで解除してから、もう一度設定してください');
     /* 保存前に同じPRF出力で復号できることを確認する。 */
     const roundTrip=await crypto.subtle.decrypt({name:'AES-GCM',iv,additionalData:BR_WEB_BIO_AAD},wrapKey,ct);
+    if(brMasterBytes!==masterForWrap)throw new Error('パスキー登録中にアプリがロックされました。パスコードで解除してから、もう一度設定してください');
     const check=new Uint8Array(roundTrip);
-    if(check.length!==brMasterBytes.length||check.some((v,i)=>v!==brMasterBytes[i]))throw new Error('パスキー暗号鍵の検証に失敗しました');
+    if(check.length!==masterForWrap.length||check.some((v,i)=>v!==masterForWrap[i]))throw new Error('パスキー暗号鍵の検証に失敗しました');
     brStoreWebBio({v:1,credId:brB64Url(new Uint8Array(cred.rawId)),salt:brB64(salt),iv:brB64(iv),ct:brB64(new Uint8Array(ct))});
     toast('パスキー（指紋・顔認証）を設定しました');
   }
@@ -10356,12 +10364,30 @@ document.body.appendChild(nav);rShelfCards();
   }
   async function brEnableBiometric(){
     if(!brMasterBytes)throw new Error('先にパスコードで解除してください');
-    if(!brHasNativeBio())return await brWebEnableBiometric();
-    const result=await brBioRequest('enableBiometricUnlock',[brB64(brMasterBytes)]);
-    if(!result.ok)throw new Error(result.message);
-    toast('生体認証を設定しました');
+    if(brBioBusy)throw new Error('生体認証の処理中です');
+    brBioBusy=true;window.__brBioBusy=true;
+    try{
+      if(!brHasNativeBio())return await brWebEnableBiometric();
+      const result=await brBioRequest('enableBiometricUnlock',[brB64(brMasterBytes)]);
+      if(!result.ok)throw new Error(result.message);
+      toast('生体認証を設定しました');
+    }finally{brFinishBioBusy()}
   }
   let brBioBusy=false;
+  function brFinishBioBusy(){
+    brBioBusy=false;window.__brBioBusy=false;
+    if(document.visibilityState==='hidden'){
+      _secCheckOnLeave('アプリを離れた');appLockOnLeave();return;
+    }
+    /* Returning from the OS credential sheet completes the active user operation. */
+    const now=Date.now(),lockDelay=secDelay();
+    if(lockDelay>0&&secHideAt&&now-secHideAt>=lockDelay*1000)secLock('時間が経った');
+    else{secHideAt=0;secLastAct=now}
+    const appDelay=appLockBgDelay();
+    if(LS.get('rd:appLock',false)&&secHas()&&appDelay>0&&_appLockHideAt&&now-_appLockHideAt>=appDelay*1000)appLockNow('バックグラウンドから復帰');
+    else{_appLockHideAt=0;_appLockLastAct=now}
+    if(_appLocked)setTimeout(()=>appLockSheet(),120);
+  }
   async function brBiometricUnlock(done,silent){
     if(brBioBusy)return false;
     brBioBusy=true;window.__brBioBusy=true;
@@ -10379,7 +10405,7 @@ document.body.appendChild(nav);rShelfCards();
       if(!silent)toast(e&&e.message?e.message:'生体認証で解除できませんでした');
       return false;
     }finally{
-      brBioBusy=false;window.__brBioBusy=false;
+      brFinishBioBusy();
     }
   }
   function brDisableBiometric(){
@@ -10536,14 +10562,14 @@ document.body.appendChild(nav);rShelfCards();
         if(typeof secOpen!=='undefined'&&secOpen)await brSetMaster(keyBytes); /* 非表示の本を表示中なら鍵を入れ直す。ロック中なら鍵は持たない */
         keyBytes.fill&&keyBytes.fill(0);
         return true;
-      }finally{brBioBusy=false;window.__brBioBusy=false}
+      }finally{brFinishBioBusy()}
     }
   };
   if(secHas()&&LS.get('rd:appLock',false)){
     try{document.body.classList.add('app-locked')}catch(_){} /* 起動直後から中身を見せない */
     setTimeout(()=>appLockNow('アプリ起動',true),80);
   }
-  applog('security','V5.3.6：ロック書籍のAES-GCM暗号化とAndroid生体認証連携を初期化');
+  applog('security','V5.3.7：ロック書籍のAES-GCM暗号化とAndroid生体認証連携を初期化');
 })();
 
 /* V5.2.4: アプリ全体の自動ロックを暗号化フォルダーの自動ロックから独立
@@ -10620,9 +10646,11 @@ function appLockIdleDelay(){const n=LS.get('rd:appLockIdle',-1);return typeof n=
 function appLockOnLeave(){
   if(!LS.get('rd:appLock',false)||!secHas())return;
   _appLockHideAt=Date.now();const d=appLockBgDelay();
+  if(window.__brBioBusy)return;
   if(d===0)appLockNow('バックグラウンド移行');
 }
 function appLockOnReturn(){
+  if(window.__brBioBusy)return;
   if(!LS.get('rd:appLock',false)||!secHas()){_appLockHideAt=0;return}
   const d=appLockBgDelay(),now=Date.now();
   if(d>=0&&_appLockHideAt&&now-_appLockHideAt>=d*1000){appLockNow('バックグラウンドから復帰');}
@@ -10636,7 +10664,7 @@ addEventListener('pagehide',appLockOnLeave);
 addEventListener('pageshow',appLockOnReturn);
 ['pointerdown','keydown','touchstart'].forEach(n=>addEventListener(n,()=>{_appLockLastAct=Date.now()},{capture:true,passive:true}));
 setInterval(()=>{
-  if(document.hidden||_appLocked||!LS.get('rd:appLock',false)||!secHas())return;
+  if(window.__brBioBusy||document.hidden||_appLocked||!LS.get('rd:appLock',false)||!secHas())return;
   const d=appLockIdleDelay();
   if(d>0&&Date.now()-_appLockLastAct>=d*1000)appLockNow('操作のない時間');
 },3000);
